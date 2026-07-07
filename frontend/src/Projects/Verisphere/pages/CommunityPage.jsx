@@ -88,7 +88,7 @@ function CommunityPage({ authHook }) {
                         width: '80px',
                         height: '80px',
                         borderRadius: '16px',
-                        background: 'linear-gradient(135deg, var(--v2-accent-primary) 0%, #2b5d8f 100%)',
+                        background: 'linear-gradient(135deg, var(--v2-accent-1) 0%, #2b5d8f 100%)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -100,10 +100,10 @@ function CommunityPage({ authHook }) {
                     </div>
                     
                     <div style={{ flex: 1 }}>
-                        <h2 style={{ margin: '0 0 8px 0', fontSize: '2.5rem', fontWeight: 'bold', letterSpacing: '-0.02em', background: 'linear-gradient(90deg, #fff, #a5d2ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                        <h2 style={{ margin: '0 0 8px 0', fontSize: '2.5rem', fontWeight: 'bold', letterSpacing: '-0.02em', color: 'var(--v2-text-main)' }}>
                             {objCommunityState.strName}
                         </h2>
-                        <p style={{ margin: '0 0 16px 0', color: 'var(--v2-text-secondary)', fontSize: '1.1rem', maxWidth: '600px', lineHeight: '1.5' }}>
+                        <p style={{ margin: '0 0 16px 0', color: 'var(--v2-text-muted)', fontSize: '1.1rem', maxWidth: '600px', lineHeight: '1.5' }}>
                             {objCommunityState.strDescription || 'A VeriSphere community dedicated to rational discourse.'}
                         </p>
                         <div style={{ display: 'flex', gap: '20px', alignItems: 'center', fontSize: '0.9rem', flexWrap: 'wrap' }}>
@@ -124,7 +124,7 @@ function CommunityPage({ authHook }) {
                                     fontSize: '0.85rem',
                                     background: 'rgba(88, 166, 255, 0.1)',
                                     border: '1px solid rgba(88, 166, 255, 0.4)',
-                                    color: 'var(--v2-accent-primary)',
+                                    color: 'var(--v2-accent-1)',
                                     opacity: objCommunityState.boolCanModerate ? 0.5 : 1,
                                 }}
                             >
