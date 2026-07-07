@@ -219,3 +219,26 @@ __marimo__/
 
 # Private/internal docs — never push to public repo
 docs/.private/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+.npm
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+.eslintcache
+.node_repl_history
+*.tsbuildinfo
+.next/
+out/
+.nuxt/
+.vercel
+.turbo
+coverage/

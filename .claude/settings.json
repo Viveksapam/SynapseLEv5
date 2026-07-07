@@ -12,7 +12,9 @@
       "Edit(**/.env)",
       "Edit(**/.env.*)",
       "Edit(backend/.env*)",
-      "Edit(frontend/env/**)"
+      "Edit(frontend/env/**)",
+      "Bash(cat .env*)",
+      "Bash(git show *.env*)"
     ]
   }
 }
