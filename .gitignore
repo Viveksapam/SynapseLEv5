@@ -203,12 +203,6 @@ cython_debug/
 # Temporary file for partial code execution
 tempCodeRunnerFile.py
 
-# Private instruction logs (not for repo)
-docs/.private/
-
-# Site logic documentation (local development reference only)
-docs/SITE_LOGIC.md
-
 # Ruff stuff:
 .ruff_cache/
 
@@ -222,14 +216,3 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
-
-# Project directories
-src/projects/classroom
-src/projects/synapse_assessments
-
-# Claude Code
-.claude/
-
-# Test run artifacts
-frontend/playwright-report/
-frontend/tests/test-results/

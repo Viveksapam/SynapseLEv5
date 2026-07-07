@@ -1,0 +1,19 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "frontend",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "frontend"],
+      "port": 5173,
+      "autoPort": false
+    },
+    {
+      "name": "backend",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-c", "import os; os.chdir('backend'); import uvicorn; uvicorn.run('main:app', reload=True, host='0.0.0.0', port=8000)"],
+      "port": 8000,
+      "autoPort": false
+    }
+  ]
+}
