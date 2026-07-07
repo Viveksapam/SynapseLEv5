@@ -1,0 +1,55 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbf9f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8dcc4;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#grad6)"/>
+
+  <!-- Central quote/statement -->
+  <g opacity="0.8">
+    <text x="200" y="150" font-family="serif" font-size="28" fill="#1b1c1a" font-style="italic">
+      "Every claim deserves
+    </text>
+    <text x="200" y="200" font-family="serif" font-size="28" fill="#1b1c1a" font-style="italic">
+      its source"
+    </text>
+  </g>
+
+  <!-- Citation links (bidirectional arrows) -->
+  <g stroke="#7b581b" stroke-width="3" fill="none" opacity="0.6">
+    <!-- Up -->
+    <line x1="150" y1="280" x2="150" y2="200"/>
+    <polygon points="150,180 140,200 160,200" fill="#7b581b" opacity="0.6"/>
+    <!-- Down -->
+    <line x1="150" y1="380" x2="150" y2="460"/>
+    <polygon points="150,480 140,460 160,460" fill="#7b581b" opacity="0.6"/>
+  </g>
+
+  <!-- Source blocks -->
+  <g opacity="0.7">
+    <rect x="80" y="100" width="140" height="60" fill="none" stroke="#7b581b" stroke-width="2"/>
+    <text x="100" y="135" font-family="monospace" font-size="12" fill="#1b1c1a">Source 1</text>
+
+    <rect x="80" y="480" width="140" height="60" fill="none" stroke="#7b581b" stroke-width="2"/>
+    <text x="100" y="515" font-family="monospace" font-size="12" fill="#1b1c1a">Source 2</text>
+  </g>
+
+  <!-- Social norm indicator -->
+  <g opacity="0.8">
+    <circle cx="450" cy="320" r="80" fill="none" stroke="#7b581b" stroke-width="2"/>
+    <text x="400" y="340" font-family="serif" font-size="48" fill="#7b581b" font-weight="bold">✓</text>
+  </g>
+
+  <!-- Right side text -->
+  <text x="700" y="280" font-family="serif" font-size="44" font-weight="bold" fill="#1b1c1a">
+    SOCIAL
+  </text>
+  <text x="700" y="340" font-family="serif" font-size="44" font-weight="bold" fill="#1b1c1a">
+    NORM
+  </text>
+  <text x="700" y="420" font-family="monospace" font-size="14" fill="#4f4539">
+    Citation as Practice
+  </text>
+</svg>

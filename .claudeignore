@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+backend/venv/
+
+# Build output
+frontend/dist/
+frontend/build/
+
+# Caches
+.pytest_cache/
+.ruff_cache/
+__pycache__/
+.vite/
+
+# IDE & OS
+.idea/
+.vscode/
+*.swp
+*.swo
+Thumbs.db
+.DS_Store
+
+# Environment
+.env
+backend/.env
+
+# Large assets
+*.mp4
+*.zip
+*.tar.gz

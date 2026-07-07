@@ -1,0 +1,31 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbf9f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8dcc4;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#grad2)"/>
+
+  <!-- Concentric circles (verification metaphor) -->
+  <circle cx="350" cy="337" r="200" fill="none" stroke="#7b581b" stroke-width="8" opacity="0.3"/>
+  <circle cx="350" cy="337" r="140" fill="none" stroke="#7b581b" stroke-width="8" opacity="0.5"/>
+  <circle cx="350" cy="337" r="80" fill="none" stroke="#7b581b" stroke-width="8" opacity="0.8"/>
+  <circle cx="350" cy="337" r="30" fill="#7b581b"/>
+
+  <!-- Checkmarks radiating -->
+  <g fill="#7b581b" opacity="0.7">
+    <text x="500" y="200" font-size="64" font-weight="bold">✓</text>
+    <text x="550" y="280" font-size="64" font-weight="bold">✓</text>
+    <text x="520" y="400" font-size="64" font-weight="bold">✓</text>
+    <text x="450" y="480" font-size="64" font-weight="bold">✓</text>
+  </g>
+
+  <!-- Text -->
+  <text x="800" y="300" font-family="serif" font-size="52" font-weight="bold" fill="#1b1c1a">
+    VERIFIABLE
+  </text>
+  <text x="800" y="380" font-family="monospace" font-size="14" fill="#4f4539">
+    Design as First Principle
+  </text>
+</svg>

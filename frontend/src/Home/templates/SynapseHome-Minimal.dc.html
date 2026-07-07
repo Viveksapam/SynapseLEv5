@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</helmet>
+
+<div style="background:#fcfcfb; color:#16181d; font-family:'Hanken Grotesk',system-ui,sans-serif; font-size:17px; line-height:1.6; min-height:100vh; -webkit-font-smoothing:antialiased;">
+
+  <!-- Nav -->
+  <header style="position:sticky; top:0; z-index:50; background:rgba(252,252,251,0.82); backdrop-filter:saturate(140%) blur(10px); border-bottom:1px solid #ededea;">
+    <nav style="display:flex; justify-content:space-between; align-items:center; max-width:1180px; margin:0 auto; padding:18px 32px;">
+      <div style="display:flex; align-items:center; gap:40px;">
+        <a href="#" style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:20px; letter-spacing:-0.02em; color:#16181d; text-decoration:none; display:flex; align-items:center; gap:9px;"><span style="width:10px; height:10px; border-radius:50%; background:#2a6fdb; display:inline-block;"></span>Synapse</a>
+        <ul style="display:flex; align-items:center; gap:26px; list-style:none; margin:0; padding:0;">
+          <li><a href="#projects" style="color:#5b6168; text-decoration:none; font-size:15px; font-weight:500;">Verisphere</a></li>
+          <li><a href="#spotlight" style="color:#5b6168; text-decoration:none; font-size:15px; font-weight:500;">Spotlight</a></li>
+          <li><a href="#merch" style="color:#5b6168; text-decoration:none; font-size:15px; font-weight:500;">Shop</a></li>
+          <li><a href="#" style="color:#5b6168; text-decoration:none; font-size:15px; font-weight:500;">Apps</a></li>
+        </ul>
+      </div>
+      <div style="display:flex; align-items:center; gap:14px;">
+        <a href="#" style="color:#16181d; text-decoration:none; font-size:15px; font-weight:600;">Log in</a>
+        <a href="#" style="background:#16181d; color:#fff; font-weight:600; font-size:15px; padding:10px 20px; border-radius:999px; text-decoration:none;" style-hover="background:#2a6fdb;">Get started</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section style="max-width:1180px; margin:0 auto; padding:92px 32px 56px; display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center;">
+    <div>
+      <span style="display:inline-flex; align-items:center; gap:8px; background:#eef3fd; color:#2a6fdb; font-size:13px; font-weight:600; padding:7px 14px; border-radius:999px; margin-bottom:26px;">● Release v4.02 — now live</span>
+      <h1 style="font-family:'Space Grotesk',sans-serif; font-size:clamp(2.6rem,5vw,4rem); font-weight:600; line-height:1.05; letter-spacing:-0.03em; margin:0 0 22px;">Virtual spaces for accessibility &amp; shared discovery.</h1>
+      <p style="font-size:1.18rem; color:#5b6168; max-width:46ch; margin:0 0 34px;">Synapse brings verifiable discussion, credentials and spatial learning into one calm, accessible environment — built for people who take trust seriously.</p>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;">
+        <a href="#projects" style="background:#2a6fdb; color:#fff; font-weight:600; font-size:16px; padding:14px 26px; border-radius:999px; text-decoration:none;" style-hover="background:#1f5bc0;">Explore Verisphere →</a>
+        <a href="#spotlight" style="background:#fff; color:#16181d; font-weight:600; font-size:16px; padding:14px 26px; border-radius:999px; text-decoration:none; border:1px solid #e3e2de;" style-hover="border-color:#16181d;">Watch the tour</a>
+      </div>
+      <div style="display:flex; gap:40px; margin-top:48px;">
+        <div><div style="font-family:'Space Grotesk',sans-serif; font-size:1.7rem; font-weight:600;">04</div><div style="font-size:13px; color:#8a9099;">Production apps</div></div>
+        <div><div style="font-family:'Space Grotesk',sans-serif; font-size:1.7rem; font-weight:600;">AA</div><div style="font-size:13px; color:#8a9099;">WCAG 2.1 verified</div></div>
+        <div><div style="font-family:'Space Grotesk',sans-serif; font-size:1.7rem; font-weight:600;">99.98%</div><div style="font-size:13px; color:#8a9099;">Platform uptime</div></div>
+      </div>
+    </div>
+    <div style="position:relative;">
+      <div style="aspect-ratio:4/3.4; border-radius:22px; background:linear-gradient(150deg,#eef3fd,#f6f1ff); border:1px solid #ececec; box-shadow:0 30px 60px -30px rgba(42,111,219,0.35); display:flex; align-items:center; justify-content:center;">
+        <span style="font-family:'Space Grotesk',sans-serif; font-size:13px; color:#9aa6c0; letter-spacing:0.08em; text-transform:uppercase;">Product preview</span>
+      </div>
+      <div style="position:absolute; bottom:-22px; left:-22px; background:#fff; border:1px solid #ececec; border-radius:16px; padding:16px 18px; box-shadow:0 16px 40px -18px rgba(0,0,0,0.2); display:flex; align-items:center; gap:12px;">
+        <span style="width:38px; height:38px; border-radius:10px; background:#eafaf0; color:#1f8a5b; display:flex; align-items:center; justify-content:center; font-size:18px;">✓</span>
+        <div><div style="font-weight:600; font-size:14px;">Source verified</div><div style="font-size:12px; color:#8a9099;">Every claim, traceable</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Capabilities -->
+  <section style="max-width:1180px; margin:0 auto; padding:40px 32px 72px;">
+    <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#9aa0a8; margin-bottom:22px;">Built with</div>
+    <div style="display:flex; flex-wrap:wrap; gap:12px;">
+      <sc-for list="{{ capabilities }}" as="cap" hint-placeholder-count="6">
+        <span style="display:inline-flex; align-items:center; gap:9px; background:#fff; border:1px solid #e8e7e4; border-radius:12px; padding:12px 18px; font-size:15px; font-weight:500; color:#3a3f47;"><span style="width:7px; height:7px; border-radius:50%; background:#2a6fdb;"></span>{{ cap }}</span>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" style="background:#fff; border-top:1px solid #ededea; border-bottom:1px solid #ededea; padding:88px 32px;">
+    <div style="max-width:1180px; margin:0 auto;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:48px;">
+        <div>
+          <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#2a6fdb; margin-bottom:12px;">The platform</div>
+          <h2 style="font-family:'Space Grotesk',sans-serif; font-size:2.4rem; font-weight:600; letter-spacing:-0.02em; margin:0;">Four apps, one environment</h2>
+        </div>
+        <a href="#" style="color:#16181d; font-weight:600; text-decoration:none; font-size:15px;">View all →</a>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+        <sc-for list="{{ projects }}" as="p" hint-placeholder-count="3">
+          <article style="border:1px solid #ececec; border-radius:20px; overflow:hidden; background:#fcfcfb;" style-hover="border-color:#cfd6e6; box-shadow:0 20px 50px -30px rgba(0,0,0,0.25);">
+            <div style="aspect-ratio:16/10; background:linear-gradient(150deg,#eef3fd,#f3effb); display:flex; align-items:flex-end; padding:16px;">
+              <span style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:600; color:#2a6fdb; background:#fff; border-radius:999px; padding:5px 12px;">{{ p.kicker }}</span>
+            </div>
+            <div style="padding:24px;">
+              <h3 style="font-family:'Space Grotesk',sans-serif; font-size:1.3rem; font-weight:600; margin:0 0 10px;">{{ p.name }}</h3>
+              <p style="color:#5b6168; font-size:0.97rem; margin:0 0 18px;">{{ p.desc }}</p>
+              <div style="display:flex; flex-wrap:wrap; gap:7px; margin-bottom:18px;">
+                <sc-for list="{{ p.tags }}" as="t" hint-placeholder-count="3">
+                  <span style="font-size:12px; color:#6b7280; background:#f1f0ec; border-radius:7px; padding:4px 10px;">{{ t }}</span>
+                </sc-for>
+              </div>
+              <a href="#" style="color:#2a6fdb; font-weight:600; font-size:14px; text-decoration:none;">{{ p.cta }} →</a>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contributions -->
+  <section style="max-width:1180px; margin:0 auto; padding:88px 32px;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px;">
+      <div>
+        <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#9aa0a8; margin-bottom:12px;">Writing</div>
+        <h2 style="font-family:'Space Grotesk',sans-serif; font-size:2.2rem; font-weight:600; letter-spacing:-0.02em; margin:0;">Recent contributions</h2>
+      </div>
+      <a href="#" style="color:#16181d; font-weight:600; text-decoration:none; font-size:15px;">All writing →</a>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:28px;">
+      <sc-for list="{{ blogs }}" as="b" hint-placeholder-count="3">
+        <article style="cursor:pointer;">
+          <div style="aspect-ratio:16/10; border-radius:16px; background:linear-gradient(150deg,#f1f0ec,#f7f5f1); margin-bottom:18px;"></div>
+          <span style="font-size:12px; font-weight:600; color:#2a6fdb; text-transform:uppercase; letter-spacing:0.06em;">{{ b.cat }} · {{ b.read }} min</span>
+          <h3 style="font-family:'Space Grotesk',sans-serif; font-size:1.2rem; font-weight:600; line-height:1.35; margin:10px 0 10px;">{{ b.title }}</h3>
+          <p style="font-size:0.95rem; color:#5b6168; margin:0;">{{ b.summary }}</p>
+        </article>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- Spotlight -->
+  <section id="spotlight" style="background:#f4f5f7; border-top:1px solid #ededea; padding:88px 32px;">
+    <div style="max-width:1180px; margin:0 auto;">
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:36px;">
+        <div>
+          <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#2a6fdb; margin-bottom:12px;">Media hub</div>
+          <h2 style="font-family:'Space Grotesk',sans-serif; font-size:2.2rem; font-weight:600; letter-spacing:-0.02em; margin:0;">Featured spotlights</h2>
+        </div>
+        <span style="font-family:'Space Grotesk',sans-serif; font-size:14px; color:#8a9099;">{{ spotActiveNo }} / 04</span>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 340px; gap:24px; align-items:start;">
+        <div>
+          <div style="aspect-ratio:16/9; border-radius:20px; overflow:hidden; background:linear-gradient(150deg,#dfe7f6,#ece6f8); display:flex; align-items:center; justify-content:center; position:relative; box-shadow:0 30px 60px -34px rgba(42,111,219,0.5);">
+            <div style="width:70px; height:70px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; color:#2a6fdb; font-size:22px; box-shadow:0 10px 30px -8px rgba(0,0,0,0.25);">▶</div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:18px 4px 0;">
+            <div>
+              <span style="font-size:12px; font-weight:600; color:#2a6fdb; text-transform:uppercase; letter-spacing:0.08em;">{{ spotActiveTag }}</span>
+              <h3 style="font-family:'Space Grotesk',sans-serif; font-size:1.35rem; font-weight:600; margin:6px 0 0;">{{ spotActiveTitle }}</h3>
+            </div>
+            <span style="font-size:14px; color:#8a9099;">{{ spotActiveDur }}</span>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <sc-for list="{{ spotlight }}" as="v" hint-placeholder-count="4">
+            <div onClick="{{ v.select }}" style="{{ v.rowStyle }}">
+              <div style="width:84px; aspect-ratio:16/10; flex:none; border-radius:10px; background:linear-gradient(150deg,#dfe7f6,#ece6f8); display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Space Grotesk',sans-serif; font-size:12px;">{{ v.n }}</div>
+              <div style="min-width:0;">
+                <span style="font-size:11px; font-weight:600; color:#2a6fdb; text-transform:uppercase; letter-spacing:0.06em;">{{ v.tag }}</span>
+                <p style="font-family:'Space Grotesk',sans-serif; font-size:0.97rem; font-weight:500; margin:4px 0 0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ v.title }}</p>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Merch -->
+  <section id="merch" style="max-width:1180px; margin:0 auto; padding:88px 32px;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px;">
+      <div>
+        <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#9aa0a8; margin-bottom:12px;">Shop</div>
+        <h2 style="font-family:'Space Grotesk',sans-serif; font-size:2.2rem; font-weight:600; letter-spacing:-0.02em; margin:0;">Synapse merchandise</h2>
+      </div>
+      <a href="#" style="background:#16181d; color:#fff; font-weight:600; font-size:15px; padding:12px 22px; border-radius:999px; text-decoration:none;">Browse shop →</a>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+      <sc-for list="{{ merch }}" as="m" hint-placeholder-count="3">
+        <div style="border:1px solid #ececec; border-radius:20px; overflow:hidden; background:#fff;" style-hover="box-shadow:0 20px 50px -30px rgba(0,0,0,0.25);">
+          <div style="aspect-ratio:1/1; background:linear-gradient(150deg,#23242a,#15161a); position:relative; display:flex; align-items:flex-end; padding:16px;">
+            <span style="background:#fff; color:#16181d; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:13px; border-radius:999px; padding:5px 12px;">₹{{ m.price }}</span>
+          </div>
+          <div style="padding:22px;">
+            <h3 style="font-family:'Space Grotesk',sans-serif; font-size:1.1rem; font-weight:600; margin:0 0 8px;">{{ m.name }}</h3>
+            <p style="font-size:0.92rem; color:#5b6168; margin:0 0 16px;">{{ m.desc }}</p>
+            <a href="#" style="color:#2a6fdb; font-weight:600; font-size:14px; text-decoration:none;">Add to cart →</a>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- CTA + Footer -->
+  <section style="max-width:1180px; margin:0 auto; padding:20px 32px 80px;">
+    <div style="border-radius:26px; background:linear-gradient(135deg,#16181d,#23304d); color:#fff; padding:60px 48px; display:flex; justify-content:space-between; align-items:center; gap:32px; flex-wrap:wrap;">
+      <div>
+        <h2 style="font-family:'Space Grotesk',sans-serif; font-size:2.1rem; font-weight:600; letter-spacing:-0.02em; margin:0 0 10px;">Join a calmer, verifiable web.</h2>
+        <p style="color:rgba(255,255,255,0.7); margin:0; font-size:1.05rem;">Create an account and start your first verified thread today.</p>
+      </div>
+      <a href="#" style="background:#fff; color:#16181d; font-weight:600; font-size:16px; padding:15px 30px; border-radius:999px; text-decoration:none; white-space:nowrap;">Get started free →</a>
+    </div>
+  </section>
+
+  <footer style="border-top:1px solid #ededea; padding:42px 32px;">
+    <div style="max-width:1180px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap;">
+      <div style="display:flex; align-items:center; gap:9px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:18px;"><span style="width:10px; height:10px; border-radius:50%; background:#2a6fdb;"></span>Synapse</div>
+      <div style="display:flex; gap:26px; flex-wrap:wrap; font-size:14px;">
+        <a href="#" style="color:#5b6168; text-decoration:none;">Ethics</a>
+        <a href="#" style="color:#5b6168; text-decoration:none;">Assessments</a>
+        <a href="#" style="color:#5b6168; text-decoration:none;">Classroom map</a>
+        <a href="#" style="color:#5b6168; text-decoration:none;">Privacy</a>
+      </div>
+      <span style="font-size:13px; color:#9aa0a8;">© 2026 Synapse LE</span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { active: 0 };
+  renderVals() {
+    const capabilities = ['Frontend Architecture & React','UI Engineering & Styling','Backend Development & FastAPI','Learning Experience Design','State Management','APIs & Data Syncing'];
+    const projects = [
+      { kicker:'TRUST-BASED DISCOURSE', name:'Verisphere', desc:'A community platform for verifiable, source-backed discussion — where every claim carries its provenance and every voice is accountable.', tags:['React','FastAPI','PostgreSQL'], cta:'Experience Verisphere' },
+      { kicker:'VERIFIABLE LEARNING', name:'Credential Assessment System', desc:'Issue, store and verify academic credentials with tamper-evident records and instant institutional lookup.', tags:['React','JWT','SQLite'], cta:'Open CAS' },
+      { kicker:'CLASSROOM MAP', name:'Spatial Learning Environment', desc:'An interactive map that turns a course into a navigable space — rooms, paths and shared discovery.', tags:['Three.js','R3F','WebGL'], cta:'Enter the Map' },
+    ];
+    const blogs = [
+      { cat:'Discovery', read:'12', title:'On the Architecture of Trust in Digital Discourse', summary:'Why verifiability must be a first-class design primitive, not a moderation afterthought.' },
+      { cat:'Ethics', read:'08', title:'Verifiability as a Design Principle', summary:'Provenance, citation and consent — building social spaces that reward rigor over reach.' },
+      { cat:'Discovery', read:'12', title:'What Verifiable Discourse Actually Requires', summary:'Notes on building social spaces that reward sources over noise.' },
+    ];
+    const merch = [
+      { name:'Dotted Field Notebook', desc:'120 pages of dotted paper for lecture notes, proofs and marginalia.', price:'249' },
+      { name:'Vinyl Sticker Pack', desc:'Six die-cut, weatherproof stickers for laptops, bottles and notebooks.', price:'149' },
+      { name:'Insulated Steel Bottle', desc:'750ml double-walled flask — from lecture halls to late-night labs.', price:'449' },
+    ];
+    const spotData = [
+      { n:'01', tag:'KEYNOTE', title:'Designing for Verifiability', dur:'24:10' },
+      { n:'02', tag:'SESSION', title:'Inside the Credential Graph', dur:'18:42' },
+      { n:'03', tag:'WORKSHOP', title:'Spatial Learning, Live', dur:'31:05' },
+      { n:'04', tag:'PANEL', title:'Community & Trust at Scale', dur:'27:33' },
+    ];
+    const active = this.state.active;
+    const spotlight = spotData.map((v,i)=>({
+      ...v, select:()=>this.setState({active:i}),
+      rowStyle:'display:flex; gap:12px; align-items:center; padding:10px; border-radius:14px; cursor:pointer; background:'+(i===active?'#fff':'transparent')+'; box-shadow:'+(i===active?'0 12px 30px -20px rgba(0,0,0,0.3)':'none')+'; border:1px solid '+(i===active?'#e3e7ef':'transparent')+';',
+    }));
+    const a = spotData[active];
+    return { capabilities, projects, blogs, merch, spotlight, spotActiveNo:a.n, spotActiveTag:a.tag, spotActiveTitle:a.title, spotActiveDur:a.dur };
+  }
+}
+</script>
+</body>
+</html>

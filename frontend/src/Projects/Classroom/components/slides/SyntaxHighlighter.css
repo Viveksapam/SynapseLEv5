@@ -1,0 +1,27 @@
+﻿.syntax-base {
+  font-family: var(--sle-font-mono);
+  color: #f8f8f2 !important;
+}
+
+.token-comment {
+  color: #6272a4 !important;
+  font-style: italic !important;
+}
+
+.token-property {
+  color: #8be9fd !important;
+}
+
+.token-selector {
+  color: #50fa7b !important;
+}
+
+.token-value {
+  color: #ffb86c !important;
+}
+
+.token-punctuation {
+  color: #f8f8f2 !important;
+  opacity: 0.7 !important;
+}
+

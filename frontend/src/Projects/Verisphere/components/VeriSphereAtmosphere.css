@@ -1,0 +1,69 @@
+/* VeriSphereAtmosphere.css */
+
+/* Full-page fixed container */
+.vs-atmosphere-container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Make VeriSphere content stack above the background */
+.verisphere-app {
+  position: relative;
+  z-index: 1;
+}
+
+/* The actual image layers */
+.vs-bg-layer {
+  position: absolute;
+  inset: -5%; /* Over-size to allow for panning/zooming */
+  width: 110%;
+  height: 110%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 2.5s ease-in-out;
+  animation: breathe 30s ease-in-out infinite alternate;
+}
+
+/* Subtle zooming animation for life */
+@keyframes breathe {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.08) translate(-1%, -1%); }
+}
+
+/* Show the active layer */
+.vs-bg-layer.active {
+  opacity: 1;
+}
+
+/* Optional: darken the images slightly so text remains readable */
+.vs-bg-layer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4); /* Base darkening */
+}
+
+/* Theme-specific images */
+.vs-bg-night { background-image: url('/backgrounds/night.jpg'); }
+.vs-bg-winter { background-image: url('/backgrounds/winter.jpg'); }
+.vs-bg-christmas { background-image: url('/backgrounds/winter.jpg'); } /* Reuse winter for christmas */
+.vs-bg-halloween { background-image: url('/backgrounds/autumn.jpg'); }
+.vs-bg-diwali { background-image: url('/backgrounds/autumn.jpg'); } /* Reuse autumn for diwali */
+.vs-bg-default { background-image: url('/backgrounds/night.jpg'); }
+
+/* The canvas sits above the image but below the app */
+.vs-atmosphere-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+

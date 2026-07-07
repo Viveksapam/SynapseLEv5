@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Interactive CSS Sandbox</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); 
+            padding: 1.5rem; 
+            margin: 0; 
+            box-sizing: border-box; 
+            min-height: 100%;
+            color: #f8fafc;
+            
+            /* Responsive Grid Layout */
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            grid-template-areas: "tabs render";
+            grid-template-rows: 550px;
+            gap: 1.5rem;
+        }
+
+        /* Mobile Adjustments */
+        @container (max-width: 900px) {
+            body {
+                grid-template-columns: 1fr;
+                grid-template-areas: 
+                    "render"
+                    "tabs";
+            }
+        }
+        
+        .panel { 
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1.5rem; 
+            border-radius: 16px; 
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); 
+            display: flex; 
+            flex-direction: column; 
+            gap: 1.5rem; 
+        }
+
+        .panel-tabs { grid-area: tabs; height: 100%; }
+        .panel-render { grid-area: render; height: 100%; }
+        
+        h2 { 
+            margin: 0; 
+            color: #e2e8f0; 
+            font-size: 1.15rem; 
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        h2 .title-text {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        h2 .title-text::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 24px;
+            background: linear-gradient(to bottom, #38bdf8, #818cf8);
+            border-radius: 4px;
+        }
+
+        /* Viewport Toggles */
+        .viewport-toggles {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(0,0,0,0.2);
+            padding: 4px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .viewport-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .viewport-btn.active {
+            background: #38bdf8;
+            color: #0f172a;
+        }
+        
+        /* Tabs System */
+        .tab-buttons {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(0,0,0,0.2);
+            padding: 6px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.05);
+            margin-bottom: 0.5rem;
+        }
+        .tab-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .tab-btn.active {
+            background: #38bdf8;
+            color: #0f172a;
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
+        }
+        .tab-content {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            padding-right: 8px;
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+            height: 100%;
+        }
+        .tab-content.active {
+            display: flex;
+        }
+
+        /* Editor */
+        textarea { 
+            width: 100%; 
+            height: 100%; 
+            min-height: 0;
+            font-family: 'Fira Code', monospace; 
+            font-size: 13px; 
+            padding: 1rem; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+            resize: none; 
+            overflow-y: auto;
+            background: #0b1120; 
+            color: #38bdf8; 
+            line-height: 1.5;
+            transition: border-color 0.3s;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #818cf8;
+            box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.2);
+        }
+
+        /* GUI Controls */
+        .gui-controls {
+            overflow-y: auto;
+            max-height: 100%; 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+            gap: 1rem; 
+            background: rgba(0, 0, 0, 0.2); 
+            padding: 1.25rem; 
+            border-radius: 12px; 
+            border: 1px solid rgba(255,255,255,0.05); 
+        }
+        .gui-control { display: flex; flex-direction: column; gap: 0.4rem; }
+        .gui-control label { 
+            font-size: 0.75rem; 
+            font-weight: 600; 
+            color: #94a3b8; 
+            text-transform: uppercase; 
+            letter-spacing: 0.05em;
+        }
+        
+        .gui-control input[type="color"], .gui-control select { 
+            width: 100%; 
+            height: 38px; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            border-radius: 6px; 
+            cursor: pointer; 
+            background: #1e293b;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+        }
+        .gui-control input[type="color"] { padding: 2px; }
+        .gui-control input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+        .gui-control input[type="color"]::-webkit-color-swatch { border: none; border-radius: 4px; }
+        
+        .gui-control input[type="number"] { 
+            width: 100%; 
+            height: 38px; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            border-radius: 6px; 
+            padding: 0 0.75rem; 
+            box-sizing: border-box; 
+            background: #1e293b;
+            color: white;
+            font-family: 'Fira Code', monospace;
+        }
+        .gui-control-full { grid-column: 1 / -1; }
+
+        /* Preview Box */
+        .preview-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%231e293b' fill-opacity='0.4' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Cg%3E%3C/svg%3E");
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            padding: 2rem;
+            box-sizing: border-box;
+            height: 100%; min-height: 0;
+            overflow: hidden; /* Hide the scaled overflow */
+        }
+
+        #live-result { \n            container-type: inline-size;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: absolute;
+            background: #0f172a;
+            overflow-y: hidden;
+            transform-origin: center center;
+            
+            /* Center the device inside the relative parent */
+            left: 50%;
+            top: 50%;
+        }
+
+        /* Device Viewports */
+        #live-result.device-desktop {
+            width: 1280px;      /* True 16:9 Desktop Resolution */
+            height: 720px;
+            border: 12px solid #1e293b;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+        }
+
+        #live-result.device-mobile {
+            width: 375px;       /* True iPhone Resolution */
+            height: 667px;
+            border: 12px solid #1e293b;
+            border-radius: 36px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+        }
+    body::-webkit-scrollbar { display: none; } body { -ms-overflow-style: none; scrollbar-width: none; overflow-y: hidden; }
+    </style>
+</head>
+<body>
+
+    <div class="panel panel-tabs">
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="switchTab('gui')">Visual GUI Controls</button>
+            <button class="tab-btn" onclick="switchTab('editor')">Code Editor</button>
+        </div>
+
+        <div id="tab-gui" class="tab-content active">
+            <div class="gui-controls">
+                <div class="gui-control gui-control-full">
+                    <label>Target Element</label>
+                    <select id="guiTarget">
+                        <option value=".card-container">Layout Container (.card-container)</option>
+                        
+                        
+                    </select>
+                </div>
+                
+                <div class="gui-control">
+                    <label>Display</label>
+                    <select id="guiDisplay">
+                        <option value="block">block</option>
+                        <option value="flex" selected>flex</option>
+                        <option value="grid">grid</option>
+                    </select>
+                </div>
+                <div class="gui-control">
+                    <label>Flex Direction</label>
+                    <select id="guiFlexDir">
+                        <option value="row" selected>row</option>
+                        <option value="column">column</option>
+                    </select>
+                </div>
+                <div class="gui-control">
+                    <label>Justify Content</label>
+                    <select id="guiJustify">
+                        <option value="flex-start">flex-start</option>
+                        <option value="center" selected>center</option>
+                        <option value="space-between">space-between</option>
+                        <option value="space-around">space-around</option>
+                    </select>
+                </div>
+                <div class="gui-control">
+                    <label>Align Items</label>
+                    <select id="guiAlign">
+                        <option value="flex-start">flex-start</option>
+                        <option value="center" selected>center</option>
+                        <option value="stretch">stretch</option>
+                    </select>
+                </div>
+                <div class="gui-control">
+                    <label>Gap (px)</label>
+                    <input type="number" id="guiGap" value="20" min="0" max="100">
+                </div>
+                <div class="gui-control">
+                    <label>Background</label>
+                    <input type="color" id="guiBg" value="#ffffff">
+                </div>
+                <div class="gui-control">
+                    <label>Padding (px)</label>
+                    <input type="number" id="guiPadding" value="40" min="0" max="100">
+                </div>
+                <div class="gui-control">
+                    <label>Radius (px)</label>
+                    <input type="number" id="guiRadius" value="24" min="0" max="100">
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-editor" class="tab-content">
+            <textarea id="cssInput" spellcheck="false">
+.card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 40px;
+  height: 100%;
+}
+
+/* 🔥 Responsive Design: On mobile, stack vertically! */
+@container (max-width: 768px) {
+  .card-container {
+    flex-direction: column !important;
+    padding: 20px !important;
+  }
+}
+
+.profile-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  padding: 30px;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  text-align: center;
+  width: 100%;
+  max-width: 300px;
+}
+
+.profile-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3px solid #818cf8;
+  margin-bottom: 15px;
+}
+
+.follow-btn {
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 100%;
+}
+            </textarea>
+        </div>
+    </div>
+
+    <div class="panel panel-render">
+        <h2>
+            <span class="title-text">Live Render</span>
+            <div class="viewport-toggles">
+                <button class="viewport-btn active" onclick="setViewport('desktop', this)">PC (16:9)</button>
+                <button class="viewport-btn" onclick="setViewport('mobile', this)">Mobile</button>
+            </div>
+        </h2>
+        <div class="preview-container" id="previewContainer">
+            <div id="live-result" class="device-desktop">
+                <div class="card-container">
+                    <div class="profile-card">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=b6e3f4" alt="Avatar" class="profile-img">
+                        <h3 style="margin:0; font-size: 1.5rem;">Alex Developer</h3>
+                        <p style="margin: 5px 0 0 0; color: #cbd5e1; font-size: 0.9rem;">Frontend Engineer</p>
+                        <button class="follow-btn">Follow Me</button>
+                    </div>
+                    <div class="profile-card">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Bella&backgroundColor=f4b6d4" alt="Avatar" class="profile-img">
+                        <h3 style="margin:0; font-size: 1.5rem;">Bella UI/UX</h3>
+                        <p style="margin: 5px 0 0 0; color: #cbd5e1; font-size: 0.9rem;">Product Designer</p>
+                        <button class="follow-btn">Follow Me</button>
+                    </div>
+    <div class="profile-card">
+        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Charlie" alt="Profile" class="profile-img">
+        <h3>Charlie Dev</h3>
+        <p>Backend Engineer</p>
+        <button class="follow-btn">Follow Me</button>
+    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style id="dynamic-styles"></style>
+
+    <script>
+        // Tab Switcher logic
+        window.switchTab = function(tabName) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById('tab-' + tabName).classList.add('active');
+        };
+
+        const input = document.getElementById('cssInput');
+        const styleTag = document.getElementById('dynamic-styles');
+        const liveResult = document.getElementById('live-result');
+        const previewContainer = document.getElementById('previewContainer');
+        
+        const target = document.getElementById('guiTarget');
+        const display = document.getElementById('guiDisplay');
+        const flexDir = document.getElementById('guiFlexDir');
+        const justify = document.getElementById('guiJustify');
+        const align = document.getElementById('guiAlign');
+        const gap = document.getElementById('guiGap');
+        const bg = document.getElementById('guiBg');
+        const padding = document.getElementById('guiPadding');
+        const radius = document.getElementById('guiRadius');
+
+        // Dynamically calculate the scale to perfectly fit the viewport inside the container!
+        function updateScaling() {
+            const containerW = previewContainer.clientWidth - 40; // leaving a bit of margin
+            const containerH = previewContainer.clientHeight - 40;
+            
+            let targetW, targetH;
+            if (liveResult.classList.contains('device-desktop')) {
+                targetW = 1280; // 16:9 PC Screen
+                targetH = 720;
+            } else {
+                targetW = 375;  // Mobile Screen
+                targetH = 667;
+            }
+            
+            // Calculate scale factors and choose the smallest one so it completely fits
+            const scaleX = containerW / targetW;
+            const scaleY = containerH / targetH;
+            const scale = Math.min(scaleX, scaleY);
+            
+            // Apply scale using translate to keep it perfectly centered
+            liveResult.style.transform = `translate(-50%, -50%) scale(${scale})`;
+        }
+
+        window.addEventListener('resize', updateScaling);
+
+        window.setViewport = function(device, btn) {
+            document.querySelectorAll('.viewport-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            if (device === 'mobile') {
+                liveResult.className = 'device-mobile';
+            } else {
+                liveResult.className = 'device-desktop';
+            }
+            
+            updateScaling();
+            updateStyles();
+        };
+
+        
+        function updateStyles() {
+            let css = input.value;
+            styleTag.innerHTML = '#live-result * { transition: all 0.3s ease; box-sizing: border-box; } ' + 
+                css.replace(/(\.card-container|\.profile-card|\.follow-btn|\.profile-img)/g, '#live-result $1');
+        }
+
+        function applyGUI() {
+            const sel = target.value;
+            let code = input.value;
+            
+            // Fix regex by properly escaping!
+            const escapedSel = sel.replace('.', '\\.');
+            const regex = new RegExp(escapedSel + '\\s*\\{([^}]+)\\}');
+            const match = code.match(regex);
+            
+            let propsMap = {};
+            if (match) {
+                match[1].split(';').forEach(rule => {
+                    let parts = rule.split(':');
+                    if (parts.length >= 2) {
+                        let key = parts[0].trim();
+                        let val = parts.slice(1).join(':').trim();
+                        if (key) propsMap[key] = val;
+                    }
+                });
+            }
+            
+            // Apply all Truthful GUI states directly
+            propsMap['display'] = display.value;
+            if (display.value === 'flex' || display.value === 'grid') {
+                propsMap['flex-direction'] = flexDir.value;
+                propsMap['justify-content'] = justify.value;
+                propsMap['align-items'] = align.value;
+                propsMap['gap'] = gap.value + 'px';
+            } else {
+                delete propsMap['flex-direction'];
+                delete propsMap['justify-content'];
+                delete propsMap['align-items'];
+                delete propsMap['gap'];
+            }
+            
+            // Only overwrite background if the user actively changed the color picker away from the synced state
+            if (bg.value !== bg.dataset.synced) {
+                propsMap['background'] = bg.value;
+                bg.dataset.synced = bg.value; // update sync state so it tracks
+            }
+            
+            propsMap['padding'] = padding.value + 'px';
+            propsMap['border-radius'] = radius.value + 'px';
+            
+            let finalStr = '';
+            for (let k in propsMap) {
+                finalStr += '\n  ' + k + ': ' + propsMap[k] + ';';
+            }
+            
+            if (match) {
+                code = code.replace(regex, sel + ' {' + finalStr + '\n}');
+            } else {
+                code += '\n\n' + sel + ' {' + finalStr + '\n}';
+            }
+            
+            input.value = code;
+            updateStyles();
+        }
+
+        input.addEventListener('input', updateStyles);
+        
+        target.addEventListener('change', () => {
+            const sel = target.value;
+            const code = input.value;
+            const regex = new RegExp(sel.replace('.', '\\.') + '\\s*\\{([^}]+)\\}');
+            const match = code.match(regex);
+            
+            if (match) {
+                let propsMap = {};
+                match[1].split(';').forEach(rule => {
+                    let parts = rule.split(':');
+                    if (parts.length >= 2) {
+                        let key = parts[0].trim();
+                        let val = parts.slice(1).join(':').trim();
+                        if (key) propsMap[key] = val;
+                    }
+                });
+                
+                if (propsMap['display']) display.value = propsMap['display'];
+                if (propsMap['flex-direction']) flexDir.value = propsMap['flex-direction'];
+                if (propsMap['justify-content']) justify.value = propsMap['justify-content'];
+                if (propsMap['align-items']) align.value = propsMap['align-items'];
+                if (propsMap['gap']) gap.value = parseInt(propsMap['gap']) || 0;
+                if (propsMap['padding']) padding.value = parseInt(propsMap['padding']) || 0;
+                if (propsMap['border-radius']) radius.value = parseInt(propsMap['border-radius']) || 0;
+                
+                if (propsMap['background'] && propsMap['background'].startsWith('#')) {
+                    bg.value = propsMap['background'].substring(0, 7);
+                } else {
+                    bg.value = '#ffffff'; // Fallback
+                }
+            }
+            
+            // Reset dirty flags when switching targets
+            [display, flexDir, justify, align, gap, bg, padding, radius].forEach(el => {
+                el.dataset.dirty = 'false';
+            });
+        });
+        
+        // Attach dirty flag logic to inputs
+        [display, flexDir, justify, align, gap, bg, padding, radius].forEach(el => {
+            el.dataset.dirty = 'false'; // Initialize
+            el.addEventListener('input', (e) => {
+                e.target.dataset.dirty = 'true';
+                applyGUI();
+            });
+        });
+
+        
+        
+        // Auto-resize logic that can SHRINK
+        const ro = new ResizeObserver(() => {
+            // Calculate true content height manually to allow shrinking
+            const renderBox = document.querySelector('.panel-render');
+            const tabsBox = document.querySelector('.panel-tabs');
+            
+            // Check if stacked (mobile) or side-by-side
+            const isStacked = window.innerWidth <= 900;
+            
+            let trueHeight = 0;
+            if (isStacked) {
+                // padding(24) + render + gap(24) + tabs + padding(24)
+                trueHeight = renderBox.offsetHeight + tabsBox.offsetHeight + 72;
+            } else {
+                // max(render, tabs) + padding(48)
+                trueHeight = Math.max(renderBox.offsetHeight, tabsBox.offsetHeight) + 48;
+            }
+
+            window.parent.postMessage({ 
+                type: 'sandbox-resize', 
+                height: trueHeight
+            }, '*');
+        });
+        ro.observe(document.body);
+        ro.observe(document.querySelector('.panel-tabs'));
+        ro.observe(document.querySelector('.panel-render'));
+  
+  
+        // Initialize
+        updateStyles();
+        // Give it a tiny delay on load to ensure DOM layout is resolved before scaling
+        setTimeout(updateScaling, 50);
+    </script>
+</body>
+</html>

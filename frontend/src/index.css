@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Source+Sans+3:ital,wght@0,300..900;1,300..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --text-main: #d1d7e0;       /* Frosted graphite */
+  --text-heading: #f1f5f9;    /* Alabaster cream */
+  --text-muted: #828c9a;      /* Muted graphite */
+  
+  --bg-main: #0e131f;         /* Deep slate-blue/graphite inkwell */
+  --bg-card: #171d2b;         /* Deep obsidian steel */
+  --bg-nav: rgba(14, 19, 31, 0.85);
+  --border-light: #222b3e;    /* Muted copper/steel lines */
+  --code-bg: #171d2b;       
+  
+  --accent-primary: #dfb26c;    /* Muted Bronze */
+  --accent-secondary: #4a90e2;  /* Scientific Telemetry Cobalt */
+  --accent-primary-light: rgba(223, 178, 108, 0.1);
+  --accent-secondary-light: rgba(74, 144, 226, 0.1);
+  
+  --brand-gradient-start: #dfb26c;
+  --brand-gradient-end: #f1f5f9;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+  
+  --font-serif: 'Lora', Georgia, serif;
+  --font-sans: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Layout Variables - Defaulting to Edge-to-Edge / New UI */
+  --max-width-xl: 100%;
+  --section-border-radius: 0px; /* Sharp academic blocks */
+  --section-margin: 64px;
+  --section-shadow: none;       /* Rely on flat design and borders */
+  --hero-border: 1px solid var(--border-light);
+
+  /* Global Spacing Variables */
+  --pad-section-desktop: 48px;
+  --pad-section-mobile: 24px;
+  --pad-edge-desktop: 24px;
+  --pad-edge-mobile: 16px;
+  
+  font-family: var(--font-sans);
+  color: var(--text-main);
+  background-color: var(--bg-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-main);
+  overflow-x: clip; /* Prevents horizontal wobble without breaking sticky nav */
+  width: 100%;
+  max-width: 100%;
+}
+
+#root {
+  min-height: 100dvh; /* Fixes address bar jumping on mobile */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  color: var(--text-heading);
+  margin: 0;
+}
+
+a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-secondary);
+}
+
+/* Unified Section Headers (Premium Typography Styles) */
+.blog-header,
+.portfolio-header {
+  background: transparent;
+  border: none;
+  padding: 0 0 24px 0;
+  margin-bottom: 40px;
+  text-align: left;
+  box-shadow: none;
+  position: relative;
+}
+
+/* Sleek horizontal divider below the header */
+.blog-header::after,
+.portfolio-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to right, var(--accent-primary), transparent);
+  opacity: 0.3;
+}
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  color: var(--accent-primary);
+  background: var(--accent-primary-light);
+  border: 1px solid rgba(79, 70, 229, 0.15);
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Glowing dot in the eyebrow */
+.section-eyebrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent-primary);
+  box-shadow: 0 0 8px var(--accent-primary);
+}
+
+.blog-title,
+.portfolio-title {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  margin: 0 0 12px 0;
+  background: linear-gradient(135deg, var(--text-heading) 0%, var(--accent-secondary) 50%, var(--accent-primary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+}
+
+.blog-subtitle,
+.portfolio-subtitle {
+  color: var(--text-muted);
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  margin: 0;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+
+@media (max-width: 768px) {
+  .blog-header,
+  .portfolio-header {
+    margin-bottom: 24px;
+    padding-top: 16px;
+  }
+}
+
+/* Animation Utility Classes */
+.animated-section {
+  opacity: 0;
+  will-change: opacity, transform;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animated-section.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.fade-up {
+  transform: translateY(40px);
+}
+
+.fade-left {
+  transform: translateX(-40px);
+}
+
+.slide-in-left {
+  transform: translateX(-100%);
+}
+
+.fade-right {
+  transform: translateX(40px);
+}
+
+.zoom-in {
+  transform: scale(0.95);
+}
+
+/* Old UI overrides */
+body.old-ui {
+  /* Clean Light Theme Overrides - Warm Parchment & Muted Bronze */
+  --font-sans: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+  
+  --text-main: #2b2e31;     /* Dark graphite */
+  --text-heading: #0c0d0e;  /* Deep Inkwell */
+  --text-muted: #5e646b;    /* Muted charcoal */
+  
+  --bg-main: #fcfbfa;       /* Pure parchment white */
+  --bg-card: #f3efe6;       /* Elevated warm parchment */
+  --bg-nav: rgba(252, 251, 250, 0.85); /* Frosty light nav */
+  --border-light: #d8d3c9;  /* Warm book border */
+  --code-bg: #f3efe6;       
+  
+  --accent-primary: #8d704a;    /* Muted dark bronze */
+  --accent-secondary: #584323;  /* Deep bronze */
+  --accent-primary-light: rgba(141, 112, 74, 0.08);
+  --accent-secondary-light: rgba(88, 67, 35, 0.08);
+  
+  --brand-gradient-start: var(--accent-primary);
+  --brand-gradient-end: var(--accent-secondary);
+  
+  /* Restore Containers */
+  --max-width-xl: 1200px;
+  --section-border-radius: 0px;
+  --section-margin: 48px;
+  --section-shadow: none;
+  --hero-border: 1px solid var(--border-light);
+}
+
+body.old-ui .animated-section {
+  /* Example: disable animations in old UI */
+  transition: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* 
+  BRUTALIST SHARP EDGES 
+  Universally remove all border radii across the entire page,
+  except for the AI chat widget and the hero visual animation nodes.
+*/
+body.brutalist-edges *:not(.global-ai-chat-window):not(.global-ai-chat-window *):not(.global-ai-overlay):not(.hero-visual):not(.hero-visual *),
+body.brutalist-edges *:not(.global-ai-chat-window):not(.global-ai-chat-window *):not(.global-ai-overlay):not(.hero-visual):not(.hero-visual *)::before,
+body.brutalist-edges *:not(.global-ai-chat-window):not(.global-ai-chat-window *):not(.global-ai-overlay):not(.hero-visual):not(.hero-visual *)::after {
+  border-radius: 0 !important;
+}
+
