@@ -1,5 +1,6 @@
 import React, { lazy, Suspense, useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import ScrollToTop from './components/ScrollToTop';
 import SEO from './components/SEO';
 import ThemeLayer from './theme/ThemeLayer';
@@ -39,6 +40,7 @@ function App() {
       <ThemeLayer />
       <SEO />
       <ScrollToTop />
+      <Analytics />
       <Suspense fallback={<div className="ath-loading-screen" />}>
         <Routes>
           <Route
