@@ -1,0 +1,1342 @@
+[
+    {
+        "id": "css-01-intro",
+        "type": "content",
+        "title": "Introduction to CSS",
+        "contentBlocks": [
+            {
+                "type": "heading",
+                "text": "Learning Objectives"
+            },
+            {
+                "type": "list",
+                "items": [
+                    "**Identify** the fundamental purpose and syntax structure of CSS in modern web development [Remember].",
+                    "**Explain** how CSS interacts with HTML to create formatted digital interfaces [Understand].",
+                    "**Apply** basic CSS rules (selectors, properties, and values) to modify the appearance of text and containers [Apply].",
+                    "**Differentiate** between inline, internal, and external CSS implementation methods and justify the use of external stylesheets [Analyze]."
+                ]
+            },
+            {
+                "type": "heading",
+                "text": "Core Lesson Content"
+            },
+            {
+                "type": "paragraph",
+                "text": "Welcome to the foundation of web design. <span style=\"color: #3366ff;\">**Cascading Style Sheets (CSS)**</span> is the styling language used to dictate the visual appearance of a document written in HTML."
+            },
+            {
+                "type": "paragraph",
+                "text": "The primary philosophy behind CSS is the <span style=\"color: #ff3333;\">**_Separation of Concerns_**</span>. While HTML handles the raw structure and semantics of your content (the \"bones\"), CSS handles the presentation and layout (the \"skin and clothing\"). This principle allows developers to redesign entire websites simply by modifying a single <span style=\"color: #2ebd59;\">*external stylesheet*</span> without ever touching the <span style=\"color: #2ebd59;\">*HTML structure*</span>."
+            },
+            {
+                "type": "paragraph",
+                "text": "To communicate with the <span style=\"color: #2ebd59;\">*web browser*</span>, you must follow the strict <span style=\"color: #ff3333;\">**_CSS Syntax Rule_**</span>. Every CSS instruction consists of two main parts:<br>1. The <span style=\"color: #3366ff;\">**Selector**</span>: This points to the exact HTML element you want to style (e.g., `h1`, `p`, `button`).<br>2. The Declaration Block: Surrounded by curly braces `{}`, this contains one or more declarations. Each declaration includes a <span style=\"color: #3366ff;\">**Property**</span> (the specific feature you want to change, like `color` or `font-size`) and a <span style=\"color: #3366ff;\">**Value**</span> (the new setting for that property, like `red` or `16px`)."
+            },
+            {
+                "type": "code",
+                "language": "css",
+                "code": "h1 {\n  color: blue;\n  font-size: 24px;\n}"
+            },
+            {
+                "type": "paragraph",
+                "text": "In this example, `h1` is the <span style=\"color: #3366ff;\">**Selector**</span>, `color` is the <span style=\"color: #3366ff;\">**Property**</span>, and `blue` is the <span style=\"color: #3366ff;\">**Value**</span>."
+            },
+            {
+                "type": "heading",
+                "text": "Interactive CSS Sandbox"
+            },
+            {
+                "type": "paragraph",
+                "text": "Below is a complete, self-contained interactive CSS Sandbox. Save this code as `index.html` and open it in your browser to experiment with CSS syntax in real-time."
+            },
+            {
+                "type": "sandbox",
+                "html": "<div class=\"sandbox-container\">\n  <div class=\"sandbox-item item-1\">Object 1</div>\n  <div class=\"sandbox-item item-2\">Object 2</div>\n  <div class=\"sandbox-item item-3\">Object 3</div>\n  <div class=\"sandbox-item item-4\">Object 4</div>\n</div>",
+                "css": ".sandbox-container {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  align-items: center;\n  gap: 20px;\n  background-color: #1e293b;\n  padding: 40px;\n  border-radius: 24px;\n  border: 1px solid #334155;\n  grid-template-columns: repeat(2, 1fr);\n}\n\n.sandbox-item {\n  display: inline-flex;\n  width: 120px;\n  height: 120px;\n  border-radius: 12px;\n  color: #ffffff;\n  font-weight: 700;\n  font-size: 1.1rem;\n  justify-content: center;\n  align-items: center;\n  box-shadow: 0 10px 20px rgba(0,0,0,0.3);\n}\n\n.item-1 {\n  background: linear-gradient(135deg, #ff007f, #ff7f00);\n}\n\n.item-2 {\n  background: linear-gradient(135deg, #00f3ff, #007fff);\n}\n\n.item-3 {\n  background: linear-gradient(135deg, #00ff7f, #7fff00);\n}\n\n.item-4 {\n  background: linear-gradient(135deg, #7f00ff, #ff00ff);\n}"
+            },
+            {
+                "type": "heading",
+                "text": "Summative Assessment"
+            },
+            {
+                "type": "inline_quiz",
+                "questions": [
+                    {
+                        "type": "mcq",
+                        "prompt": "Which of the following represents the core design philosophy of CSS?",
+                        "options": [
+                            "A) To execute logical scripts on the user's browser.",
+                            "B) To separate the presentation/styling from the HTML structure.",
+                            "C) To store and retrieve data from a backend server.",
+                            "D) To create the structural foundation of a webpage."
+                        ]
+                    },
+                    {
+                        "type": "fill_in_blank",
+                        "prompt": "In the CSS rule `p { font-weight: bold; }`, the `p` acts as the __________, pointing out which HTML element should be targeted."
+                    },
+                    {
+                        "type": "short_answer",
+                        "prompt": "Explain the structural difference between a CSS 'Property' and a CSS 'Value' using an example."
+                    },
+                    {
+                        "type": "open_ended",
+                        "prompt": "You have built a website with 50 different HTML pages. You currently have your CSS written directly inside each HTML file (Internal CSS). You decide you want to change the background color of the entire website from blue to red. Identify the primary problem with your current setup and propose the best CSS methodology to solve it."
+                    },
+                    {
+                        "type": "open_ended",
+                        "prompt": "Why is the concept of 'Separation of Concerns' critical for modern software teams? Consider what would happen if the UI designer and the database engineer both had to modify the exact same HTML file to do their jobs."
+                    }
+                ]
+            },
+            {
+                "type": "accordion",
+                "summary": "Click to view Answer Key",
+                "content": "<ul><li><strong>Question 1:</strong> B (To separate the presentation/styling from the HTML structure.)</li><li><strong>Question 2:</strong> Selector</li><li><strong>Question 3:</strong> The property is the specific attribute being changed, while the value is the new setting being applied. For example, in <code>color: red;</code>, <code>color</code> is the property being targeted, and <code>red</code> is the specific value applied to that property.</li><li><strong>Question 4:</strong> The student must identify that Internal CSS requires updating 50 separate files manually, leading to massive inefficiency and high risk of errors. The proposed solution must be to use an <strong>External Stylesheet</strong> (<code>.css</code> file), which allows all 50 HTML pages to link to a single source of truth.</li><li><strong>Question 5:</strong> Separating structure (HTML) from presentation (CSS) prevents code conflicts, allows team members to work in parallel without stepping on each other's toes, and keeps the codebase clean, readable, and highly maintainable.</li></ul>"
+            }
+        ]
+    },
+    {
+        "id": "css-02-video",
+        "type": "video",
+        "title": "The Evolution of CSS",
+        "videoId": "1Rs2ND1ryYc"
+    },
+    {
+        "id": "css-03-selectors",
+        "type": "content",
+        "title": "Fundamental Selectors",
+        "contentBlocks": [
+            {
+                "type": "paragraph",
+                "text": "To style an element, you must first target it. CSS provides three fundamental selector types, each with different power and use cases."
+            },
+            {
+                "type": "tabs",
+                "tabs": [
+                    {
+                        "label": "TYPE",
+                        "blocks": [
+                            {
+                                "type": "paragraph",
+                                "text": "Type selectors (also called element selectors) target every instance of an HTML tag. They're the broadest brush in your toolkit."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": "/* Targets EVERY paragraph on the page */\np {\n  font-size: 1rem;\n  line-height: 1.6;\n  color: #e0e0e0;\n}\n\n/* Targets EVERY anchor tag */\na {\n  color: cyan;\n  text-decoration: none;\n}"
+                            },
+                            {
+                                "type": "callout",
+                                "variant": "tip",
+                                "text": "Type selectors have the lowest specificity (1 point). Use them for base/reset styles, then override with classes."
+                            }
+                        ]
+                    },
+                    {
+                        "label": "CLASS",
+                        "blocks": [
+                            {
+                                "type": "paragraph",
+                                "text": "Class selectors target elements with a specific class attribute. They're the workhorse of professional CSS — reusable, composable, and mid-specificity."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": "/* A reusable button class */\n.btn {\n  padding: 0.75rem 1.5rem;\n  border: none;\n  border-radius: 6px;\n  cursor: pointer;\n  font-weight: 600;\n}\n\n/* Modifier classes */\n.btn-primary { background: cyan; color: #000; }\n.btn-danger  { background: #ff3333; color: #fff; }"
+                            },
+                            {
+                                "type": "callout",
+                                "variant": "info",
+                                "text": "Classes are prefixed with a dot (.) and can be reused across unlimited elements. An element can also have multiple classes: class=\"btn btn-primary\"."
+                            }
+                        ]
+                    },
+                    {
+                        "label": "ID",
+                        "blocks": [
+                            {
+                                "type": "paragraph",
+                                "text": "ID selectors target a single unique element. They carry very high specificity and should be used sparingly."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": "#site-header {\n  position: sticky;\n  top: 0;\n  z-index: 1000;\n  background: #0a0a0a;\n}"
+                            },
+                            {
+                                "type": "callout",
+                                "variant": "warning",
+                                "text": "IDs have 100 specificity points. Overusing them creates specificity wars that are hard to debug. Prefer classes for styling; reserve IDs for JavaScript hooks and anchor links."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "css-04-combinators",
+        "type": "content",
+        "title": "Combinators & Attribute Selectors",
+        "contentBlocks": [
+            {
+                "type": "paragraph",
+                "text": "Combinators let you target elements based on their relationship to other elements in the DOM tree. This is how you write surgical, context-aware CSS."
+            },
+            {
+                "type": "tabs",
+                "tabs": [
+                    {
+                        "label": "DESCENDANT",
+                        "blocks": [
+                            {
+                                "type": "paragraph",
+                                "text": "The space combinator selects all descendants (children, grandchildren, etc.) of a parent."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": "/* Any <a> inside .navbar, no matter how deep */\n.navbar a {\n  color: white;\n  text-decoration: none;\n}"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "CHILD >",
+                        "blocks": [
+                            {
+                                "type": "paragraph",
+                                "text": "The > combinator selects only direct children — not grandchildren."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": "/* Only direct <li> children of .menu */\n.menu > li {\n  display: inline-block;\n  margin-right: 1rem;\n}"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "SIBLING + ~",
+                        "blocks": [
+                            {
+                                "type": "paragraph",
+                                "text": "Adjacent (+) targets the immediately next sibling. General (~) targets all subsequent siblings."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": "/* Style the paragraph right after an h2 */\nh2 + p {\n  font-size: 1.1rem;\n  color: #aaa;\n}\n\n/* Style ALL paragraphs after an h2 */\nh2 ~ p {\n  margin-left: 1rem;\n}"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "ATTRIBUTE",
+                        "blocks": [
+                            {
+                                "type": "paragraph",
+                                "text": "Attribute selectors let you target elements by their HTML attributes, with powerful substring matching."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": "/* Exact match */\ninput[type=\"email\"] { border-color: cyan; }\n\n/* Starts with */\na[href^=\"https\"] { color: green; }\n\n/* Ends with */\na[href$=\".pdf\"] { color: red; }\n\n/* Contains */\na[href*=\"github\"] { font-weight: bold; }"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "css-05-pseudo",
+        "type": "content",
+        "title": "Pseudo-classes & Pseudo-elements",
+        "contentBlocks": [
+            {
+                "type": "paragraph",
+                "text": "Pseudo-classes select elements based on their state or position. Pseudo-elements create virtual DOM nodes you can style without adding HTML."
+            },
+            {
+                "type": "tabs",
+                "tabs": [
+                    {
+                        "label": "INTERACTION",
+                        "blocks": [
+                            {
+                                "type": "heading",
+                                "text": ":hover, :focus, :active"
+                            },
+                            {
+                                "type": "paragraph",
+                                "text": "These respond to user interaction. They're essential for building accessible, responsive interfaces."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": "button {\n  background: #1a1a1a;\n  border: 1px solid cyan;\n  color: cyan;\n  transition: all 0.3s ease;\n}\n\nbutton:hover {\n  background: cyan;\n  color: #000;\n  box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);\n}\n\nbutton:active {\n  transform: scale(0.97);\n}\n\ninput:focus {\n  outline: none;\n  border-color: var(--neon-green);\n  box-shadow: 0 0 8px rgba(0, 255, 65, 0.3);\n}"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "STRUCTURAL",
+                        "blocks": [
+                            {
+                                "type": "heading",
+                                "text": ":nth-child, :first-of-type, :last-child"
+                            },
+                            {
+                                "type": "paragraph",
+                                "text": "These target elements by their position in the DOM tree — extremely powerful for styling lists, tables, and grids without extra classes."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": "/* Zebra-stripe a table */\ntr:nth-child(even) {\n  background: rgba(255, 255, 255, 0.03);\n}\n\n/* Style only the first paragraph */\np:first-of-type {\n  font-size: 1.2rem;\n  font-weight: 600;\n}\n\n/* Remove bottom margin from last item */\n.card:last-child {\n  margin-bottom: 0;\n}"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "PSEUDO-ELEMENTS",
+                        "blocks": [
+                            {
+                                "type": "heading",
+                                "text": "::before, ::after, ::first-line"
+                            },
+                            {
+                                "type": "paragraph",
+                                "text": "Pseudo-elements inject virtual content into the DOM. They're used for decorative elements, clearfixes, and typographic flourishes."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": ".badge::before {\n  content: '⚡';\n  margin-right: 0.5rem;\n}\n\n.quote::after {\n  content: '';\n  display: block;\n  width: 60px;\n  height: 3px;\n  background: var(--neon-cyan);\n  margin-top: 1rem;\n}\n\np::first-line {\n  font-weight: bold;\n  color: white;\n}"
+                            },
+                            {
+                                "type": "callout",
+                                "variant": "warning",
+                                "text": "Pseudo-elements REQUIRE the 'content' property to render — even if it's just content: ''. Without it, the element won't appear."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "css-05b-quiz-pseudo",
+        "type": "quiz",
+        "title": "Apply: Pseudo-classes",
+        "question": "To style alternating rows in a data table, which CSS selector do you use?",
+        "options": [
+            "tr:nth-child(even)",
+            "tr:hover",
+            "tr::after",
+            "tr:last-child"
+        ],
+        "correctAnswer": 0
+    },
+    {
+        "id": "css-06-specificity",
+        "type": "content",
+        "title": "Specificity & The Cascade",
+        "contentBlocks": [
+            {
+                "type": "paragraph",
+                "text": "The Cascade is the core algorithm browsers use to resolve CSS conflicts. Specificity is the mathematical weight assigned to each selector."
+            },
+            {
+                "type": "image",
+                "url": "/images/css-specificity.png",
+                "alt": "CSS Specificity Pyramid",
+                "caption": "The Specificity Hierarchy: Inline > IDs > Classes > Elements"
+            },
+            {
+                "type": "tabs",
+                "tabs": [
+                    {
+                        "label": "CALCULATION",
+                        "blocks": [
+                            {
+                                "type": "paragraph",
+                                "text": "Every selector gets a score in the format: (Inline, IDs, Classes, Elements)."
+                            },
+                            {
+                                "type": "list",
+                                "items": [
+                                    "Inline Styles: 1,0,0,0 (1000 points)",
+                                    "IDs (#header): 0,1,0,0 (100 points)",
+                                    "Classes / Pseudo-classes / Attributes: 0,0,1,0 (10 points)",
+                                    "Elements / Pseudo-elements: 0,0,0,1 (1 point)"
+                                ]
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": "/* Specificity: 0,0,1,1 = 11 */\nul.nav li { color: white; }\n\n/* Specificity: 0,1,0,1 = 101 — WINS */\n#main-menu li { color: cyan; }"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "TIE-BREAKING",
+                        "blocks": [
+                            {
+                                "type": "paragraph",
+                                "text": "When two selectors have the same specificity, the rule written LAST in the stylesheet wins. This is the 'cascade' part of CSS."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": ".btn { color: red; }\n.btn { color: blue; }\n/* Result: blue wins — it comes last */"
+                            },
+                            {
+                                "type": "callout",
+                                "variant": "tip",
+                                "text": "The !important declaration overrides everything, but it's considered a code smell. It makes debugging nearly impossible. Avoid it."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "css-07-quiz-spec",
+        "type": "quiz",
+        "title": "Assessment: Specificity",
+        "question": "Which selector overrides the others because it has the highest specificity?",
+        "options": [
+            ".card",
+            "div.wrapper .card",
+            "body section div.wrapper",
+            "They are all equal"
+        ],
+        "correctAnswer": 1,
+        "maxAttempts": 3
+    },
+    {
+        "id": "css-08-box-model",
+        "type": "content",
+        "title": "The Box Model",
+        "contentBlocks": [
+            {
+                "type": "paragraph",
+                "text": "Every single element rendered by the browser is a rectangular box. The Box Model defines how the size of that box is calculated."
+            },
+            {
+                "type": "image",
+                "url": "/images/box-model.png",
+                "alt": "CSS Box Model",
+                "caption": "From inside out: Content → Padding → Border → Margin"
+            },
+            {
+                "type": "tabs",
+                "tabs": [
+                    {
+                        "label": "CONTENT-BOX",
+                        "blocks": [
+                            {
+                                "type": "paragraph",
+                                "text": "The DEFAULT behavior. Width and height define only the content area. Padding and border are ADDED on top, making the total box bigger than you specified."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": ".box {\n  box-sizing: content-box; /* Default */\n  width: 200px;\n  padding: 20px;\n  border: 5px solid white;\n}\n/* Total rendered width = 200 + 40 + 10 = 250px! */"
+                            },
+                            {
+                                "type": "callout",
+                                "variant": "warning",
+                                "text": "This is the #1 source of layout bugs for beginners. Your 200px box is actually 250px wide."
+                            }
+                        ]
+                    },
+                    {
+                        "label": "BORDER-BOX",
+                        "blocks": [
+                            {
+                                "type": "paragraph",
+                                "text": "The modern best practice. Width and height include padding and border. The content area shrinks inward to fit."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": "*, *::before, *::after {\n  box-sizing: border-box;\n}\n\n.box {\n  width: 200px;\n  padding: 20px;\n  border: 5px solid white;\n}\n/* Total rendered width = exactly 200px ✓ */"
+                            },
+                            {
+                                "type": "callout",
+                                "variant": "tip",
+                                "text": "Always set box-sizing: border-box on everything. This single line prevents countless layout headaches."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "css-08b-box-visualizer",
+        "type": "visualizer",
+        "title": "The Box Model",
+        "instruction": "Use the steppers below to adjust padding, border, and margin. Watch how the generated CSS changes and how the box size is affected.",
+        "boxText": "I am the content!",
+        "defaultStyles": {
+            "backgroundColor": "#eff6ff",
+            "color": "#1e40af",
+            "borderStyle": "solid",
+            "borderColor": "#3b82f6"
+        },
+        "controls": [
+            {
+                "property": "padding",
+                "label": "Padding",
+                "type": "number",
+                "min": 0,
+                "max": 100,
+                "step": 5,
+                "defaultValue": 20,
+                "unit": "px"
+            },
+            {
+                "property": "borderWidth",
+                "label": "Border Width",
+                "type": "number",
+                "min": 0,
+                "max": 20,
+                "step": 1,
+                "defaultValue": 4,
+                "unit": "px"
+            },
+            {
+                "property": "margin",
+                "label": "Margin",
+                "type": "number",
+                "min": 0,
+                "max": 100,
+                "step": 5,
+                "defaultValue": 10,
+                "unit": "px"
+            },
+            {
+                "property": "borderRadius",
+                "label": "Border Radius",
+                "type": "number",
+                "min": 0,
+                "max": 100,
+                "step": 5,
+                "defaultValue": 8,
+                "unit": "px"
+            }
+        ]
+    },
+    {
+        "id": "css-09-box-sandbox",
+        "type": "interactive",
+        "title": "Sandbox: Box Model Hack",
+        "instruction": "Transform this div. Set its background color, give it EXACTLY 25px of padding, and a 2px solid cyan border.",
+        "initialCss": ".hacker-box {\n  width: 200px;\n  height: 100px;\n  color: white;\n  font-family: monospace;\n  /* Add your styles below */\n  \n}",
+        "htmlContent": "<div class='hacker-box'>SYS_MODULE_09</div>",
+        "validations": [
+            {
+                "regex": "background(-color)?:\\s*[^;]+",
+                "errorMessage": "SYSTEM_ERR: Missing background property."
+            },
+            {
+                "regex": "padding:\\s*25px",
+                "errorMessage": "SYSTEM_ERR: Padding must be exactly 25px."
+            },
+            {
+                "regex": "border:\\s*2px\\s+solid\\s+(cyan|#00ffff)",
+                "errorMessage": "SYSTEM_ERR: Border must be '2px solid cyan'."
+            }
+        ],
+        "maxAttempts": 3
+    },
+    {
+        "id": "css-09b-quiz-box",
+        "type": "quiz",
+        "title": "Apply: Box Model",
+        "question": "To prevent 20px padding from expanding a 300px wide box, you should apply:",
+        "options": [
+            "width: 260px;",
+            "box-sizing: border-box;",
+            "overflow: hidden;",
+            "margin: 0;"
+        ],
+        "correctAnswer": 1
+    },
+    {
+        "id": "css-10-typography",
+        "type": "content",
+        "title": "Typography & Web Fonts",
+        "contentBlocks": [
+            {
+                "type": "paragraph",
+                "text": "Typography is 90% of web design. The difference between an amateur and a premium site is almost always the text."
+            },
+            {
+                "type": "tabs",
+                "tabs": [
+                    {
+                        "label": "FONT STACK",
+                        "blocks": [
+                            {
+                                "type": "paragraph",
+                                "text": "A font stack is a list of fallback fonts. The browser uses the first one it finds installed. Always end with a generic family."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": "body {\n  /* Custom → System → Generic */\n  font-family:\n    'Inter',\n    system-ui,\n    -apple-system,\n    'Segoe UI',\n    sans-serif;\n}"
+                            },
+                            {
+                                "type": "callout",
+                                "variant": "tip",
+                                "text": "system-ui uses the OS's native font. It loads instantly and looks native on every platform."
+                            }
+                        ]
+                    },
+                    {
+                        "label": "SIZING",
+                        "blocks": [
+                            {
+                                "type": "paragraph",
+                                "text": "Use rem for font sizes — it respects the user's browser font-size preference, which is critical for accessibility."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": "html { font-size: 16px; } /* 1rem = 16px */\n\nh1 { font-size: 2.5rem; }   /* 40px */\nh2 { font-size: 2rem; }     /* 32px */\nh3 { font-size: 1.5rem; }   /* 24px */\nbody { font-size: 1rem; }   /* 16px */\nsmall { font-size: 0.875rem; } /* 14px */"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "RHYTHM",
+                        "blocks": [
+                            {
+                                "type": "paragraph",
+                                "text": "Vertical rhythm (line-height + spacing) makes text feel polished and easy to read. Here are professional values:"
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": "body {\n  line-height: 1.6;       /* Generous for body text */\n  letter-spacing: -0.01em; /* Slightly tighter for modern feel */\n}\n\nh1, h2, h3 {\n  line-height: 1.2;       /* Tighter for headings */\n  letter-spacing: -0.02em;\n}"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "css-10b-typo-visualizer",
+        "type": "visualizer",
+        "title": "Typography UI",
+        "instruction": "Use the number steppers and segments to style text perfectly.",
+        "boxText": "Design is Intelligence Made Visible",
+        "defaultStyles": {
+            "backgroundColor": "transparent",
+            "color": "#0f172a",
+            "padding": "20px",
+            "width": "100%"
+        },
+        "controls": [
+            {
+                "property": "fontSize",
+                "label": "Font Size",
+                "type": "number",
+                "min": 12,
+                "max": 72,
+                "step": 2,
+                "defaultValue": 24,
+                "unit": "px"
+            },
+            {
+                "property": "fontWeight",
+                "label": "Font Weight",
+                "type": "number",
+                "min": 100,
+                "max": 900,
+                "step": 100,
+                "defaultValue": 700,
+                "unit": ""
+            },
+            {
+                "property": "letterSpacing",
+                "label": "Letter Spacing",
+                "type": "number",
+                "min": -5,
+                "max": 20,
+                "step": 1,
+                "defaultValue": -1,
+                "unit": "px"
+            },
+            {
+                "property": "textAlign",
+                "label": "Text Align",
+                "type": "segmented",
+                "options": [
+                    "left",
+                    "center",
+                    "right"
+                ],
+                "defaultValue": "center",
+                "unit": ""
+            }
+        ]
+    },
+    {
+        "id": "css-11-positioning",
+        "type": "content",
+        "title": "Document Flow & Positioning",
+        "contentBlocks": [
+            {
+                "type": "paragraph",
+                "text": "By default, elements flow top-to-bottom (block) or left-to-right (inline). The position property lets you break out of this flow."
+            },
+            {
+                "type": "image",
+                "url": "/images/css-positioning.png",
+                "alt": "CSS Positioning",
+                "caption": "Static, Relative, Absolute, Fixed, and Sticky"
+            },
+            {
+                "type": "tabs",
+                "tabs": [
+                    {
+                        "label": "STATIC & RELATIVE",
+                        "blocks": [
+                            {
+                                "type": "paragraph",
+                                "text": "static is the default — element sits in normal flow. relative keeps the element in flow but lets you nudge it with top/left/right/bottom."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": ".tag {\n  position: relative;\n  top: -5px;   /* Nudges UP by 5px visually */\n  left: 10px;  /* Nudges RIGHT by 10px */\n  /* Other elements still behave as if .tag hasn't moved */\n}"
+                            },
+                            {
+                                "type": "callout",
+                                "variant": "info",
+                                "text": "relative is most commonly used as an anchor for absolute children — not for visual nudging."
+                            }
+                        ]
+                    },
+                    {
+                        "label": "ABSOLUTE",
+                        "blocks": [
+                            {
+                                "type": "paragraph",
+                                "text": "absolute removes the element from flow entirely. It's positioned relative to its nearest positioned ancestor (any ancestor with position: relative, absolute, or fixed)."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": ".card {\n  position: relative; /* Becomes the anchor */\n}\n\n.card .badge {\n  position: absolute;\n  top: -10px;\n  right: -10px;\n  /* Floats at the top-right corner of .card */\n}"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "FIXED & STICKY",
+                        "blocks": [
+                            {
+                                "type": "paragraph",
+                                "text": "fixed anchors to the viewport — perfect for persistent navbars. sticky acts like relative until the user scrolls past a threshold, then acts fixed."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": "/* Always visible at the top */\n.navbar {\n  position: fixed;\n  top: 0;\n  width: 100%;\n  z-index: 1000;\n}\n\n/* Sticks when scrolled to */\n.section-title {\n  position: sticky;\n  top: 0;\n  background: #0a0a0a;\n}"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "css-12-pos-sandbox",
+        "type": "interactive",
+        "title": "Sandbox: Positioning",
+        "instruction": "Make the container position: relative. Then make the child position: absolute, pinned 10px from the top and 10px from the right.",
+        "initialCss": ".parent {\n  width: 100%;\n  height: 200px;\n  background: #111;\n  border: 1px solid #333;\n  /* Make me relative */\n  \n}\n\n.child {\n  width: 50px;\n  height: 50px;\n  background: cyan;\n  /* Make me absolute, top: 10px, right: 10px */\n  \n}",
+        "htmlContent": "<div class='parent'>\n  <div class='child'></div>\n</div>",
+        "validations": [
+            {
+                "regex": "position:\\s*relative",
+                "errorMessage": "Parent must have position: relative."
+            },
+            {
+                "regex": "position:\\s*absolute",
+                "errorMessage": "Child must have position: absolute."
+            },
+            {
+                "regex": "top:\\s*10px",
+                "errorMessage": "Child must have top: 10px."
+            },
+            {
+                "regex": "right:\\s*10px",
+                "errorMessage": "Child must have right: 10px."
+            }
+        ],
+        "maxAttempts": 3
+    },
+    {
+        "id": "css-12b-quiz-pos",
+        "type": "quiz",
+        "title": "Apply: Positioning",
+        "question": "To absolutely position a notification badge inside an avatar container, the container needs:",
+        "options": [
+            "position: fixed;",
+            "position: relative;",
+            "display: block;",
+            "float: left;"
+        ],
+        "correctAnswer": 1,
+        "maxAttempts": 3
+    },
+    {
+        "id": "css-13-flexbox",
+        "type": "content",
+        "title": "Flexbox Architecture",
+        "contentBlocks": [
+            {
+                "type": "paragraph",
+                "text": "Flexbox is a 1-dimensional layout system — it handles alignment and distribution along a single axis (row or column)."
+            },
+            {
+                "type": "tabs",
+                "tabs": [
+                    {
+                        "label": "AXES",
+                        "blocks": [
+                            {
+                                "type": "heading",
+                                "text": "Main Axis vs. Cross Axis"
+                            },
+                            {
+                                "type": "paragraph",
+                                "text": "If flex-direction is row, the Main Axis is horizontal and the Cross Axis is vertical. If flex-direction is column, they swap."
+                            },
+                            {
+                                "type": "list",
+                                "items": [
+                                    "justify-content → aligns items along the MAIN axis",
+                                    "align-items → aligns items along the CROSS axis",
+                                    "gap → sets spacing between flex items (replaces margin hacks)"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "label": "CONTAINER",
+                        "blocks": [
+                            {
+                                "type": "heading",
+                                "text": "Parent Properties"
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": ".flex-parent {\n  display: flex;\n  flex-direction: row;       /* or column */\n  justify-content: center;   /* center, space-between, space-around, flex-start, flex-end */\n  align-items: center;       /* center, stretch, flex-start, flex-end, baseline */\n  flex-wrap: wrap;           /* Allow items to wrap to next line */\n  gap: 1rem;                 /* Space between items */\n}"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "CHILDREN",
+                        "blocks": [
+                            {
+                                "type": "heading",
+                                "text": "Child Properties"
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": ".flex-child {\n  flex-grow: 1;    /* How much the item should grow */\n  flex-shrink: 0;  /* How much the item should shrink */\n  flex-basis: 200px; /* The initial size before growing/shrinking */\n\n  /* Shorthand: grow shrink basis */\n  flex: 1 0 200px;\n\n  /* Override alignment for just this item */\n  align-self: flex-end;\n}"
+                            },
+                            {
+                                "type": "callout",
+                                "variant": "tip",
+                                "text": "flex: 1 is shorthand for flex: 1 1 0%, meaning the item grows and shrinks equally with no initial basis. Perfect for equal columns."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "css-14-flex-sandbox",
+        "type": "interactive",
+        "title": "Sandbox: Flexbox Visualizer",
+        "instruction": "Experiment freely! Try changing justify-content to 'space-between', 'space-around', or 'flex-end'. Try flex-direction: column. Watch the boxes respond in real-time.",
+        "initialCss": ".flex-container {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  align-items: center;\n  gap: 10px;\n  height: 300px;\n  background: rgba(0, 255, 65, 0.05);\n  border: 1px solid rgba(0, 255, 65, 0.3);\n  padding: 20px;\n}\n\n.flex-item {\n  width: 80px;\n  height: 80px;\n  background: rgba(0, 255, 65, 0.8);\n  color: #000;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  font-weight: bold;\n  font-family: monospace;\n  border-radius: 6px;\n}",
+        "htmlContent": "<div class='flex-container'>\n  <div class='flex-item'>A</div>\n  <div class='flex-item'>B</div>\n  <div class='flex-item'>C</div>\n</div>"
+    },
+    {
+        "id": "css-14c-flex-visualizer",
+        "type": "visualizer",
+        "title": "Flexbox Alignment",
+        "instruction": "Use the controls below to understand how flex containers align their children.",
+        "boxText": "Item",
+        "defaultStyles": {
+            "display": "flex",
+            "padding": "10px",
+            "backgroundColor": "#f1f5f9",
+            "border": "2px dashed #cbd5e1",
+            "height": "200px",
+            "width": "100%",
+            "gap": "10px"
+        },
+        "controls": [
+            {
+                "property": "flexDirection",
+                "label": "Direction",
+                "type": "segmented",
+                "options": [
+                    "row",
+                    "column"
+                ],
+                "defaultValue": "row",
+                "unit": ""
+            },
+            {
+                "property": "justifyContent",
+                "label": "Justify (Main Axis)",
+                "type": "select",
+                "options": [
+                    "flex-start",
+                    "center",
+                    "flex-end",
+                    "space-between",
+                    "space-around"
+                ],
+                "defaultValue": "center",
+                "unit": ""
+            },
+            {
+                "property": "alignItems",
+                "label": "Align (Cross Axis)",
+                "type": "select",
+                "options": [
+                    "flex-start",
+                    "center",
+                    "flex-end",
+                    "stretch"
+                ],
+                "defaultValue": "center",
+                "unit": ""
+            }
+        ]
+    },
+    {
+        "id": "css-14b-quiz-flex",
+        "type": "quiz",
+        "title": "Apply: Flexbox",
+        "question": "To push a logo to the far left and links to the far right of a flex navbar, use:",
+        "options": [
+            "align-items: space-between;",
+            "justify-content: space-between;",
+            "float: right;",
+            "gap: auto;"
+        ],
+        "correctAnswer": 1
+    },
+    {
+        "id": "css-15-grid",
+        "type": "content",
+        "title": "CSS Grid Fundamentals",
+        "contentBlocks": [
+            {
+                "type": "paragraph",
+                "text": "CSS Grid is a 2-dimensional layout system. It handles rows AND columns simultaneously — the most powerful layout tool in CSS."
+            },
+            {
+                "type": "tabs",
+                "tabs": [
+                    {
+                        "label": "TRACKS",
+                        "blocks": [
+                            {
+                                "type": "heading",
+                                "text": "Rows & Columns"
+                            },
+                            {
+                                "type": "paragraph",
+                                "text": "You define tracks (rows and columns) on the container. The fr unit divides available space fractionally."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": ".grid {\n  display: grid;\n  /* 3 columns: sidebar | main | sidebar */\n  grid-template-columns: 250px 1fr 250px;\n  /* 2 rows: header + content */\n  grid-template-rows: 80px 1fr;\n  gap: 20px;\n}"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "TEMPLATE AREAS",
+                        "blocks": [
+                            {
+                                "type": "heading",
+                                "text": "Named Grid Areas"
+                            },
+                            {
+                                "type": "paragraph",
+                                "text": "The most readable way to define complex layouts — you literally draw the layout with names."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": ".page {\n  display: grid;\n  grid-template-areas:\n    \"header  header  header\"\n    \"sidebar content aside\"\n    \"footer  footer  footer\";\n  grid-template-columns: 200px 1fr 200px;\n  grid-template-rows: 60px 1fr 60px;\n}\n\n.header  { grid-area: header; }\n.sidebar { grid-area: sidebar; }\n.content { grid-area: content; }\n.aside   { grid-area: aside; }\n.footer  { grid-area: footer; }"
+                            },
+                            {
+                                "type": "callout",
+                                "variant": "tip",
+                                "text": "This is exactly how the SLE layout you're looking at right now is built — sidebar, topbar, content, and footer are all grid areas!"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "SPANNING",
+                        "blocks": [
+                            {
+                                "type": "heading",
+                                "text": "Spanning Rows & Columns"
+                            },
+                            {
+                                "type": "paragraph",
+                                "text": "Individual grid items can span across multiple rows or columns — perfect for featured cards, hero sections, or dashboards."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": ".featured-card {\n  grid-column: 1 / 3; /* Spans from column line 1 to 3 */\n  grid-row: 1 / 3;    /* Spans from row line 1 to 3 */\n}\n\n/* Shorthand: span N tracks */\n.wide-item {\n  grid-column: span 2;\n}"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "css-16-grid-sandbox",
+        "type": "interactive",
+        "title": "Sandbox: CSS Grid Visualizer",
+        "instruction": "Try changing grid-template-columns to '1fr 2fr 1fr' (middle column twice as wide). Try 'repeat(4, 1fr)' for 4 equal columns. Change gap to 30px.",
+        "initialCss": ".grid-container {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  grid-template-rows: 100px 100px;\n  gap: 15px;\n  height: 100%;\n  background: rgba(0, 243, 255, 0.05);\n  border: 1px solid rgba(0, 243, 255, 0.3);\n  padding: 15px;\n}\n\n.grid-item {\n  background: rgba(0, 243, 255, 0.8);\n  color: #000;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  font-weight: bold;\n  font-size: 1.5rem;\n  border-radius: 6px;\n}",
+        "htmlContent": "<div class='grid-container'>\n  <div class='grid-item'>1</div>\n  <div class='grid-item'>2</div>\n  <div class='grid-item'>3</div>\n  <div class='grid-item'>4</div>\n  <div class='grid-item'>5</div>\n  <div class='grid-item'>6</div>\n</div>"
+    },
+    {
+        "id": "css-16b-quiz-grid",
+        "type": "quiz",
+        "title": "Apply: Grid vs Flexbox",
+        "question": "To create a responsive grid where columns automatically share available space evenly, use:",
+        "options": [
+            "width: 33%;",
+            "grid-template-columns: 1fr 1fr 1fr;",
+            "column-count: 3;",
+            "flex-wrap: wrap;"
+        ],
+        "correctAnswer": 1,
+        "maxAttempts": 3
+    },
+    {
+        "id": "css-17-responsive",
+        "type": "content",
+        "title": "Responsive Design & Media Queries",
+        "contentBlocks": [
+            {
+                "type": "paragraph",
+                "text": "Websites must look perfect on everything from 4K monitors to tiny phones. Media Queries let you apply CSS conditionally based on viewport size."
+            },
+            {
+                "type": "image",
+                "url": "/images/css-responsive.png",
+                "alt": "Responsive Design Devices",
+                "caption": "One codebase adapting from Desktop → Tablet → Mobile"
+            },
+            {
+                "type": "tabs",
+                "tabs": [
+                    {
+                        "label": "MOBILE-FIRST",
+                        "blocks": [
+                            {
+                                "type": "paragraph",
+                                "text": "The industry standard approach: write your default CSS for mobile, then use min-width queries to add complexity for larger screens."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": "/* Default: Mobile (no query needed) */\n.sidebar { display: none; }\n.content { padding: 1rem; }\n\n/* Tablet: 768px+ */\n@media (min-width: 768px) {\n  .content { padding: 2rem; }\n}\n\n/* Desktop: 1024px+ */\n@media (min-width: 1024px) {\n  .sidebar {\n    display: block;\n    width: 250px;\n  }\n  .content { padding: 3rem; }\n}"
+                            },
+                            {
+                                "type": "callout",
+                                "variant": "tip",
+                                "text": "Mobile-first means your site works on mobile even if the CSS fails to load. Progressive enhancement, not graceful degradation."
+                            }
+                        ]
+                    },
+                    {
+                        "label": "BREAKPOINTS",
+                        "blocks": [
+                            {
+                                "type": "heading",
+                                "text": "Standard Breakpoints"
+                            },
+                            {
+                                "type": "list",
+                                "items": [
+                                    "480px — Small phones",
+                                    "768px — Tablets / Large phones",
+                                    "1024px — Small desktops / Landscape tablets",
+                                    "1280px — Standard desktops",
+                                    "1536px — Large / Ultra-wide monitors"
+                                ]
+                            },
+                            {
+                                "type": "callout",
+                                "variant": "info",
+                                "text": "Don't design for specific devices. Design for content breakpoints — where your layout actually starts to look bad."
+                            }
+                        ]
+                    },
+                    {
+                        "label": "FLUID UNITS",
+                        "blocks": [
+                            {
+                                "type": "paragraph",
+                                "text": "Combine media queries with fluid units for buttery-smooth scaling between breakpoints."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": "/* Fluid font: scales between 16px and 24px */\nh1 {\n  font-size: clamp(1rem, 2.5vw, 1.5rem);\n}\n\n/* Fluid container */\n.container {\n  width: min(90vw, 1200px); /* 90% of viewport OR 1200px max */\n  margin: 0 auto;\n}"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "css-17b-quiz-responsive",
+        "type": "quiz",
+        "title": "Apply: Responsive Design",
+        "question": "To apply styles ONLY to desktop screens in a mobile-first workflow, you wrap them in:",
+        "options": [
+            "@media (max-width: 768px)",
+            "@media (min-width: 768px)",
+            "@media desktop",
+            "A separate desktop.css file"
+        ],
+        "correctAnswer": 1
+    },
+    {
+        "id": "css-18-animations",
+        "type": "content",
+        "title": "Transitions & Keyframe Animations",
+        "contentBlocks": [
+            {
+                "type": "paragraph",
+                "text": "CSS animations bring interfaces to life. Use transitions for simple A→B state changes. Use @keyframes for complex multi-step sequences."
+            },
+            {
+                "type": "tabs",
+                "tabs": [
+                    {
+                        "label": "TRANSITIONS",
+                        "blocks": [
+                            {
+                                "type": "paragraph",
+                                "text": "Transitions animate a property change over a duration. They need a trigger (like :hover or a class toggle)."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": ".card {\n  background: #1a1a1a;\n  transform: translateY(0);\n  box-shadow: 0 2px 8px rgba(0,0,0,0.3);\n  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n}\n\n.card:hover {\n  transform: translateY(-8px);\n  box-shadow: 0 12px 40px rgba(0, 243, 255, 0.15);\n}"
+                            },
+                            {
+                                "type": "callout",
+                                "variant": "tip",
+                                "text": "Only transition specific properties (transform, opacity, background) — never use transition: all in production. It's expensive."
+                            }
+                        ]
+                    },
+                    {
+                        "label": "KEYFRAMES",
+                        "blocks": [
+                            {
+                                "type": "paragraph",
+                                "text": "Keyframes define a multi-step animation sequence. You control each step with percentage waypoints."
+                            },
+                            {
+                                "type": "code",
+                                "language": "css",
+                                "code": "@keyframes pulse {\n  0%   { transform: scale(1);   opacity: 1; }\n  50%  { transform: scale(1.08); opacity: 0.8; }\n  100% { transform: scale(1);   opacity: 1; }\n}\n\n.live-indicator {\n  width: 10px;\n  height: 10px;\n  border-radius: 50%;\n  background: #00ff41;\n  animation: pulse 2s ease-in-out infinite;\n}"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "PERFORMANCE",
+                        "blocks": [
+                            {
+                                "type": "heading",
+                                "text": "GPU-Accelerated Properties"
+                            },
+                            {
+                                "type": "paragraph",
+                                "text": "Not all CSS properties animate equally. Some trigger expensive layout recalculations. Others are silky smooth because they run on the GPU."
+                            },
+                            {
+                                "type": "list",
+                                "items": [
+                                    "✅ FAST (GPU): transform, opacity",
+                                    "⚠️ MEDIUM: background-color, box-shadow",
+                                    "❌ SLOW (Layout): width, height, margin, padding, top, left"
+                                ]
+                            },
+                            {
+                                "type": "callout",
+                                "variant": "warning",
+                                "text": "Always animate with transform and opacity. Moving a box? Use transform: translateX() instead of changing left. Hiding? Use opacity: 0 instead of display: none."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "css-19-quiz-final",
+        "type": "quiz",
+        "title": "Final Assessment",
+        "question": "To make a card lift smoothly on hover without causing layout lag, you animate:",
+        "options": [
+            "margin-top",
+            "top",
+            "transform: translateY()",
+            "padding-bottom"
+        ],
+        "correctAnswer": 2,
+        "maxAttempts": 3
+    },
+    {
+        "id": "sle-hiring-managers-empathy",
+        "type": "content",
+        "title": "Empathizing with Hiring Managers & Platform Values",
+        "contentBlocks": [
+            {
+                "type": "heading",
+                "text": "Learning Objectives"
+            },
+            {
+                "type": "list",
+                "items": [
+                    "**Analyze** the primary sources of recruitment friction (the \"Trust Deficit\") from the perspective of technical and business hiring managers [Analyze].",
+                    "**Explain** how cognitive load theories (e.g., Sweller's Cognitive Load Theory) apply to developer onboarding and system architecture [Understand].",
+                    "**Evaluate** how verified competencies and interactive telemetry in portfolios reduce time-to-hire and business cost-to-serve [Evaluate].",
+                    "**Create** a custom-styled candidate profile card using a layout sandbox to demonstrate alignment with institutional values [Create]."
+                ]
+            },
+            {
+                "type": "heading",
+                "text": "Core Lesson Content"
+            },
+            {
+                "type": "paragraph",
+                "text": "In the modern software landscape, hiring managers are facing a persistent <span style=\"color: #ff3333;\">**_Trust Deficit_**</span>. Resume inflation and unverified credentials make it extremely difficult to verify a candidate's actual engineering capabilities, resulting in inflated <span style=\"color: #2ebd59;\">*time-to-hire*</span> and wasted technical assessment cycles. Hiring managers need a way to verify <span style=\"color: #3366ff;\">**Proven Competency**</span> directly."
+            },
+            {
+                "type": "paragraph",
+                "text": "To solve this, we position backend engineering as an empirical discipline aligned with business objectives. An elite backend engineer does not just write raw code—they optimize for <span style=\"color: #3366ff;\">**Developer Experience (DX)**</span>. By applying <span style=\"color: #2ebd59;\">*cognitive load theory*</span>, they structure systems, microservices, and API endpoints to reduce extraneous load on the engineering team. This makes the onboarding process efficient, leading to higher <span style=\"color: #3366ff;\">**Capital Efficiency**</span>."
+            },
+            {
+                "type": "paragraph",
+                "text": "The Synapse monorepo integrates two powerful systems to address these gaps: the <span style=\"color: #3366ff;\">**Synapse Learning Experience (SLE)**</span>, which hosts interactive, self-paced Masterclass slides demonstrating real systems architecture in real-time, and <span style=\"color: #3366ff;\">**VeriSphere**</span>, a social feed showing <span style=\"color: #2ebd59;\">*verified credentials*</span> and peer-reviewed accomplishments. Together, they establish a solid <span style=\"color: #ff3333;\">**_Proof of Capability_**</span>, aligning candidate skills with business needs."
+            },
+            {
+                "type": "heading",
+                "text": "Interactive Profile & Cognitive Layout Sandbox"
+            },
+            {
+                "type": "paragraph",
+                "text": "Hiring managers value clean presentation. Below is a self-contained Interactive Sandbox. Toggle the viewport to Mobile vs PC, pick a target element (Container, Badge, Button), adjust spacing/borders using the steppers, and watch the Raw CSS sync bi-directionally."
+            },
+            {
+                "type": "sandbox",
+                "html": "<div class=\"sandbox-app\">\n  <div class=\"sandbox-header\">\n    <div class=\"sandbox-title\">COGNITIVE INTERFACE BUILDER</div>\n    <div class=\"viewport-toggle\">\n      <button onclick=\"setViewport('desktop')\" class=\"viewport-btn active\" id=\"btn-desktop\">Desktop</button>\n      <button onclick=\"setViewport('mobile')\" class=\"viewport-btn\" id=\"btn-mobile\">Mobile</button>\n    </div>\n  </div>\n\n  <div class=\"control-panel\">\n    <div class=\"control-group\">\n      <label>Target Element</label>\n      <select id=\"target-selector\" onchange=\"changeTarget()\">\n        <option value=\".profile-card\">.profile-card (Main Container)</option>\n        <option value=\".card-badge\">.card-badge (Skills Badge)</option>\n        <option value=\".cta-button\">.cta-button (Request Interview)</option>\n      </select>\n    </div>\n\n    <div class=\"control-group\">\n      <label>Display Layout</label>\n      <select id=\"control-display\" onchange=\"updateStyle('display', this.value)\">\n        <option value=\"flex\">flex</option>\n        <option value=\"grid\">grid</option>\n        <option value=\"block\">block</option>\n      </select>\n    </div>\n\n    <div class=\"control-group\">\n      <label>Alignment (Justify)</label>\n      <select id=\"control-justify\" onchange=\"updateStyle('justify-content', this.value)\">\n        <option value=\"center\">center</option>\n        <option value=\"space-between\">space-between</option>\n        <option value=\"flex-start\">flex-start</option>\n        <option value=\"flex-end\">flex-end</option>\n      </select>\n    </div>\n\n    <div class=\"control-group\">\n      <label>Padding</label>\n      <div class=\"stepper\">\n        <button onclick=\"step('padding', -4)\">-</button>\n        <input type=\"text\" id=\"val-padding\" value=\"24\" readonly />\n        <button onclick=\"step('padding', 4)\">+</button>\n      </div>\n    </div>\n\n    <div class=\"control-group\">\n      <label>Border Radius</label>\n      <div class=\"stepper\">\n        <button onclick=\"step('border-radius', -2)\">-</button>\n        <input type=\"text\" id=\"val-border-radius\" value=\"0\" readonly />\n        <button onclick=\"step('border-radius', 2)\">+</button>\n      </div>\n    </div>\n\n    <div class=\"control-group\">\n      <label>Background Color</label>\n      <select id=\"control-bg\" onchange=\"updateStyle('background-color', this.value)\">\n        <option value=\"#151719\">#151719 (Slate)</option>\n        <option value=\"#c5a880\">#c5a880 (Bronze)</option>\n        <option value=\"#0c0d0e\">#0c0d0e (Inkwell)</option>\n        <option value=\"#ffffff\">#ffffff (White)</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"app-split\">\n    <div class=\"preview-area\" id=\"preview-area\">\n      <div class=\"profile-card\" id=\"mockup-profile-card\">\n        <div class=\"card-badge\" id=\"mockup-card-badge\">Verified Backend (AI-Augmented)</div>\n        <div class=\"card-title\">Viv Sapam</div>\n        <div class=\"card-subtitle\">Systems Architect & Ed. Psychology Researcher</div>\n        <p class=\"card-description\">\n          Designing microservices aligned with human cognitive bandwidth. Reducing developer onboarding ramp by 40% using structured L&D pipelines.\n        </p>\n        <div class=\"metrics-grid\">\n          <div class=\"metric-item\">\n            <span class=\"metric-val\">99.99%</span>\n            <span class=\"metric-lbl\">Reliability</span>\n          </div>\n          <div class=\"metric-item\">\n            <span class=\"metric-val\">-30%</span>\n            <span class=\"metric-lbl\">Cloud Cost</span>\n          </div>\n        </div>\n        <button class=\"cta-button\" id=\"mockup-cta-button\">Request Technical Dossier</button>\n      </div>\n    </div>\n\n    <div class=\"editor-area\">\n      <div class=\"editor-label\">RAW STYLESHEET (CSS)</div>\n      <textarea id=\"css-editor\" oninput=\"parseCssEditor()\"></textarea>\n    </div>\n  </div>\n</div>\n\n<style>\n* { box-sizing: border-box; }\nbody {\n  font-family: 'Source Sans 3', sans-serif;\n  background-color: #0e131f;\n  color: #d1d7e0;\n  margin: 0;\n  padding: 16px;\n}\n.sandbox-app {\n  display: flex;\n  flex-direction: column;\n  height: 100vh;\n  gap: 16px;\n}\n.sandbox-header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  border-bottom: 1px solid #222b3e;\n  padding-bottom: 8px;\n}\n.sandbox-title {\n  font-family: 'Lora', serif;\n  font-size: 1.2rem;\n  color: #f1f5f9;\n  letter-spacing: 0.05em;\n}\n.viewport-toggle {\n  display: flex;\n  gap: 8px;\n}\n.viewport-btn {\n  background-color: #171d2b;\n  border: 1px solid #222b3e;\n  color: #828c9a;\n  padding: 4px 12px;\n  cursor: pointer;\n  font-family: 'JetBrains Mono', monospace;\n  font-size: 0.8rem;\n  outline: none;\n}\n.viewport-btn.active {\n  border-color: #dfb26c;\n  color: #dfb26c;\n}\n.control-panel {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 16px;\n  background-color: #171d2b;\n  padding: 12px;\n  border: 1px solid #222b3e;\n}\n.control-group {\n  display: flex;\n  flex-direction: column;\n  gap: 4px;\n}\n.control-group label {\n  font-family: 'JetBrains Mono', monospace;\n  font-size: 0.75rem;\n  color: #828c9a;\n}\n.control-group select, .stepper input {\n  background-color: #0e131f;\n  border: 1px solid #222b3e;\n  color: #f1f5f9;\n  padding: 6px;\n  font-family: sans-serif;\n  font-size: 0.85rem;\n  outline: none;\n}\n.stepper {\n  display: flex;\n}\n.stepper button {\n  background-color: #222b3e;\n  border: 1px solid #222b3e;\n  color: #f1f5f9;\n  padding: 0 10px;\n  cursor: pointer;\n}\n.stepper input {\n  width: 40px;\n  text-align: center;\n}\n.app-split {\n  display: flex;\n  flex: 1;\n  gap: 16px;\n  height: 0;\n}\n.preview-area {\n  flex: 2;\n  background-color: #0c0d0e;\n  border: 1px solid #222b3e;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  overflow: auto;\n  transition: width 0.3s ease, max-width 0.3s ease;\n}\n.editor-area {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  gap: 4px;\n}\n.editor-label {\n  font-family: 'JetBrains Mono', monospace;\n  font-size: 0.75rem;\n  color: #828c9a;\n}\n#css-editor {\n  flex: 1;\n  background-color: #171d2b;\n  border: 1px solid #222b3e;\n  color: #dfb26c;\n  font-family: 'JetBrains Mono', monospace;\n  font-size: 0.85rem;\n  padding: 8px;\n  resize: none;\n  outline: none;\n}\n.profile-card {\n  width: 95%;\n  max-width: 400px;\n  background-color: #151719;\n  border: 1px solid #222b3e;\n  padding: 24px;\n  display: flex;\n  flex-direction: column;\n  gap: 12px;\n}\n.card-badge {\n  background-color: #dfb26c;\n  color: #0e131f;\n  font-family: 'JetBrains Mono', monospace;\n  font-size: 0.7rem;\n  padding: 4px 8px;\n  align-self: flex-start;\n  font-weight: bold;\n}\n.card-title {\n  font-family: 'Lora', serif;\n  font-size: 1.4rem;\n  color: #f1f5f9;\n}\n.card-subtitle {\n  font-family: 'Source Sans 3', sans-serif;\n  font-size: 0.85rem;\n  color: #dfb26c;\n}\n.card-description {\n  font-size: 0.85rem;\n  color: #828c9a;\n  line-height: 1.4;\n  margin: 0;\n}\n.metrics-grid {\n  display: flex;\n  gap: 16px;\n  border-top: 1px solid #222b3e;\n  border-bottom: 1px solid #222b3e;\n  padding: 8px 0;\n}\n.metric-item {\n  display: flex;\n  flex-direction: column;\n}\n.metric-val {\n  font-family: 'Lora', serif;\n  font-size: 1.2rem;\n  color: #f1f5f9;\n}\n.metric-lbl {\n  font-family: 'JetBrains Mono', monospace;\n  font-size: 0.65rem;\n  color: #828c9a;\n}\n.cta-button {\n  background-color: #dfb26c;\n  color: #0e131f;\n  border: none;\n  padding: 12px;\n  cursor: pointer;\n  font-family: 'Source Sans 3', sans-serif;\n  font-weight: bold;\n  text-align: center;\n  transition: opacity 0.2s ease;\n}\n.cta-button:hover {\n  opacity: 0.9;\n}\n</style>\n\n<script>\nconst styles = {\n  '.profile-card': {\n    'display': 'flex',\n    'justify-content': 'center',\n    'padding': '24px',\n    'border-radius': '0px',\n    'background-color': '#151719',\n    'color': '#f1f5f9'\n  },\n  '.card-badge': {\n    'display': 'inline-block',\n    'padding': '6px',\n    'border-radius': '0px',\n    'background-color': '#dfb26c',\n    'color': '#0e131f'\n  },\n  '.cta-button': {\n    'display': 'block',\n    'padding': '12px',\n    'border-radius': '0px',\n    'background-color': '#dfb26c',\n    'color': '#0e131f'\n  }\n};\n\nconst domMap = {\n  '.profile-card': 'mockup-profile-card',\n  '.card-badge': 'mockup-card-badge',\n  '.cta-button': 'mockup-cta-button'\n};\n\nfunction camelCase(str) {\n  return str.replace(/-([a-z])/g, g => g[1].toUpperCase());\n}\n\nfunction updateStyle(prop, val) {\n  const target = document.getElementById('target-selector').value;\n  styles[target][prop] = val;\n  const el = document.getElementById(domMap[target]);\n  if (el) {\n    el.style[camelCase(prop)] = val;\n  }\n  generateCss();\n}\n\nfunction step(prop, amt) {\n  const target = document.getElementById('target-selector').value;\n  let currentVal = parseInt(styles[target][prop]) || 0;\n  let newVal = Math.max(0, currentVal + amt);\n  styles[target][prop] = newVal + 'px';\n  document.getElementById('val-' + prop).value = newVal;\n  const el = document.getElementById(domMap[target]);\n  if (el) {\n    el.style[camelCase(prop)] = newVal + 'px';\n  }\n  generateCss();\n}\n\nfunction generateCss() {\n  let cssText = '';\n  for (const selector in styles) {\n    cssText += selector + ' {\\n';\n    for (const prop in styles[selector]) {\n      cssText += '  ' + prop + ': ' + styles[selector][prop] + ';\\n';\n    }\n    cssText += '}\\n\\n';\n  }\n  document.getElementById('css-editor').value = cssText.trim();\n}\n\nfunction changeTarget() {\n  const target = document.getElementById('target-selector').value;\n  document.getElementById('control-display').value = styles[target]['display'] || 'flex';\n  document.getElementById('control-justify').value = styles[target]['justify-content'] || 'center';\n  document.getElementById('val-padding').value = parseInt(styles[target]['padding']) || 0;\n  document.getElementById('val-border-radius').value = parseInt(styles[target]['border-radius']) || 0;\n  document.getElementById('control-bg').value = styles[target]['background-color'] || '#151719';\n}\n\nfunction parseCssEditor() {\n  const cssText = document.getElementById('css-editor').value;\n  const regex = /([.#\\\\w-]+)\\s*\\{([^}]+)\\}/g;\n  let match;\n  while ((match = regex.exec(cssText)) !== null) {\n    const sel = match[1].trim();\n    if (styles[sel]) {\n      const decls = match[2].split(';');\n      decls.forEach(decl => {\n        const parts = decl.split(':');\n        if (parts.length === 2) {\n          const prop = parts[0].trim().toLowerCase();\n          const val = parts[1].trim();\n          styles[sel][prop] = val;\n          const el = document.getElementById(domMap[sel]);\n          if (el) {\n            el.style[camelCase(prop)] = val;\n          }\n        }\n      });\n    }\n  }\n  changeTarget();\n}\n\nfunction setViewport(mode) {\n  const area = document.getElementById('preview-area');\n  const btnDesktop = document.getElementById('btn-desktop');\n  const btnMobile = document.getElementById('btn-mobile');\n  if (mode === 'desktop') {\n    area.style.width = '100%';\n    area.style.maxWidth = '100%';\n    btnDesktop.classList.add('active');\n    btnMobile.classList.remove('active');\n  } else {\n    area.style.width = '360px';\n    area.style.maxWidth = '360px';\n    btnDesktop.classList.remove('active');\n    btnMobile.classList.add('active');\n  }\n}\n\ngenerateCss();\nchangeTarget();\n</script>"
+            },
+            {
+                "type": "heading",
+                "text": "Summative Assessment"
+            },
+            {
+                "type": "inline_quiz",
+                "questions": [
+                    {
+                        "type": "mcq",
+                        "prompt": "Which primary recruitment hurdle does the Synapse platform address by providing interactive slide runtimes and verified repositories?",
+                        "options": [
+                            "A) Candidate coding speed in timed hackathons.",
+                            "B) The trust deficit caused by unverified resume claims.",
+                            "C) Server overhead during high-scale backend deployments.",
+                            "D) General marketing reach on social media channels."
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "type": "fill_in_blank",
+                        "prompt": "Applying Sweller's cognitive load theory to system architecture means designing cleaner APIs and interfaces to reduce extraneous __________ load on developers."
+                    },
+                    {
+                        "type": "short_answer",
+                        "prompt": "Explain how a backend developer's business sense directly impacts technical decisions such as choosing a database or caching layer."
+                    },
+                    {
+                        "type": "open_ended",
+                        "prompt": "A company experiences a 50% delay in onboarding new backend developers because their API documentation is complex and unstructured. Detail a technical and pedagogical initiative to reduce this ramp time."
+                    },
+                    {
+                        "type": "open_ended",
+                        "prompt": "Reflect on how demonstrating a portfolio via an interactive runtime (like the Synapse Learning Experience) changes the dynamic of a technical interview. How does this align with the values a business manager looks for?"
+                    }
+                ]
+            },
+            {
+                "type": "accordion",
+                "summary": "Click to view Answer Key",
+                "content": "<ul><li><strong>Question 1:</strong> B (The trust deficit caused by unverified resume claims.)</li><li><strong>Question 2:</strong> cognitive</li><li><strong>Question 3:</strong> A backend developer with business sense does not build technology for its own sake. They understand that database selection affects capital efficiency. For example, opting for an optimized caching layer (like Redis) over raw SQL reads directly lowers cloud hosting cost-to-serve and decreases time-to-market.</li><li><strong>Question 4:</strong> The student should propose structured pedagogical refactoring: (a) applying cognitive chunking by breaking APIs into modular micro-sections, (b) introducing interactive sandboxes (like the SLE) allowing developers to run example code safely, and (c) automating credential verifications to validate learning.</li><li><strong>Question 5:</strong> Standard interviews test theoretical rote memory, which fails to verify actual system design capabilities. An interactive player like SLE acts as an empirical proof of capability. It demonstrates high-caliber communication, educational structure, and business value alignment, satisfying both the technical lead and the business manager.</li></ul>"
+            }
+        ]
+    },
+    {
+        "id": "css-20-conclusion",
+        "type": "content",
+        "title": "Course Complete!",
+        "celebration": true,
+        "contentBlocks": [
+            {
+                "type": "heading",
+                "text": "SYSTEM_OVERRIDE: MASTERY_ACHIEVED"
+            },
+            {
+                "type": "paragraph",
+                "text": "You have completed the Elite CSS Mastery module. Your quiz scores and sandbox task results have been calculated and recorded."
+            },
+            {
+                "type": "paragraph",
+                "text": "You've demonstrated proficiency across Selectors, Specificity, Box Models, Positioning, Flexbox, Grid, Responsive Design, and Animations."
+            },
+            {
+                "type": "callout",
+                "variant": "tip",
+                "text": "Want to go further? Build a portfolio project using only what you learned here. No frameworks — just raw HTML and CSS. That's how masters are forged."
+            },
+            {
+                "type": "code",
+                "language": "css",
+                "code": ".student::after {\n  content: 'CSS Master';\n  color: var(--neon-cyan);\n  text-shadow: 0 0 20px rgba(0, 243, 255, 0.8);\n  animation: legendary-glow 3s infinite;\n}"
+            }
+        ]
+    }
+]

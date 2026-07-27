@@ -1,0 +1,92 @@
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-main);
+}
+
+.page-body {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--pad-section-desktop) var(--pad-edge-desktop);
+  flex: 1;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .page-body {
+    padding: var(--pad-section-mobile) 0;
+  }
+}
+
+/* ==========================================================================
+   Maintenance Block Page
+   ========================================================================== */
+.ath-maintenance-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--ath-bg);
+  padding: 40px 24px;
+}
+
+.ath-maintenance-container {
+  max-width: 600px;
+  width: 100%;
+}
+
+.ath-maintenance-content {
+  text-align: center;
+  padding: 2rem 2rem;
+  border: 1px solid var(--ath-border);
+  background-color: var(--ath-bg-card);
+}
+
+.ath-maintenance-title {
+  font-family: var(--font-ath-serif);
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 700;
+  color: var(--ath-text-main);
+  margin: 0 0 24px 0;
+  letter-spacing: -0.02em;
+}
+
+.ath-maintenance-message {
+  font-family: var(--font-ath-serif);
+  font-size: 1.1rem;
+  color: var(--ath-text-muted);
+  margin: 0 0 16px 0;
+  line-height: 1.6;
+}
+
+.ath-maintenance-subtitle {
+  font-family: var(--font-ath-serif);
+  font-size: 0.95rem;
+  color: var(--ath-border);
+  margin: 0 0 32px 0;
+  line-height: 1.6;
+}
+
+.ath-maintenance-btn {
+  display: inline-block;
+  background-color: var(--ath-accent);
+  color: #ffffff;
+  padding: 12px 32px;
+  font-family: var(--font-ath-mono);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  border: 1px solid var(--ath-accent);
+  transition: all 0.2s ease;
+}
+
+.ath-maintenance-btn:hover {
+  background-color: var(--ath-text-main);
+  border-color: var(--ath-text-main);
+  color: #ffffff;
+}
+

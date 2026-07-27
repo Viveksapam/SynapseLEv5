@@ -1,0 +1,90 @@
+:root {
+  --sle-bg-dark: #0e131f;       /* Deep slate-blue */
+  --sle-bg-darker: #0c0d0e;     /* Deep Inkwell */
+  --sle-bg-panel: #171d2b;      /* Slate card */
+  --sle-neon-green: #dfb26c;    /* Bronze */
+  --sle-neon-cyan: #4a90e2;     /* Telemetry Blue */
+  --sle-text-main: #f1f5f9;     /* Alabaster */
+  --sle-text-muted: #828c9a;    /* Graphite */
+  --sle-border-neon: 1px solid #dfb26c;
+  --sle-border-cyan: 1px solid #4a90e2;
+  --sle-glow-green: none;
+  --sle-glow-cyan: none;
+  --sle-transition-fast: 0.2s ease;
+  --sle-font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+  --sle-font-sans: 'Source Sans 3', 'Inter', sans-serif;
+  --sle-font-serif: 'Lora', Georgia, serif;
+}
+
+.layout-container {
+  background-color: var(--sle-bg-dark);
+  color: var(--sle-text-main);
+  font-family: var(--sle-font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.layout-container * {
+  box-sizing: border-box;
+}
+
+/* Base interactive elements — scoped to nav buttons only */
+.layout-container .nav-btn {
+  background: transparent;
+  color: var(--sle-neon-green);
+  border: var(--sle-border-neon);
+  padding: 0.5rem 1rem;
+  font-family: var(--sle-font-mono);
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--sle-transition-fast);
+  box-shadow: var(--sle-glow-green);
+}
+
+.layout-container .nav-btn:hover {
+  background: var(--sle-neon-green);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.layout-container .nav-btn:disabled {
+  border-color: #cbd5e1;
+  color: #cbd5e1;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* Utilities */
+.hacker-text {
+  font-family: var(--sle-font-mono);
+  color: var(--sle-neon-green);
+}
+
+.cyan-text {
+  color: var(--sle-neon-cyan);
+}
+
+::highlight(user-highlight-yellow) {
+  background-color: #eab308;
+  color: #0f172a;
+}
+
+::highlight(user-highlight-green) {
+  background-color: #22c55e;
+  color: #ffffff;
+}
+
+::highlight(user-highlight-red) {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+.layout-container h1,
+.layout-container h2,
+.layout-container h3,
+.layout-container h4,
+.layout-container .slide-title {
+  font-family: var(--sle-font-serif);
+}
+
