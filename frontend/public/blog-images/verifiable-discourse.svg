@@ -1,0 +1,35 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbf9f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d2c4b4;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#grad3)"/>
+
+  <!-- Stacked text blocks (discourse layers) -->
+  <g opacity="0.8">
+    <rect x="150" y="100" width="500" height="60" fill="none" stroke="#7b581b" stroke-width="3"/>
+    <text x="170" y="138" font-family="monospace" font-size="24" fill="#1b1c1a">Sources</text>
+
+    <rect x="150" y="200" width="500" height="60" fill="none" stroke="#7b581b" stroke-width="3"/>
+    <text x="170" y="238" font-family="monospace" font-size="24" fill="#1b1c1a">Claims</text>
+
+    <rect x="150" y="300" width="500" height="60" fill="none" stroke="#7b581b" stroke-width="3"/>
+    <text x="170" y="338" font-family="monospace" font-size="24" fill="#1b1c1a">Evidence</text>
+
+    <rect x="150" y="400" width="500" height="60" fill="none" stroke="#7b581b" stroke-width="3"/>
+    <text x="170" y="438" font-family="monospace" font-size="24" fill="#1b1c1a">Verification</text>
+  </g>
+
+  <!-- Right side emphasis -->
+  <text x="800" y="280" font-family="serif" font-size="48" font-weight="bold" fill="#1b1c1a">
+    REQUIRES
+  </text>
+  <text x="800" y="360" font-family="serif" font-size="40" fill="#7b581b" opacity="0.7">
+    Rigor
+  </text>
+  <text x="800" y="420" font-family="serif" font-size="40" fill="#7b581b" opacity="0.7">
+    Transparency
+  </text>
+</svg>
