@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 
 const TopNavBar = ({ boolIsLoggedInState, onOpenLogin, handleLogout }) => {
+  const navigate = useNavigate();
   const [boolIsDarkModeState, setBoolIsDarkMode] = useState(false);
   const [boolIsMobileMenuOpenState, setBoolIsMobileMenuOpen] = useState(false);
+
+  const goToSectionOrMaintenance = (sectionId, maintenanceRoute) => {
+    const el = document.getElementById(sectionId);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    else navigate(maintenanceRoute);
+  };
 
   useEffect(() => {
     const savedMode = localStorage.getItem('ath-dark-mode');
@@ -46,22 +53,22 @@ const TopNavBar = ({ boolIsLoggedInState, onOpenLogin, handleLogout }) => {
             <Link className="ath-nav-link" to="/verisphere">
               Verisphere
             </Link>
-            <a 
-              className="ath-nav-link" 
+            <a
+              className="ath-nav-link"
               href="#video"
               onClick={(e) => {
                 e.preventDefault();
-                document.getElementById('video')?.scrollIntoView({ behavior: 'smooth' });
+                goToSectionOrMaintenance('video', '/spotlight');
               }}
             >
               Spotlight
             </a>
-            <a 
-              className="ath-nav-link" 
+            <a
+              className="ath-nav-link"
               href="#merchandise"
               onClick={(e) => {
                 e.preventDefault();
-                document.getElementById('merchandise')?.scrollIntoView({ behavior: 'smooth' });
+                goToSectionOrMaintenance('merchandise', '/merchandise');
               }}
             >
               Merchandise
@@ -145,7 +152,7 @@ const TopNavBar = ({ boolIsLoggedInState, onOpenLogin, handleLogout }) => {
               className="ath-mobile-menu-link"
               onClick={(e) => {
                 e.preventDefault();
-                document.getElementById('video')?.scrollIntoView({ behavior: 'smooth' });
+                goToSectionOrMaintenance('video', '/spotlight');
                 setBoolIsMobileMenuOpen(false);
               }}
             >
@@ -156,7 +163,7 @@ const TopNavBar = ({ boolIsLoggedInState, onOpenLogin, handleLogout }) => {
               className="ath-mobile-menu-link"
               onClick={(e) => {
                 e.preventDefault();
-                document.getElementById('merchandise')?.scrollIntoView({ behavior: 'smooth' });
+                goToSectionOrMaintenance('merchandise', '/merchandise');
                 setBoolIsMobileMenuOpen(false);
               }}
             >
