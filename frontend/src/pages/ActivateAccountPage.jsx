@@ -30,7 +30,7 @@ const ActivateAccountPage = ({ authHook, onOpenLogin }) => {
             <div className="auth-error" style={{ background: 'rgba(16, 185, 129, 0.2)', color: '#34d399', borderColor: 'rgba(16, 185, 129, 0.3)' }}>
               Account activated. You can now log in.
             </div>
-            <button onClick={onOpenLogin}>Log in</button>
+            <button className="auth-btn" onClick={onOpenLogin}>Log in</button>
           </>
         )}
         {status === 'error' && (

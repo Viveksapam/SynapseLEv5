@@ -20,7 +20,22 @@ class PageErrorBoundary extends React.Component {
       return (
         <div style={{ padding: '40px', textAlign: 'center', color: 'var(--ath-text-main)' }}>
           <h2>Something went wrong.</h2>
-          <button onClick={() => window.location.reload()}>Reload Page</button>
+          <button
+            onClick={() => window.location.reload()}
+            style={{
+              padding: '12px 24px',
+              borderRadius: '8px',
+              border: 'none',
+              background: '#fca5a5',
+              color: 'white',
+              fontWeight: 'bold',
+              fontSize: '16px',
+              cursor: 'pointer',
+              marginTop: '16px',
+            }}
+          >
+            Reload Page
+          </button>
         </div>
       );
     }
