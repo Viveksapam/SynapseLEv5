@@ -477,7 +477,7 @@ body.v2-light-mode {
   justify-content: space-between;
   align-items: center;
   border-top: 1px solid var(--glass-border);
-  background: rgba(3,3,5,0.8);
+  background: var(--glass-bg);
   backdrop-filter: blur(12px);
   margin-top: 60px;
 }
