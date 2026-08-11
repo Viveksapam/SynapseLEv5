@@ -61,3 +61,12 @@ export const updateNotificationSettings = async (settings, token) => {
 export const deactivateAccount = async (password, token) => {
   return await apiClient.post('/auth/deactivate', { password }, authHeader(token));
 };
+
+export const uploadImage = async (file, token) => {
+  const formData = new FormData();
+  formData.append('file', file);
+  const data = await apiClient.post('/upload/image/', formData, {
+    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' },
+  });
+  return data.url;
+};
