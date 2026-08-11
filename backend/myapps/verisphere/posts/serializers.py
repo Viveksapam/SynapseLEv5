@@ -12,7 +12,7 @@ class BlogResponseSerializer(serializers.ModelSerializer):
         model = BlogModel
         fields = [
             "id", "strTitle", "strSummary", "strContent", "strThemeColor", "datePublished",
-            "strMediaUrl", "strCategory", "numReadTime", "strAuthorUsername", "objCommunity",
+            "strMediaUrl", "strCategory", "numReadTime", "strAuthorUsername", "strAuthorProfilePicUrl", "objCommunity",
             "strCommunityName", "strCommunityRegister", "numUpvotes", "comments_count",
             "sources_count", "strPostType", "strAnalysisMode", "jsonAllowedAnalysisFocus",
             "boolAnalysisEnabled", "ai_summary", "ai_context_guardrail", "analysis_detail",

@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ComposerActions = ({ onCancel, boolCanSubmit, boolIsSubmitting }) => (
-  <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '4px' }}>
+  <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '10px', marginTop: '4px' }}>
+    {!boolCanSubmit && !boolIsSubmitting && (
+      <span style={{ fontSize: '11.5px', color: 'var(--cr-text-muted)' }}>Title and content are both required to post</span>
+    )}
     <button type="button" onClick={onCancel}
       style={{ background: 'transparent', border: 'none', color: 'var(--cr-text-muted)', cursor: 'pointer', padding: '7px 14px', borderRadius: 'var(--cr-radius-input)', fontFamily: 'var(--cr-font-body)', fontSize: '13px' }}>
       Cancel

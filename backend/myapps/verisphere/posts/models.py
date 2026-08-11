@@ -37,12 +37,16 @@ class BlogModel(models.Model):
         return self.author.username if self.author else "System"
 
     @property
+    def strAuthorProfilePicUrl(self):
+        return self.author.strProfilePicUrl if self.author else None
+
+    @property
     def objCommunity(self):
         return self.community_id
 
     @property
     def strCommunityName(self):
-        return self.community.strName if self.community else "General"
+        return self.community.strName if self.community else None
 
     @property
     def strCommunityRegister(self):
