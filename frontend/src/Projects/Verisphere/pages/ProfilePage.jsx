@@ -9,7 +9,7 @@ import ProfileActivity from '../components/ProfileActivity';
 import ProfileSettings from '../components/ProfileSettings';
 import '../styles/VeriSphere.css';
 
-const TABS = ['Overview', 'Activity', 'Settings'];
+const TABS = ['Activity', 'Overview', 'Settings'];
 const EMPTY_FORM = { first_name: '', last_name: '', strBio: '', strProfilePicUrl: '' };
 
 const buildForm = (user) => user ? {

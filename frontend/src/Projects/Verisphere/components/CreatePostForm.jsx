@@ -53,7 +53,7 @@ const CreatePostForm = ({ numCommunityId = null, onPostCreated }) => {
     try {
       await createPost({
         strTitle: strTitleState, strContent: strContentState,
-        strReferences: strSurface === 'full' ? strReferencesState : '',
+        strReferences: strReferencesState,
         strMediaUrl: strMediaUrlState || null,
         community_id: numDestinationState ? parseInt(numDestinationState, 10) : null,
         strPostType: strTypeState,
@@ -118,9 +118,7 @@ const CreatePostForm = ({ numCommunityId = null, onPostCreated }) => {
               Formatting
             </button>
           )}
-          {strSurface === 'full' && (
-            <input type="text" placeholder="Sources and links (encouraged, never required)" value={strReferencesState} onChange={(e) => setStrReferencesState(e.target.value)} style={fieldStyle} />
-          )}
+          <input type="text" placeholder="Sources and links (encouraged, never required)" value={strReferencesState} onChange={(e) => setStrReferencesState(e.target.value)} style={fieldStyle} />
           <input type="url" placeholder="Media URL (optional)" value={strMediaUrlState} onChange={(e) => setStrMediaUrlState(e.target.value)} style={fieldStyle} />
           {!numCommunityId && (
             <select value={numDestinationState} onChange={(e) => setNumDestinationState(e.target.value)}
