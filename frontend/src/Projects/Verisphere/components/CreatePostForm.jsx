@@ -31,7 +31,6 @@ const CreatePostForm = ({ numCommunityId = null, onPostCreated }) => {
   const [numDestinationState, setNumDestinationState] = useState(numCommunityId || '');
   const [arrCommunitiesState, setArrCommunitiesState] = useState([]);
   const [strModeState, setStrModeState] = useState('open');
-  const [arrLensesState, setArrLensesState] = useState([]);
   const [boolShowToolbarState, setBoolShowToolbarState] = useState(false);
   const [boolPreviewState, setBoolPreviewState] = useState(false);
   const [boolIsSubmittingState, setBoolIsSubmittingState] = useState(false);
@@ -75,7 +74,7 @@ const CreatePostForm = ({ numCommunityId = null, onPostCreated }) => {
         community_id: numDestinationState ? parseInt(numDestinationState, 10) : null,
         strPostType: strTypeState,
         strAnalysisMode: strModeState,
-        allowed_analysis_focus: strModeState === 'limited' ? arrLensesState : null,
+        allowed_analysis_focus: null,
       });
       setStrTitleState(''); setStrContentState(''); setStrReferencesState('');
       setStrMediaUrlState(''); setBoolIsExpandedState(false); setBoolPreviewState(false);
@@ -158,7 +157,6 @@ const CreatePostForm = ({ numCommunityId = null, onPostCreated }) => {
           )}
           <ComposerAnalysisControls
             mode={strModeState} onModeChange={setStrModeState}
-            allowedLenses={arrLensesState} onLensesChange={setArrLensesState}
             compact={strSurface === 'light'}
           />
           <ComposerActions onCancel={() => setBoolIsExpandedState(false)} boolCanSubmit={!!boolCanSubmit} boolIsSubmitting={boolIsSubmittingState} />

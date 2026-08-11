@@ -45,10 +45,23 @@ const PostCard = ({ objPost, authHook }) => {
 
       <div className="verisphere-post-content">
         <div className="verisphere-post-meta">
-          <Link to={`/verisphere/community/${objPost.objCommunity || 'general'}`} className="verisphere-community-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '12px', fontWeight: 600, fontFamily: 'var(--cr-font-mono)', color: 'var(--cr-text-main)', whiteSpace: 'nowrap' }}>
-            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: strRegisterColor, display: 'inline-block' }} />
-            {objPost.strCommunityName || 'General'}
-          </Link>
+          <span
+            title={objPost.strAuthorUsername}
+            style={{
+              width: '22px', height: '22px', borderRadius: '50%', flexShrink: 0,
+              background: objPost.strAuthorProfilePicUrl ? `url(${objPost.strAuthorProfilePicUrl}) center/cover` : 'var(--cr-surface-raised)',
+              border: '1px solid var(--cr-border)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+              fontFamily: 'var(--cr-font-heading)', fontSize: '11px', fontWeight: 700, color: 'var(--cr-text-main)',
+            }}
+          >
+            {!objPost.strAuthorProfilePicUrl && (objPost.strAuthorUsername || '?').charAt(0).toUpperCase()}
+          </span>
+          {objPost.objCommunity && (
+            <Link to={`/verisphere/community/${objPost.objCommunity}`} className="verisphere-community-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '12px', fontWeight: 600, fontFamily: 'var(--cr-font-mono)', color: 'var(--cr-text-main)', whiteSpace: 'nowrap' }}>
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: strRegisterColor, display: 'inline-block' }} />
+              {objPost.strCommunityName}
+            </Link>
+          )}
           {objPost.strPostType && objPost.strPostType !== 'mixed' && (
             <span style={{ fontSize: '10.5px', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'var(--cr-text-muted)', fontFamily: 'var(--cr-font-mono)', border: '1px solid var(--cr-border)', borderRadius: 'var(--cr-radius-badge)', padding: '1px 8px', whiteSpace: 'nowrap' }}>
               {objPost.strPostType}

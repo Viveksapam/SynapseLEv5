@@ -121,9 +121,11 @@ const PostDetailHeader = ({ post, reactions, boolCanEdit, onSave, boolIsLoggedIn
       </div>
 
       <div className="verisphere-post-meta" style={{ display: 'flex', alignItems: 'center', gap: '9px', flexWrap: 'wrap', marginBottom: '1rem' }}>
-        <span className="verisphere-community-badge" style={{ fontSize: '12px', fontWeight: 600, fontFamily: 'var(--cr-font-mono)', color: 'var(--cr-text-main)', whiteSpace: 'nowrap' }}>
-          {post.strCommunityName || 'General'}
-        </span>
+        {post.strCommunityName && (
+          <span className="verisphere-community-badge" style={{ fontSize: '12px', fontWeight: 600, fontFamily: 'var(--cr-font-mono)', color: 'var(--cr-text-main)', whiteSpace: 'nowrap' }}>
+            {post.strCommunityName}
+          </span>
+        )}
         {post.strPostType && post.strPostType !== 'mixed' && (
           <span style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.5px', textTransform: 'capitalize', color: 'var(--cr-text-muted)', border: '1px solid var(--cr-border)', borderRadius: 'var(--cr-radius-badge)', padding: '1px 8px' }}>
             {post.strPostType}
