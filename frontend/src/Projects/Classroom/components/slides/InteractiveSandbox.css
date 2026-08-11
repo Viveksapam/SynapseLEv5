@@ -1,0 +1,374 @@
+﻿.sandbox-panel {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--sle-bg-panel, #1e293b);
+  border: 1px solid var(--sle-border-color, #334155);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 1.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+}
+
+/* Control Station Panel (Bottom side) */
+.sandbox-control-station {
+  order: 2;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(15, 23, 42, 0.2);
+}
+
+/* Tabs System */
+.sandbox-tabs {
+  display: flex;
+  background-color: var(--sle-bg-darker, #0f172a);
+  border-bottom: 1px solid var(--sle-border-color, #334155);
+  padding: 4px;
+}
+
+.sandbox-tabs button {
+  flex: 1;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  color: var(--sle-text-muted, #94a3b8);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 8px;
+}
+
+.sandbox-tabs button.active {
+  color: var(--sle-accent-cyan, #38bdf8);
+  background-color: rgba(56, 189, 248, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(56, 189, 248, 0.15);
+}
+
+.sandbox-tabs button:hover:not(.active) {
+  background-color: rgba(255, 255, 255, 0.03);
+  color: var(--sle-text-main, #f8fafc);
+}
+
+/* Controls Wrapper & GUI List */
+.sandbox-controls-wrapper {
+  flex: 1;
+  height: 380px;
+  overflow: hidden;
+}
+
+.sandbox-gui-controls {
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1.25rem;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Layout Sections & Labels */
+.gui-section-title {
+  grid-column: 1 / -1;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--sle-accent-cyan, #38bdf8);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-bottom: 1px dashed rgba(56, 189, 248, 0.2);
+  padding-bottom: 0.25rem;
+  margin-top: 0.75rem;
+}
+
+.gui-section-title:first-of-type {
+  margin-top: 0;
+}
+
+.gui-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.gui-row.full-width {
+  grid-column: 1 / -1;
+}
+
+.gui-row > label, .gui-section-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--sle-text-muted, #94a3b8);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Form Inputs */
+.gui-select, .gui-text-input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--sle-border-color, #334155);
+  background-color: var(--sle-bg-darker, #0f172a);
+  color: var(--sle-text-main, #f8fafc);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.gui-select:focus, .gui-text-input:focus {
+  border-color: var(--sle-accent-cyan, #38bdf8);
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15);
+}
+
+/* Stepper Custom Number Picker */
+.stepper-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.stepper-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--sle-text-muted, #94a3b8);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stepper-controls-wrapper {
+  display: flex;
+  border: 1px solid var(--sle-border-color, #334155);
+  background-color: var(--sle-bg-darker, #0f172a);
+  border-radius: 8px;
+  overflow: hidden;
+  height: 38px;
+}
+
+.stepper-input {
+  flex: 1;
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: var(--sle-text-main, #f8fafc);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
+  text-align: center;
+  outline: none;
+  -moz-appearance: textfield; /* Hide spinner */
+}
+
+.stepper-input::-webkit-outer-spin-button,
+.stepper-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.stepper-btn {
+  width: 32px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: none;
+  color: var(--sle-text-muted, #94a3b8);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stepper-btn:hover {
+  background-color: rgba(56, 189, 248, 0.1);
+  color: var(--sle-accent-cyan, #38bdf8);
+}
+
+.stepper-btn:active {
+  background-color: rgba(56, 189, 248, 0.2);
+}
+
+/* Color Picker & Hex Text Field Combo */
+.color-selector-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.color-selector-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--sle-text-muted, #94a3b8);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.color-selector-controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.color-picker-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 42px;
+  height: 38px;
+  border: 1px solid var(--sle-border-color, #334155);
+  border-radius: 8px;
+  cursor: pointer;
+  background: var(--sle-bg-darker, #0f172a);
+  padding: 3px;
+}
+
+.color-picker-input::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.color-picker-input::-webkit-color-swatch {
+  border: none;
+  border-radius: 6px;
+}
+
+.color-hex-input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--sle-border-color, #334155);
+  background-color: var(--sle-bg-darker, #0f172a);
+  color: var(--sle-text-main, #f8fafc);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
+  outline: none;
+  transition: all 0.2s;
+  height: 38px;
+  box-sizing: border-box;
+}
+
+.color-hex-input:focus {
+  border-color: var(--sle-accent-cyan, #38bdf8);
+}
+
+/* Code Editor Stylings */
+.sandbox-code-editor {
+  position: relative;
+  background-color: #0b1120;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.sandbox-code-editor .code-editor, 
+.sandbox-code-editor .code-editor-highlight {
+  margin: 0;
+  padding: 1.25rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  border: none;
+  width: 100%;
+  height: 100%;
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.sandbox-code-editor .code-editor-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-color: transparent;
+}
+
+.sandbox-code-editor .code-editor {
+  position: relative;
+  background-color: transparent;
+  color: transparent;
+  caret-color: #f8fafc;
+  resize: none;
+  outline: none;
+  z-index: 2;
+}
+
+/* Render Station (Top side) */
+.sandbox-render-station {
+  order: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--sle-bg-darker, #0f172a);
+  border-bottom: 1px solid var(--sle-border-color, #334155);
+}
+
+.sandbox-render-header {
+  background: var(--sle-bg-darker, #0f172a);
+  border-bottom: 1px solid var(--sle-border-color, #334155);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 1.5rem;
+  height: 48px;
+  box-sizing: border-box;
+}
+
+.sandbox-render-header .title-text {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--sle-text-muted, #94a3b8);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Viewport Toggles */
+.viewport-toggles {
+  display: flex;
+  gap: 0.25rem;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.viewport-btn {
+  background: transparent;
+  border: none;
+  color: var(--sle-text-muted, #94a3b8);
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.viewport-btn.active {
+  background: var(--sle-accent-cyan, #38bdf8);
+  color: #0f172a;
+}
+
+.viewport-btn:hover:not(.active) {
+  color: var(--sle-text-main, #f8fafc);
+}
+
+/* Preview Area with Dotted Pattern */
+.preview-container {
+  flex: 1;
+  background-color: #0b1120;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
+  background-size: 24px 24px;
+  position: relative;
+  overflow: hidden;
+  height: 320px;
+  min-height: 320px;
+}
+
+.sandbox-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+

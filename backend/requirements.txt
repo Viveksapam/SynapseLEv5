@@ -1,0 +1,13 @@
+Django==5.2.16
+djangorestframework==3.17.1
+django-filter==25.1
+django-cors-headers==4.9.0
+dj-database-url==3.1.2
+psycopg2-binary==2.9.10
+djangorestframework-simplejwt==5.5.1
+djoser==2.3.4
+python-dotenv==1.2.2
+gunicorn==26.0.0
+google-generativeai==0.8.3
+pytest==9.1.1
+pytest-django==4.12.0

@@ -1,0 +1,11 @@
+node_modules/
+build/
+dist/
+.env
+*.log
+coverage/
+.git/
+__pycache__/
+*.pyc
+migrations/
+.venv/
