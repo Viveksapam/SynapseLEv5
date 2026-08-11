@@ -99,8 +99,8 @@ const TopNavBar = ({ boolIsLoggedInState, onOpenLogin, handleLogout }) => {
                 <a href="/" className="ath-nav-link">Classic</a>
               </div>
               <div className="ath-dropdown-column">
-                <h4>Verisphere</h4>
-                <Link to="/verisphere">Verisphere Main</Link>
+                <h4>Social</h4>
+                <Link to="/verisphere">Verisphere</Link>
               </div>
               <div className="ath-dropdown-column">
                 <h4>E-Commerce</h4>
@@ -108,9 +108,8 @@ const TopNavBar = ({ boolIsLoggedInState, onOpenLogin, handleLogout }) => {
               </div>
               <div className="ath-dropdown-column">
                 <h4>Learning</h4>
-                <Link to="/credentials">Credentials (CAS)</Link>
                 <Link to="/assessment">Assessment Hub</Link>
-                <Link to="/sle">Classroom Map</Link>
+                <Link to="/sle">Classroom</Link>
               </div>
             </div>
           </div>
