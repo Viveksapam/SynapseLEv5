@@ -24,7 +24,7 @@ const SpotlightSection = ({ arrVideosState, boolIsLoadingState }) => {
     <section className="ath-video-section ath-reveal" id="video">
       <div className="ath-video-header">
         <div className="ath-video-header-left">
-          <span className="ath-video-eyebrow">// MEDIA HUB</span>
+          <span className="ath-video-eyebrow">MEDIA HUB</span>
           <h2 className="ath-video-title">Featured Spotlights</h2>
         </div>
         <div className="ath-video-header-right">
