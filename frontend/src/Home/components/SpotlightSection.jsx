@@ -52,7 +52,7 @@ const SpotlightSection = ({ arrVideosState, boolIsLoadingState }) => {
             {!boolIsVideoPlayingState ? (
               <div 
                 className="ath-video-facade"
-                style={{ backgroundImage: `url(https://img.youtube.com/vi/${extractYoutubeId(objActiveVideoState.strYoutubeEmbedUrl)}/maxresdefault.jpg)` }}
+                style={{ backgroundImage: `url(https://img.youtube.com/vi/${extractYoutubeId(objActiveVideoState.strYoutubeEmbedUrl)}/hqdefault.jpg)` }}
                 onClick={() => setBoolIsVideoPlayingState(true)}
               />
             ) : (
