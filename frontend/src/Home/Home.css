@@ -662,11 +662,10 @@
    a given width. Keeping this first lets each breakpoint's override actually apply. */
 .ath-article-img-wrapper {
   position: relative;
-  aspect-ratio: 4/5;
   max-height: 70vh;
-  background-color: var(--ath-bg-card);
   overflow: hidden;
   border: 1px solid var(--ath-border);
+  border-radius: 28px !important;
 }
 
 /* Mobile: stack project rows into a single clean column */
@@ -688,9 +687,7 @@
   .ath-article-img-wrapper {
     width: 100%;
     max-width: 100%;
-    aspect-ratio: 16/9;
-    max-height: 320px;
-    box-sizing: border-box;
+    max-height: 70vh;
   }
   .ath-article-body {
     width: 100%;
@@ -731,12 +728,8 @@
 
 /* Tablet gap: the sidebar is still visible (grid-template-columns kicks in at 768px)
    but the article row hasn't switched to the 2-column layout yet (that's 1024px+),
-   so a single-column row at this width still spans most of the viewport. The default
-   4/5 (tall) aspect-ratio on a nearly-full-width image gets disproportionately huge
-   here — cap it to a shorter ratio for this range specifically. Must come AFTER the
-   base rule above: same specificity, so source order decides the winner. Keeps the
-   same 4/5 shape as the desktop 2-column layout — just constrains the rendered size
-   instead of switching to a different crop, since this is still a single-column row. */
+   so a single-column row at this width would otherwise span most of the viewport.
+   Cap the width so the image doesn't render disproportionately huge at this range. */
 @media (min-width: 768px) and (max-width: 1023px) {
   .ath-article-img-wrapper {
     max-width: 420px;
@@ -745,14 +738,8 @@
 
 .ath-article-img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: grayscale(100%) brightness(95%);
-  transition: transform 0.7s ease;
-}
-
-.ath-article-row:hover .ath-article-img {
-  transform: scale(1.04);
+  height: auto;
+  display: block;
 }
 
 .ath-article-badge {

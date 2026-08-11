@@ -61,7 +61,6 @@ const ProjectsDirectory = ({ boolIsProjectsLoadingState, arrFilteredProjectsStat
           arrFilteredProjectsState.map((project, idx) => {
             const isEven = idx % 2 === 0;
             const techStack = project.strTechStack ? project.strTechStack.split(',').map(t => t.trim()) : [];
-            const figLabel = `FIG. 0${idx + 1}`;
             const kicker = project.strKickerLabel || `PROJECT 0${idx + 1}`;
             const ctaText = project.strCtaText || 'Explore';
             const ctaTo = project.strCtaRoute || '/verisphere';
@@ -77,7 +76,6 @@ const ProjectsDirectory = ({ boolIsProjectsLoadingState, arrFilteredProjectsStat
                     alt={project.strName}
                     className="ath-article-img"
                   />
-                  <div className="ath-article-badge">{figLabel}</div>
                 </div>
 
                 <div className="ath-article-body">
