@@ -17,7 +17,11 @@ class VideoAdmin(admin.ModelAdmin):
 
 
 class ProjectAdminForm(forms.ModelForm):
-    fileImageUpload = forms.ImageField(required=False, label="Upload image")
+    fileImageUpload = forms.ImageField(
+        required=False,
+        label="Upload image",
+        help_text="Uploading a file here replaces the URL below with the resulting Cloudinary link. Leave blank to keep or hand-edit the URL directly.",
+    )
 
     class Meta:
         model = ProjectModel
@@ -33,6 +37,18 @@ class ProjectAdmin(admin.ModelAdmin):
     form = ProjectAdminForm
     list_display = ("id", "strName", "strTechStack", "boolIsFeatured")
     list_filter = ("boolIsFeatured",)
+    fieldsets = (
+        (None, {
+            "fields": ("strName", "strDescription", "strTechStack", "strGithubUrl", "strLiveUrl", "boolIsFeatured"),
+        }),
+        ("Image", {
+            "fields": ("fileImageUpload", "strImageUrl"),
+            "description": "Either upload an image or paste a URL directly — not both.",
+        }),
+        ("Display", {
+            "fields": ("strKickerLabel", "strCtaText", "strCtaRoute"),
+        }),
+    )
 
     def save_model(self, request, obj, form, change):
         uploaded_file = form.cleaned_data.get("fileImageUpload")
