@@ -10,6 +10,7 @@ urlpatterns = [
     path("api/auth/", include("myapps.users.urls")),
 
     path("api/activity/log/", myproject_views.log_activity),
+    path("api/upload/image/", myproject_views.upload_image),
 
     path("api/portfolio/skills/", portfolio_views.skills),
 

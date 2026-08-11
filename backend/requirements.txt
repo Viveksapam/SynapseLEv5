@@ -9,5 +9,6 @@ djoser==2.3.4
 python-dotenv==1.2.2
 gunicorn==26.0.0
 google-generativeai==0.8.3
+cloudinary==1.44.1
 pytest==9.1.1
 pytest-django==4.12.0

@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { createPost } from '../api/postApi';
 import { fetchCommunities } from '../api/communityApi';
-import { useAuth } from '../../../hooks/useAuth';
+import { uploadImage } from '../../../api/userApi';
+import { useAuth, readToken } from '../../../hooks/useAuth';
 import PostTypePicker, { surfaceFor } from './PostTypePicker';
 import ComposerAnalysisControls from './ComposerAnalysisControls';
 import MarkdownToolbar from './MarkdownToolbar';
@@ -35,6 +36,7 @@ const CreatePostForm = ({ numCommunityId = null, onPostCreated }) => {
   const [boolPreviewState, setBoolPreviewState] = useState(false);
   const [boolIsSubmittingState, setBoolIsSubmittingState] = useState(false);
   const [boolIsExpandedState, setBoolIsExpandedState] = useState(false);
+  const [boolIsUploadingState, setBoolIsUploadingState] = useState(false);
 
   useEffect(() => {
     if (!numCommunityId) fetchCommunities().then((arr) => setArrCommunitiesState(arr.filter((c) => c.joined)));
@@ -45,6 +47,21 @@ const CreatePostForm = ({ numCommunityId = null, onPostCreated }) => {
   
   const boolShowEditorTools = strSurface === 'full' || boolShowToolbarState;
   const boolCanSubmit = strTitleState.trim() && strContentState.trim();
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file) return;
+    setBoolIsUploadingState(true);
+    try {
+      const url = await uploadImage(file, readToken());
+      setStrMediaUrlState(url);
+    } catch (objErr) {
+      alert(objErr.message || 'Image upload failed.');
+    } finally {
+      setBoolIsUploadingState(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -119,7 +136,19 @@ const CreatePostForm = ({ numCommunityId = null, onPostCreated }) => {
             </button>
           )}
           <input type="text" placeholder="Sources and links (encouraged, never required)" value={strReferencesState} onChange={(e) => setStrReferencesState(e.target.value)} style={fieldStyle} />
-          <input type="url" placeholder="Media URL (optional)" value={strMediaUrlState} onChange={(e) => setStrMediaUrlState(e.target.value)} style={fieldStyle} />
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            <input type="url" placeholder="Media URL (optional)" value={strMediaUrlState} onChange={(e) => setStrMediaUrlState(e.target.value)} style={{ ...fieldStyle, flex: 1 }} />
+            <label style={{
+              fontSize: '12px', color: 'var(--cr-text-muted)', cursor: boolIsUploadingState ? 'not-allowed' : 'pointer',
+              border: '1px solid var(--cr-border)', borderRadius: 'var(--cr-radius-chip)', padding: '6px 10px', whiteSpace: 'nowrap',
+            }}>
+              {boolIsUploadingState ? 'Uploading...' : 'Upload image'}
+              <input type="file" accept="image/jpeg,image/png,image/webp,image/gif" onChange={handleFileChange} disabled={boolIsUploadingState} style={{ display: 'none' }} />
+            </label>
+          </div>
+          {strMediaUrlState && /^https?:\/\//.test(strMediaUrlState) && (
+            <img src={strMediaUrlState} alt="" style={{ maxWidth: '160px', maxHeight: '160px', borderRadius: '6px', objectFit: 'cover' }} />
+          )}
           {!numCommunityId && (
             <select value={numDestinationState} onChange={(e) => setNumDestinationState(e.target.value)}
               style={{ ...fieldStyle, cursor: 'pointer' }} aria-label="Post destination">

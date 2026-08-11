@@ -1,17 +1,25 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { profileInputStyle, profileBtnBase, formatDate } from './ProfileStyles';
+import { uploadImage } from '../../../api/userApi';
 
-const ProfileBanner = ({ user, isEditing, editForm, setEditForm, isSaving, onSave, onCancel, onStartEdit }) => {
+const ProfileBanner = ({ user, isEditing, editForm, setEditForm, isSaving, onSave, onCancel, onStartEdit, strToken }) => {
   const fileInputRef = useRef(null);
+  const [boolIsUploadingState, setBoolIsUploadingState] = useState(false);
 
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
     const objFile = e.target.files[0];
+    e.target.value = '';
     if (!objFile) return;
-    if (objFile.size > 2 * 1024 * 1024) { alert('Image too large – max 2 MB'); return; }
-    const reader = new FileReader();
-    reader.onloadend = () => setEditForm((prev) => ({ ...prev, strProfilePicUrl: reader.result }));
-    reader.readAsDataURL(objFile);
+    setBoolIsUploadingState(true);
+    try {
+      const strUrl = await uploadImage(objFile, strToken);
+      setEditForm((prev) => ({ ...prev, strProfilePicUrl: strUrl }));
+    } catch (objErr) {
+      alert(objErr.message || 'Image upload failed.');
+    } finally {
+      setBoolIsUploadingState(false);
+    }
   };
 
   const strAvatarUrl = isEditing ? editForm.strProfilePicUrl : user.strProfilePicUrl;
@@ -42,19 +50,19 @@ const ProfileBanner = ({ user, isEditing, editForm, setEditForm, isSaving, onSav
 
         <div style={{ display: 'flex', alignItems: 'flex-end', gap: '16px', marginTop: '-30px', marginBottom: '14px' }}>
           <div
-            onClick={() => isEditing && fileInputRef.current?.click()}
+            onClick={() => isEditing && !boolIsUploadingState && fileInputRef.current?.click()}
             style={{
               width: '76px', height: '76px', borderRadius: '50%', flexShrink: 0,
               background: strAvatarUrl ? `url(${strAvatarUrl}) center/cover` : 'var(--cr-surface-raised)',
               border: '3px solid var(--cr-surface)', display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontFamily: 'var(--cr-font-heading)', fontSize: '24px', fontWeight: 700, color: 'var(--cr-text-main)',
-              cursor: isEditing ? 'pointer' : 'default', position: 'relative', userSelect: 'none',
+              cursor: isEditing && !boolIsUploadingState ? 'pointer' : 'default', position: 'relative', userSelect: 'none',
             }}
           >
             {!strAvatarUrl && user.username.charAt(0).toUpperCase()}
             {isEditing && (
               <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: 'rgba(0,0,0,0.45)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9px', color: '#fff', letterSpacing: '0.06em' }}>
-                UPLOAD
+                {boolIsUploadingState ? 'UPLOADING…' : 'UPLOAD'}
               </div>
             )}
           </div>
@@ -99,6 +107,7 @@ ProfileBanner.propTypes = {
   onSave: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   onStartEdit: PropTypes.func.isRequired,
+  strToken: PropTypes.string,
 };
 
 export default ProfileBanner;

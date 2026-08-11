@@ -85,6 +85,7 @@ const ProfilePage = ({ authHook }) => {
         onSave={handleSaveProfile}
         onCancel={() => { setBoolIsEditingState(false); setObjEditFormState(buildForm(objUserState)); }}
         onStartEdit={() => setBoolIsEditingState(true)}
+        strToken={strTokenState}
       />
 
       <div className="vs-profile-tabs" style={{ display: 'flex', gap: '22px', padding: '0 24px', borderBottom: '1px solid var(--cr-border)' }}>
