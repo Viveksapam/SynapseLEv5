@@ -74,6 +74,8 @@ function App() {
             }
           />
           <Route path="/shop" element={<ShopPage />} />
+          <Route path="/spotlight" element={<MaintenanceBlock pageName="Media Hub" />} />
+          <Route path="/merchandise" element={<MaintenanceBlock pageName="Merchandise" />} />
           <Route path="/credentials" element={<MaintenanceBlock pageName="Credential Assessment System" />} />
           <Route path="/assessment" element={<MaintenanceBlock pageName="Assessment Hub" />} />
           <Route path="/checkout" element={<CheckoutPage />} />

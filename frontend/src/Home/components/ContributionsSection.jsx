@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { Newspaper } from 'lucide-react';
 
 const ContributionsSection = ({ arrBlogsState }) => {
   const navigate = useNavigate();
+
+  if (arrBlogsState.length === 0) return null;
 
   const renderCard = (post, idx, keyPrefix) => {
     const category = post.strCategory || 'Discovery';
@@ -47,17 +48,9 @@ const ContributionsSection = ({ arrBlogsState }) => {
         <div className="ath-blog-divider" />
 
         {}
-        {arrBlogsState.length === 0 ? (
-          <div className="ath-empty-state">
-            <Newspaper className="ath-empty-state-icon" size={32} strokeWidth={1.5} />
-            <p className="ath-empty-state-title">No contributions yet</p>
-            <p className="ath-empty-state-desc">Community writing will show up here once it's posted.</p>
-          </div>
-        ) : (
-          <div className="ath-blog-grid-static">
-            {arrBlogsState.slice(0, 3).map((post, idx) => renderCard(post, idx, 'static'))}
-          </div>
-        )}
+        <div className="ath-blog-grid-static">
+          {arrBlogsState.slice(0, 3).map((post, idx) => renderCard(post, idx, 'static'))}
+        </div>
 
         {}
         <div className="ath-blog-footer-bar">
