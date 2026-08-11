@@ -693,6 +693,7 @@
     width: 100%;
     max-width: 100%;
     min-width: 0;
+    padding:20px;
   }
   .ath-article-title {
     font-size: 1.1rem;
