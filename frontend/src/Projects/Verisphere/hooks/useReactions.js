@@ -1,10 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { fetchPostReactions, postToggleReaction } from '../api/verisphereApi';
-import { seedInitialReactions } from '../utils/embedUtils';
 
 export const useReactions = (postId, boolIsLoggedIn) => {
-  const objInitial = seedInitialReactions(postId);
-  const [objReactionsState, setReactions] = useState(objInitial);
+  const [objReactionsState, setReactions] = useState({});
   const [objUserReactedState, setUserReacted] = useState({});
   const [boolShowPickerState, setShowPicker] = useState(false);
 
@@ -12,11 +10,7 @@ export const useReactions = (postId, boolIsLoggedIn) => {
     let boolMounted = true;
     fetchPostReactions(postId).then((data) => {
       if (!boolMounted || !data) return;
-      const objCombined = { ...objInitial };
-      for (const [strEmoji, numCount] of Object.entries(data.reactions || {})) {
-        objCombined[strEmoji] = (objCombined[strEmoji] || 0) + numCount;
-      }
-      setReactions(objCombined);
+      setReactions(data.reactions || {});
       setUserReacted(data.user_reacted || {});
     });
     return () => { boolMounted = false; };

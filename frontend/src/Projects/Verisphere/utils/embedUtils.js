@@ -20,13 +20,3 @@ export const isImageUrl = (strUrl) => {
 };
 
 export const EXTENDED_EMOJIS = ['❤️', '👏', '🤗', '😂', '👽', '🛡️', '🥺', '😞', '🖕', '🤬'];
-
-export const seedInitialReactions = (postId) => {
-  if (postId === 1004 || postId === '1004' || postId === 'blog_1004') {
-    return { '❤️': 45, '👽': 12, '😂': 95, '🤗': 18, '👏': 27 };
-  }
-  if (postId === 1002 || postId === '1002' || postId === 'blog_1002') {
-    return { '❤️': 89, '😂': 12, '🥺': 34, '🖕': 5, '🤬': 3 };
-  }
-  return { '❤️': 15, '🛡️': 6, '😂': 8, '😞': 4 };
-};
