@@ -67,7 +67,8 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
-.auth-form button {
+.auth-form button,
+.auth-btn {
   padding: 12px;
   border-radius: 8px;
   border: none;
@@ -80,7 +81,8 @@
   margin-top: 8px;
 }
 
-.auth-form button:hover:not(:disabled) {
+.auth-form button:hover:not(:disabled),
+.auth-btn:hover:not(:disabled) {
   background: #f43f5e;
 }
 
