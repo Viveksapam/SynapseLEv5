@@ -170,24 +170,7 @@ const TopNavBar = ({ boolIsLoggedInState, onOpenLogin, handleLogout }) => {
               Merchandise
             </a>
             <div className="ath-mobile-menu-divider"></div>
-            <button
-              className="ath-mobile-menu-link"
-              onClick={() => {
-                setBoolIsMobileMenuOpen(false);
-                window.location.href = '/shop';
-              }}
-            >
-              Shop
-            </button>
-            <button
-              className="ath-mobile-menu-link"
-              onClick={() => {
-                setBoolIsMobileMenuOpen(false);
-                window.location.href = '/credentials';
-              }}
-            >
-              Credentials
-            </button>
+           
             {boolIsLoggedInState ? (
               <button
                 onClick={() => {
