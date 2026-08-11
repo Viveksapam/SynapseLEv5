@@ -136,6 +136,8 @@ const PostDetailHeader = ({ post, reactions, boolCanEdit, onSave, boolIsLoggedIn
         </span>
       </div>
 
+      <MediaEmbed strMediaUrl={post.strMediaUrl} numMaxImageHeight={480} numIframeHeight={420} />
+
       <MarkdownContent
         content={`${strDisplayContent || ''}${boolNeedsCollapse && !boolIsExpandedState ? '...' : ''}`}
         style={{ marginBottom: boolNeedsCollapse ? '0.4rem' : undefined, color: 'var(--cr-text-main)' }}
