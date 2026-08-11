@@ -19,11 +19,19 @@ const ProjectsDirectory = ({ boolIsProjectsLoadingState, arrFilteredProjectsStat
               <span className="ath-sidebar-item-name">ASSESSMENTS</span>
               <span className="ath-sidebar-item-code">042</span>
             </li>
-            <li className="ath-sidebar-item" onClick={() => document.getElementById('video')?.scrollIntoView({ behavior: 'smooth' })}>
+            <li className="ath-sidebar-item" onClick={() => {
+              const el = document.getElementById('video');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+              else navigate('/spotlight');
+            }}>
               <span className="ath-sidebar-item-name">SPOTLIGHT</span>
               <span className="ath-sidebar-item-code">109</span>
             </li>
-            <li className="ath-sidebar-item" onClick={() => document.getElementById('merchandise')?.scrollIntoView({ behavior: 'smooth' })}>
+            <li className="ath-sidebar-item" onClick={() => {
+              const el = document.getElementById('merchandise');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+              else navigate('/merchandise');
+            }}>
               <span className="ath-sidebar-item-name">MERCHANDISE</span>
               <span className="ath-sidebar-item-code">215</span>
             </li>

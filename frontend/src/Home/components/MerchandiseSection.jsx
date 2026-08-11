@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { ShoppingBag } from 'lucide-react';
 
 const MerchandiseSection = ({ arrProductsState, boolIsLoadingState }) => {
+  if (!boolIsLoadingState && arrProductsState.length === 0) return null;
+
   return (
     <section className="ath-merch-section ath-reveal" id="merchandise">
       <div className="ath-merch-container">
@@ -21,12 +23,6 @@ const MerchandiseSection = ({ arrProductsState, boolIsLoadingState }) => {
           <div className="ath-empty-state">
             <ShoppingBag className="ath-empty-state-icon" size={32} strokeWidth={1.5} />
             <p className="ath-empty-state-title">Loading merchandise...</p>
-          </div>
-        ) : arrProductsState.length === 0 ? (
-          <div className="ath-empty-state">
-            <ShoppingBag className="ath-empty-state-icon" size={32} strokeWidth={1.5} />
-            <p className="ath-empty-state-title">No merchandise available right now</p>
-            <p className="ath-empty-state-desc">The shop is being restocked — check back soon.</p>
           </div>
         ) : (
           <div className="ath-merch-grid">

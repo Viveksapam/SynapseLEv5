@@ -20,6 +20,8 @@ const SpotlightSection = ({ arrVideosState, boolIsLoadingState }) => {
     setBoolIsVideoPlayingState(false);
   }, [arrVideosState]);
 
+  if (!boolIsLoadingState && arrVideosState.length === 0) return null;
+
   return (
     <section className="ath-video-section ath-reveal" id="video">
       <div className="ath-video-header">
