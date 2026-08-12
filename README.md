@@ -12,7 +12,7 @@ Built by Sapam Vivek Singh · [GitHub](https://github.com/Viveksapam) · [Linked
 
 The feed, posts, and comments are readable without an account. Below is the audit output on a live post: five rubric scores with the reasoning behind each, the fallacy it caught with the offending sentence quoted back, a steelman of the argument, and a suggested way to check the claim.
 
-![Audit panel showing five rubric scores from 90 to 0, a detected post hoc fallacy with the quoted sentence, a steelman, and a verification pathway](docs/screenshots/ai-audit.png)
+![Audit panel showing five rubric scores from 90 to 0, a detected post hoc fallacy with the quoted sentence, a steelman, and a verification pathway](docs/screenshots/ai-post-audit.png)
 
 A handful of friends and testers use it. Verisphere ships inside a monorepo alongside a few other things I've built; see [Also in this repo](#also-in-this-repo).
 
