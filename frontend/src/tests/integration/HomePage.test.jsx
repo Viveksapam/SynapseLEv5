@@ -125,9 +125,17 @@ describe('Home page integration', () => {
     expect(screen.getAllByText('Loading Capabilities...').length).toBe(12);
   });
 
-  it('renders merchandise section with local products', () => {
+  it('renders recent contributions section once blogs load', async () => {
+    fetchBlogList.mockResolvedValueOnce({
+      data: [{ id: 1, strTitle: 'Test Post', strSummary: 'A summary', strCategory: 'Discovery', numReadTime: 5 }],
+      error: null,
+    });
+
     renderHome();
-    expect(screen.getByText(/Recent Contributions/)).toBeDefined();
+
+    await waitFor(() => {
+      expect(screen.getByText(/Recent Contributions/)).toBeDefined();
+    });
   });
 
   it('renders all major sections', () => {

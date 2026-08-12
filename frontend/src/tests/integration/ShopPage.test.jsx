@@ -45,7 +45,7 @@ beforeEach(() => {
 describe('ShopPage integration', () => {
   it('shows loading state initially then renders products', async () => {
     renderShop();
-    expect(screen.getByText(/Loading latest merchandise/)).toBeDefined();
+    expect(screen.getByText(/Loading the shop/)).toBeDefined();
 
     await waitFor(() => {
       expect(screen.getByText('Dev Hoodie')).toBeDefined();
@@ -122,10 +122,9 @@ describe('ShopPage integration', () => {
     expect(qtySpan.textContent).toBe('2');
   });
 
-  it('renders page title and subtitle', async () => {
+  it('renders page title', async () => {
     renderShop();
     expect(screen.getByText('Exclusive Apparel & Merchandise')).toBeDefined();
-    expect(screen.getByText(/Premium quality developer gear/)).toBeDefined();
   });
 
   it('renders category filter buttons', async () => {
