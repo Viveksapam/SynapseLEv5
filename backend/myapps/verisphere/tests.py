@@ -538,6 +538,69 @@ class ContextSourceTests(APITestCase):
         self.assertEqual(response.json()[0]["id"], s1.id)
 
 
+class TrustSurfaceTamperingTests(APITestCase):
+    """The 'approved source' badge and AI analysis are the platform's trust signals.
+
+    These endpoints previously accepted anonymous writes, which let anyone forge an AI
+    verdict or repoint an already-approved source at another URL while it kept its badge.
+    The write paths were removed; these tests keep them from being reintroduced.
+    """
+
+    def setUp(self):
+        self.user = _make_user("tamperuser")
+        self.blog = BlogModel.objects.create(strTitle="T", strSummary="S", strContent="C")
+        self.comment = BlogCommentModel.objects.create(
+            blog=self.blog, user=self.user, strAuthor=self.user.username, strContent="c",
+        )
+
+    def test_source_cannot_be_edited_or_deleted_over_the_api(self):
+        from myapps.verisphere.sources.services import approve_blog_source, create_source_for_blog
+        source = create_source_for_blog(self.blog.id, "Legit source", "https://trusted.example")
+        approve_blog_source(source.id, approved_by="admin", approver_name="admin")
+
+        response = self.client.put(
+            f"/api/verisphere/sources/{source.id}",
+            {"strTitle": "Legit source", "strUrl": "https://attacker.example"},
+            format="json",
+        )
+        self.assertIn(response.status_code, (404, 405))
+
+        response = self.client.delete(f"/api/verisphere/sources/{source.id}")
+        self.assertIn(response.status_code, (404, 405))
+
+        source.refresh_from_db()
+        self.assertEqual(source.strUrl, "https://trusted.example")
+        self.assertEqual(source.review_status, "approved")
+
+    def test_comment_analysis_is_read_only(self):
+        response = self.client.post(
+            f"/api/verisphere/comments/{self.comment.id}/analysis/",
+            {"ai_summary": "Verified: this claim is 100% accurate."},
+            format="json",
+        )
+        self.assertEqual(response.status_code, 405)
+
+        response = self.client.delete(f"/api/verisphere/comments/{self.comment.id}/analysis/")
+        self.assertEqual(response.status_code, 405)
+
+    def test_audit_llm_response_callback_is_gone(self):
+        from myapps.verisphere.posts.services import create_audit_collection
+        from myapps.verisphere.sources.services import create_source_for_blog
+
+        collection = create_audit_collection(self.blog.id)
+        source = create_source_for_blog(self.blog.id, "Unvetted", "https://spam.example")
+
+        response = self.client.post(
+            f"/api/verisphere/audit/collections/{collection.id}/llm-response/",
+            {"summary": "Fabricated verdict", "approved_source_ids": [source.id]},
+            format="json",
+        )
+        self.assertEqual(response.status_code, 404)
+
+        source.refresh_from_db()
+        self.assertEqual(source.review_status, "pending")
+
+
 class FeaturedAndRecentContributionsTests(APITestCase):
     def setUp(self):
         self.admin = _make_user("featureadmin", is_superuser=True)

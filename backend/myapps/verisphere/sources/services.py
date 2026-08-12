@@ -9,23 +9,6 @@ def create_blog_context(blog_id: int, title: str, description: str = None):
     return BlogContextModel.objects.create(blog_id=blog_id, strTitle=title, strDescription=description)
 
 
-def update_blog_context(context_id: int, title: str = None, description: str = None):
-    context = BlogContextModel.objects.filter(id=context_id).first()
-    if not context:
-        return None
-    if title:
-        context.strTitle = title
-    if description is not None:
-        context.strDescription = description
-    context.save()
-    return context
-
-
-def delete_blog_context(context_id: int) -> bool:
-    deleted, _ = BlogContextModel.objects.filter(id=context_id).delete()
-    return deleted > 0
-
-
 def get_context_sources(context_id: int):
     return list(BlogSourceModel.objects.filter(context_id=context_id))
 
@@ -55,20 +38,6 @@ def create_source_in_context(context_id: int, title: str, url: str, description:
     )
 
 
-def update_blog_source(source_id: int, title: str = None, url: str = None, author: str = None):
-    source = BlogSourceModel.objects.filter(id=source_id).first()
-    if not source:
-        return None
-    if title:
-        source.strTitle = title
-    if url:
-        source.strUrl = url
-    if author is not None:
-        source.strAuthor = author
-    source.save()
-    return source
-
-
 def approve_blog_source(source_id: int, approved_by: str = "admin", approver_name: str = None):
     source = BlogSourceModel.objects.filter(id=source_id).first()
     if not source:
@@ -78,8 +47,3 @@ def approve_blog_source(source_id: int, approved_by: str = "admin", approver_nam
     source.approver_name = approver_name
     source.save()
     return source
-
-
-def delete_blog_source(source_id: int) -> bool:
-    deleted, _ = BlogSourceModel.objects.filter(id=source_id).delete()
-    return deleted > 0
