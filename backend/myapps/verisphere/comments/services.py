@@ -57,22 +57,6 @@ def get_comment_analysis(comment_id: int):
     return CommentAnalysisModel.objects.filter(comment_id=comment_id).first()
 
 
-def create_or_update_comment_analysis(comment_id: int, ai_summary: str = None):
-    analysis = CommentAnalysisModel.objects.filter(comment_id=comment_id).first()
-    if analysis:
-        if ai_summary:
-            analysis.ai_summary = ai_summary
-            analysis.save()
-    else:
-        analysis = CommentAnalysisModel.objects.create(comment_id=comment_id, ai_summary=ai_summary)
-    return analysis
-
-
-def delete_comment_analysis(comment_id: int) -> bool:
-    deleted, _ = CommentAnalysisModel.objects.filter(comment_id=comment_id).delete()
-    return deleted > 0
-
-
 def get_all_blog_comments_flat(blog_id: int):
     return list(BlogCommentModel.objects.filter(blog_id=blog_id))
 

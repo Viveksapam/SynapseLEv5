@@ -23,20 +23,6 @@ def blog_contexts(request, blog_id):
     return Response(BlogContextSerializer(context).data)
 
 
-@api_view(["PUT", "DELETE"])
-@permission_classes([AllowAny])
-def blog_context_detail(request, blog_id, context_id):
-    if request.method == "PUT":
-        data = validated(BlogContextCreateSerializer, request.data)
-        updated = services.update_blog_context(context_id, data["strTitle"], data.get("strDescription"))
-        if not updated:
-            raise NotFound("Context not found")
-        return Response(BlogContextSerializer(updated).data)
-    if not services.delete_blog_context(context_id):
-        raise NotFound("Context not found")
-    return Response({"message": "Context deleted successfully"})
-
-
 @api_view(["GET", "POST"])
 @permission_classes([AllowAny])
 def context_sources(request, context_id):
@@ -59,20 +45,6 @@ def blog_sources(request, blog_id):
     data = validated(BlogSourceCreateSerializer, request.data)
     source = services.create_source_for_blog(blog_id, data["strTitle"], data["strUrl"], data.get("strDescription"), data.get("strAuthor"))
     return Response(BlogSourceSerializer(source).data)
-
-
-@api_view(["PUT", "DELETE"])
-@permission_classes([AllowAny])
-def source_detail(request, source_id):
-    if request.method == "PUT":
-        data = validated(BlogSourceCreateSerializer, request.data)
-        updated = services.update_blog_source(source_id, data["strTitle"], data["strUrl"], data.get("strAuthor"))
-        if not updated:
-            raise NotFound("Source not found")
-        return Response(BlogSourceSerializer(updated).data)
-    if not services.delete_blog_source(source_id):
-        raise NotFound("Source not found")
-    return Response({"message": "Source deleted successfully"})
 
 
 @api_view(["POST"])

@@ -3,7 +3,6 @@ import json
 from django.conf import settings
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.exceptions import NotFound, ValidationError
-from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from myapps.verisphere.posts import services
@@ -40,19 +39,6 @@ def run_blog_audit(request, blog_id):
         source_services.approve_blog_source(source_id, approved_by="ai", approver_name=llm_audit.APPROVER_DISPLAY_NAME)
 
     return Response(BlogAuditCollectionSerializer(collection).data)
-
-
-@api_view(["POST"])
-@permission_classes([AllowAny])
-def set_llm_response(request, collection_id):
-    llm_response = request.data
-    collection = services.update_audit_collection_response(collection_id, llm_response)
-    if not collection:
-        raise NotFound("Collection not found")
-    for source_id in llm_response.get("approved_source_ids", []):
-        from myapps.verisphere.sources import services as source_services
-        source_services.approve_blog_source(source_id, approved_by="ai", approver_name=llm_audit.APPROVER_DISPLAY_NAME)
-    return Response({"message": "LLM response stored", "status": collection.status})
 
 
 @api_view(["POST"])

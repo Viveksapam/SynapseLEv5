@@ -8,7 +8,6 @@ from myapps.verisphere.comments.models import BlogCommentModel
 from myapps.verisphere.comments.serializers import (
     BlogCommentCreateSerializer,
     BlogCommentSerializer,
-    CommentAnalysisCreateSerializer,
     CommentAnalysisSerializer,
 )
 from myapps.verisphere.engagement import services as engagement_services
@@ -88,18 +87,10 @@ def comment_replies(request, blog_id, comment_id):
     return Response(BlogCommentSerializer(new_reply).data)
 
 
-@api_view(["GET", "POST", "DELETE"])
+@api_view(["GET"])
 @permission_classes([AllowAny])
 def comment_analysis(request, comment_id):
-    if request.method == "GET":
-        analysis = services.get_comment_analysis(comment_id)
-        if not analysis:
-            raise NotFound("Analysis not found")
-        return Response(CommentAnalysisSerializer(analysis).data)
-    if request.method == "POST":
-        data = validated(CommentAnalysisCreateSerializer, request.data)
-        analysis = services.create_or_update_comment_analysis(comment_id, data.get("ai_summary"))
-        return Response(CommentAnalysisSerializer(analysis).data)
-    if not services.delete_comment_analysis(comment_id):
+    analysis = services.get_comment_analysis(comment_id)
+    if not analysis:
         raise NotFound("Analysis not found")
-    return Response({"message": "Analysis deleted successfully"})
+    return Response(CommentAnalysisSerializer(analysis).data)

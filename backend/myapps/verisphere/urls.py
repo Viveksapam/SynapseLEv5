@@ -18,10 +18,8 @@ urlpatterns = [
     path("blogs/<int:blog_id>/react", post_views.toggle_reaction),
     path("blogs/<int:blog_id>/reactions", post_views.get_reactions),
     path("blogs/<int:blog_id>/contexts/", source_views.blog_contexts),
-    path("blogs/<int:blog_id>/contexts/<int:context_id>", source_views.blog_context_detail),
     path("contexts/<int:context_id>/sources/", source_views.context_sources),
     path("blogs/<int:blog_id>/sources/", source_views.blog_sources),
-    path("sources/<int:source_id>", source_views.source_detail),
     path("sources/<int:source_id>/approve/", source_views.approve_source),
     path("recent-contributions/", post_views.recent_contributions),
     path("recent-contributions/<int:contribution_id>/position/", post_views.update_contribution_position),
@@ -47,7 +45,6 @@ urlpatterns = [
     path("reports/<int:report_id>/resolve", report_views.resolve_report),
 
     path("blogs/<int:blog_id>/audit/run/", post_analysis_views.run_blog_audit),
-    path("audit/collections/<int:collection_id>/llm-response/", post_analysis_views.set_llm_response),
     path("comments/<int:comment_id>/analyze/", comment_analysis_views.analyze_comment_endpoint),
     path("blogs/<int:blog_id>/comments/analyze-batch/", comment_analysis_views.analyze_comments_batch),
     path("blogs/<int:blog_id>/analysis/", post_analysis_views.analyze_blog),
