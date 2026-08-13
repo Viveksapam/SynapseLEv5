@@ -72,7 +72,7 @@ class PostCreateSerializer(serializers.Serializer):
 class PostUpdateSerializer(serializers.Serializer):
     strTitle = serializers.CharField(required=False, allow_null=True)
     strContent = serializers.CharField(required=False, allow_null=True)
-    strMediaUrl = serializers.CharField(required=False, allow_null=True)
+    strMediaUrl = serializers.CharField(required=False, allow_null=True, allow_blank=True)
     strPostType = serializers.CharField(required=False, allow_null=True)
 
 

@@ -260,6 +260,19 @@ export const postUpdatePost = async (numPostId, objUpdates, strToken) => {
   return objResponse.json();
 };
 
+export const deletePost = async (numPostId, strToken) => {
+  const numBlogId = blogIdFromString(numPostId);
+  const objResponse = await fetch(`${API_BASE}/verisphere/blogs/${numBlogId}`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json', ...authHeaders(strToken) },
+  });
+  if (!objResponse.ok) {
+    const strDetail = await objResponse.text().catch(() => '');
+    throw new Error(`Failed to delete post (${objResponse.status}): ${strDetail}`);
+  }
+  return objResponse.json();
+};
+
 export const updateComment = async (numPostId, numCommentId, strContent, strToken) => {
   const numBlogId = blogIdFromString(numPostId);
   const objResponse = await fetch(`${API_BASE}/verisphere/blogs/${numBlogId}/comments/${numCommentId}`, {

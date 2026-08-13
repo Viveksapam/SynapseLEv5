@@ -11,11 +11,12 @@ const inputStyle = {
   boxSizing: 'border-box',
 };
 
-const PostDetailHeader = ({ post, reactions, boolCanEdit, onSave, boolIsLoggedIn }) => {
+const PostDetailHeader = ({ post, reactions, boolCanEdit, onSave, onDelete, boolIsLoggedIn }) => {
   const [boolIsExpandedState, setBoolIsExpandedState] = useState(false);
   const [numWindowWidth, setNumWindowWidth] = useState(window.innerWidth);
   const [boolIsEditingState, setBoolIsEditingState] = useState(false);
   const [boolIsSavingState, setBoolIsSavingState] = useState(false);
+  const [boolIsDeletingState, setBoolIsDeletingState] = useState(false);
   const [strEditTitleState, setStrEditTitleState] = useState(post.strTitle || '');
   const [strEditContentState, setStrEditContentState] = useState(post.strContent || '');
   const [strEditMediaUrlState, setStrEditMediaUrlState] = useState(post.strMediaUrl || '');
@@ -47,6 +48,17 @@ const PostDetailHeader = ({ post, reactions, boolCanEdit, onSave, boolIsLoggedIn
       alert(objErr.message || 'Failed to save changes.');
     } finally {
       setBoolIsSavingState(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!window.confirm('Are you sure you want to delete this post? This cannot be undone.')) return;
+    setBoolIsDeletingState(true);
+    try {
+      await onDelete();
+    } catch (objErr) {
+      alert(objErr.message || 'Failed to delete post.');
+      setBoolIsDeletingState(false);
     }
   };
 
@@ -110,13 +122,23 @@ const PostDetailHeader = ({ post, reactions, boolCanEdit, onSave, boolIsLoggedIn
           {post.strTitle}
         </h1>
         {boolCanEdit && (
-          <button
-            onClick={openEdit}
-            className="verisphere-btn-outline"
-            style={{ flexShrink: 0, padding: '6px 14px', fontSize: '0.85rem', cursor: 'pointer' }}
-          >
-            Edit
-          </button>
+          <div style={{ display: 'flex', gap: '0.5rem', flexShrink: 0 }}>
+            <button
+              onClick={openEdit}
+              className="verisphere-btn-outline"
+              style={{ padding: '6px 14px', fontSize: '0.85rem', cursor: 'pointer' }}
+            >
+              Edit
+            </button>
+            <button
+              onClick={handleDelete}
+              disabled={boolIsDeletingState}
+              className="verisphere-btn-outline"
+              style={{ padding: '6px 14px', fontSize: '0.85rem', cursor: boolIsDeletingState ? 'not-allowed' : 'pointer', color: '#f85149', borderColor: '#f85149', opacity: boolIsDeletingState ? 0.6 : 1 }}
+            >
+              {boolIsDeletingState ? 'Deleting...' : 'Delete'}
+            </button>
+          </div>
         )}
       </div>
 
@@ -171,6 +193,7 @@ PostDetailHeader.propTypes = {
   reactions: PropTypes.object.isRequired,
   boolCanEdit: PropTypes.bool,
   onSave: PropTypes.func,
+  onDelete: PropTypes.func,
   boolIsLoggedIn: PropTypes.bool,
 };
 
