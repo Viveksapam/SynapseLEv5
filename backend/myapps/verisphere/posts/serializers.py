@@ -7,6 +7,8 @@ class BlogResponseSerializer(serializers.ModelSerializer):
     boolIsFeatured = serializers.SerializerMethodField()
     contexts = serializers.SerializerMethodField()
     sources = serializers.SerializerMethodField()
+    comments_count = serializers.SerializerMethodField()
+    sources_count = serializers.SerializerMethodField()
 
     class Meta:
         model = BlogModel
@@ -19,7 +21,18 @@ class BlogResponseSerializer(serializers.ModelSerializer):
             "analyzed_at", "boolIsFeatured", "contexts", "sources",
         ]
 
+    def get_comments_count(self, obj):
+        annotated = getattr(obj, "annotated_comments_count", None)
+        return annotated if annotated is not None else obj.comments_count
+
+    def get_sources_count(self, obj):
+        annotated = getattr(obj, "annotated_sources_count", None)
+        return annotated if annotated is not None else obj.sources_count
+
     def get_boolIsFeatured(self, obj):
+        annotated = getattr(obj, "is_featured", None)
+        if annotated is not None:
+            return annotated
         featured_ids = self.context.get("featured_ids")
         if featured_ids is not None:
             return obj.id in featured_ids

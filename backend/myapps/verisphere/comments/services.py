@@ -1,5 +1,4 @@
 import datetime
-import json
 
 from django.utils import timezone
 
@@ -127,7 +126,7 @@ def create_comment_audit_collection(comment_id: int):
 
     return CommentAuditCollectionModel.objects.create(
         comment_id=comment_id, blog_id=comment.blog_id,
-        collected_data=json.dumps(collected_data), status="pending",
+        collected_data=collected_data, status="pending",
     )
 
 
@@ -163,7 +162,7 @@ def update_comment_audit_collection_response(collection_id: int, llm_response: d
     collection = CommentAuditCollectionModel.objects.filter(id=collection_id).first()
     if not collection:
         return None
-    collection.llm_response = json.dumps(llm_response)
+    collection.llm_response = llm_response
     collection.status = "processed"
     collection.processed_at = timezone.now()
     collection.save()
@@ -179,13 +178,13 @@ def sync_comment_audit_to_analysis(comment_id: int, llm_response: dict):
     return analysis
 
 
-def normalize_params(params: dict) -> str:
-    return json.dumps({
+def normalize_params(params: dict) -> dict:
+    return {
         "focus": params.get("focus") or "fact_check",
         "depth": params.get("depth") or "quick",
         "tone": params.get("tone") or "match",
         "custom_instruction": (params.get("custom_instruction") or "").strip(),
-    }, sort_keys=True)
+    }
 
 
 def count_requests_today(user_id: int) -> int:
@@ -193,18 +192,17 @@ def count_requests_today(user_id: int) -> int:
     return BlogCommentModel.objects.filter(user_id=user_id, strType="analysis_request", datePosted__gte=since).count()
 
 
-def find_duplicate_request(blog_id: int, params_json: str):
+def find_duplicate_request(blog_id: int, params: dict):
     return BlogCommentModel.objects.filter(
-        blog_id=blog_id, strType="analysis_request", jsonAnalysisParams=params_json,
+        blog_id=blog_id, strType="analysis_request", jsonAnalysisParams=params,
     ).first()
 
 
-def create_analysis_request(blog_id: int, user, params_json: str):
-    params = json.loads(params_json)
+def create_analysis_request(blog_id: int, user, params: dict):
     focus = params["focus"].replace("_", " ")
     return BlogCommentModel.objects.create(
         blog_id=blog_id, user_id=user.id, strAuthor=user.username, strType="analysis_request",
-        jsonAnalysisParams=params_json, strContent=f"Requested an AI analysis ({focus}, {params['depth']}).",
+        jsonAnalysisParams=params, strContent=f"Requested an AI analysis ({focus}, {params['depth']}).",
     )
 
 
@@ -214,7 +212,7 @@ def create_analysis_response(blog_id: int, parent_id: int, result: dict, model_u
     return BlogCommentModel.objects.create(
         blog_id=blog_id, parent_comment_id=parent_id, user_id=ai_user.id if ai_user else None,
         strAuthor=APPROVER_DISPLAY_NAME, strType="analysis_response",
-        strContent=result.get("response_text", ""), jsonAnalysisResult=json.dumps(result), strModelUsed=model_used,
+        strContent=result.get("response_text", ""), jsonAnalysisResult=result, strModelUsed=model_used,
     )
 
 

@@ -1,14 +1,10 @@
 import datetime
-import json
 
 from django.db import models
 from django.utils import timezone
 
 
 class BlogModel(models.Model):
-    class Meta:
-        db_table = "blog_blogmodel"
-
     id = models.BigAutoField(primary_key=True)
     author = models.ForeignKey(
         "users.UserModel", db_column="author_id", on_delete=models.SET_NULL,
@@ -30,7 +26,11 @@ class BlogModel(models.Model):
     comments_count = models.IntegerField(default=0, null=True, blank=True)
     strPostType = models.CharField(max_length=20, default="mixed")
     strAnalysisMode = models.CharField(max_length=20, default="open")
-    jsonAllowedAnalysisFocus = models.TextField(null=True, blank=True)
+    jsonAllowedAnalysisFocus = models.JSONField(null=True, blank=True)
+
+    class Meta:
+        db_table = "blog_blogmodel"
+        indexes = [models.Index(fields=["author", "datePublished"], name="ix_blog_author_datepub")]
 
     @property
     def strAuthorUsername(self):
@@ -70,13 +70,7 @@ class BlogModel(models.Model):
     @property
     def analysis_detail(self):
         analysis = getattr(self, "ai_analysis", None)
-        raw = analysis.analysis_detail if analysis else None
-        if not raw:
-            return None
-        try:
-            return json.loads(raw)
-        except (ValueError, TypeError):
-            return None
+        return analysis.analysis_detail if analysis else None
 
     @property
     def boolAnalysisEnabled(self):
@@ -98,7 +92,7 @@ class BlogAIAnalysisModel(models.Model):
     )
     ai_summary = models.TextField(null=True, blank=True)
     ai_context_guardrail = models.TextField(null=True, blank=True)
-    analysis_detail = models.TextField(null=True, blank=True)
+    analysis_detail = models.JSONField(null=True, blank=True)
     analyzed_at = models.DateTimeField(null=True, blank=True)
 
 
@@ -155,11 +149,11 @@ class BlogAuditCollectionModel(models.Model):
         BlogModel, db_column="blog_id", on_delete=models.CASCADE,
         null=True, blank=True, related_name="audit_collections",
     )
-    comment_ids = models.TextField(null=True, blank=True)
-    source_ids = models.TextField(null=True, blank=True)
-    context_ids = models.TextField(null=True, blank=True)
-    collected_data = models.TextField(null=True, blank=True)
-    llm_response = models.TextField(null=True, blank=True)
+    comment_ids = models.JSONField(null=True, blank=True)
+    source_ids = models.JSONField(null=True, blank=True)
+    context_ids = models.JSONField(null=True, blank=True)
+    collected_data = models.JSONField(null=True, blank=True)
+    llm_response = models.JSONField(null=True, blank=True)
     status = models.CharField(max_length=50, null=True, blank=True, default="pending")
     error_message = models.TextField(null=True, blank=True)
     collected_at = models.DateTimeField(null=True, blank=True, default=timezone.now)

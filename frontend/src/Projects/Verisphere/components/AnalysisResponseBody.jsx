@@ -5,13 +5,8 @@ import PropTypes from 'prop-types';
 
 const MISSION_FOOTER = 'Our rating is not absolute truth - it is the closest reading we are willing to publicly settle for.';
 
-const parseResult = (strJson) => {
-  try { return JSON.parse(strJson) || {}; }
-  catch { return {}; }
-};
-
 const AnalysisResponseBody = ({ comment, requestedBy }) => {
-  const objResult = parseResult(comment.jsonAnalysisResult);
+  const objResult = comment.jsonAnalysisResult || {};
   const arrSources = objResult.suggested_sources || [];
 
   return (

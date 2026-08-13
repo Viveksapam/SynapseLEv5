@@ -1,5 +1,3 @@
-import json
-
 from django.conf import settings
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.exceptions import NotFound, PermissionDenied, Throttled, ValidationError
@@ -42,7 +40,7 @@ def analyze_comment_endpoint(request, comment_id):
         raise ValidationError("Failed to create collection")
 
     try:
-        llm_result = llm_audit.analyze_comment_audit(json.loads(collection.collected_data))
+        llm_result = llm_audit.analyze_comment_audit(collection.collected_data)
     except LlmAuditError as e:
         raise ServiceUnavailable(str(e))
 
@@ -109,13 +107,13 @@ def create_analysis_thread(request, blog_id):
         raise PermissionDenied("The author has not opened this post to analysis.")
     data = validated(AnalysisRequestCreateSerializer, request.data)
     if blog.strAnalysisMode == "limited":
-        allowed = set(json.loads(blog.jsonAllowedAnalysisFocus or "[]"))
+        allowed = set(blog.jsonAllowedAnalysisFocus or [])
         if data["focus"] not in allowed:
             raise PermissionDenied(f"The author opened this post to these lenses only: {sorted(allowed)}")
 
-    params_json = _validate_thread_params(data)
+    params = _validate_thread_params(data)
 
-    duplicate = services.find_duplicate_request(blog_id, params_json)
+    duplicate = services.find_duplicate_request(blog_id, params)
     if duplicate:
         return Response({
             "request": BlogCommentSerializer(duplicate).data, "response": None, "deduplicated": True,
@@ -124,10 +122,10 @@ def create_analysis_thread(request, blog_id):
     if services.count_requests_today(current_user.id) >= DAILY_REQUEST_LIMIT:
         raise Throttled(detail=f"Analysis request limit reached ({DAILY_REQUEST_LIMIT} per day). Try again tomorrow.")
 
-    request_comment = services.create_analysis_request(blog_id, current_user, params_json)
+    request_comment = services.create_analysis_request(blog_id, current_user, params)
     try:
         collection = post_services.create_audit_collection(blog_id)
-        result = llm_thread_analysis.analyze_post_thread(json.loads(collection.collected_data), json.loads(params_json))
+        result = llm_thread_analysis.analyze_post_thread(collection.collected_data, params)
     except LlmAuditError as e:
         services.delete_comment_row(request_comment.id)
         raise ServiceUnavailable(str(e))

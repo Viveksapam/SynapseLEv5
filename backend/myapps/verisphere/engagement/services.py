@@ -2,7 +2,7 @@ import datetime
 import logging
 
 from django.db import IntegrityError, transaction
-from django.db.models import Sum
+from django.db.models import Case, Count, Sum, When
 from django.utils import timezone
 
 from myapps.verisphere.engagement.models import NotificationModel, ReputationEventModel, UserBadgeModel
@@ -110,11 +110,9 @@ def get_recap(user_id: int, days: int = 30) -> dict:
         .aggregate(total=Sum("weight"))["total"] or 0
     )
     posts = BlogModel.objects.filter(author_id=user_id, datePublished__gte=since.date()).count()
-    comments = BlogCommentModel.objects.filter(
-        user_id=user_id, datePosted__gte=since, strType="standard",
-    ).count()
-    analyses = BlogCommentModel.objects.filter(
-        user_id=user_id, datePosted__gte=since, strType="analysis_request",
-    ).count()
+    comment_counts = BlogCommentModel.objects.filter(user_id=user_id, datePosted__gte=since).aggregate(
+        comments=Count(Case(When(strType="standard", then=1))),
+        analyses=Count(Case(When(strType="analysis_request", then=1))),
+    )
     return {"days": days, "reputation_earned": int(reputation), "posts": posts,
-            "comments": comments, "analyses_requested": analyses}
+            "comments": comment_counts["comments"], "analyses_requested": comment_counts["analyses"]}
