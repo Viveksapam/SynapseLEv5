@@ -1,4 +1,3 @@
-import json
 import re
 
 from django.core.cache import cache
@@ -28,13 +27,26 @@ from myproject.view_helpers import SkipLimitPagination, require_active, require_
 
 
 FEATURED_BLOGS_CACHE_TTL = 30
+FEATURED_BLOGS_CACHE_VERSION_KEY = "verisphere:featured_blogs:version"
+
+
+def _featured_blogs_cache_version() -> int:
+    return cache.get(FEATURED_BLOGS_CACHE_VERSION_KEY, 1)
+
+
+def _bump_featured_blogs_cache_version():
+    try:
+        cache.incr(FEATURED_BLOGS_CACHE_VERSION_KEY)
+    except ValueError:
+        cache.set(FEATURED_BLOGS_CACHE_VERSION_KEY, 2)
 
 
 @api_view(["GET"])
 @permission_classes([AllowAny])
 def featured_blogs(request):
     skip, limit = skip_limit(request)
-    cache_key = f"verisphere:featured_blogs:{skip}:{limit}"
+    version = _featured_blogs_cache_version()
+    cache_key = f"verisphere:featured_blogs:{version}:{skip}:{limit}"
     data = cache.get(cache_key)
     if data is None:
         blogs = services.get_featured_blogs(skip=skip, limit=limit)
@@ -49,10 +61,10 @@ def featured_blogs(request):
 def featured_blog_detail(request, blog_id):
     if request.method == "POST":
         services.add_featured_blog(blog_id)
-        cache.clear()  # bust the featured-list cache so the change is visible immediately
+        _bump_featured_blogs_cache_version()  # bust only the featured-list cache, not the whole cache backend
         return Response({"message": "Blog featured successfully"})
     services.remove_featured_blog(blog_id)
-    cache.clear()
+    _bump_featured_blogs_cache_version()
     return Response({"message": "Blog removed from featured list"})
 
 
@@ -66,13 +78,9 @@ def blogs_collection(request):
 
         paginator = SkipLimitPagination()
         page = paginator.paginate_queryset(queryset, request)
-        blogs = page if page is not None else list(queryset)
-        for blog in blogs:
-            blog.comments_count = services.count_all_comments_for_blog(blog.id)
+        blogs = page if page is not None else queryset
 
-        featured_blogs_list = services.get_featured_blogs(skip=0, limit=1000)
-        featured_ids = {b.id for b in featured_blogs_list}
-        data = BlogResponseSerializer(blogs, many=True, context={"featured_ids": featured_ids}).data
+        data = BlogResponseSerializer(blogs, many=True).data
         return Response(data)
     require_active(request)
     return _create_post(request)
@@ -185,7 +193,7 @@ def _validate_analysis(mode, focus_list):
     if mode == "limited":
         if not focus_list or not set(focus_list) <= FOCUS_OPTIONS:
             raise ValidationError(f"allowed_analysis_focus must be a non-empty subset of {sorted(FOCUS_OPTIONS)}")
-        return json.dumps(sorted(set(focus_list)))
+        return sorted(set(focus_list))
     return None
 
 

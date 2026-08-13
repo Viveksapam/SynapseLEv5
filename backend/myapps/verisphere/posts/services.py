@@ -1,7 +1,5 @@
-import json
-
-from django.db import IntegrityError
-from django.db.models import Count
+from django.db import IntegrityError, transaction
+from django.db.models import Count, Exists, OuterRef
 from django.utils import timezone
 
 from myapps.verisphere.comments.models import BlogCommentModel
@@ -22,7 +20,14 @@ def count_all_comments_for_blog(blog_id: int) -> int:
 
 
 def get_blogs_queryset():
-    return BlogModel.objects.select_related(*_LIST_SELECT_RELATED)
+    return (
+        BlogModel.objects.select_related(*_LIST_SELECT_RELATED)
+        .annotate(
+            annotated_comments_count=Count("comments", distinct=True),
+            annotated_sources_count=Count("contexts__sources", distinct=True),
+            is_featured=Exists(FeaturedBlogModel.objects.filter(blog_id=OuterRef("id"))),
+        )
+    )
 
 
 def get_blog_by_id(blog_id: int):
@@ -38,8 +43,9 @@ def get_recent_contributions():
 
 
 def add_to_recent_contributions(blog_id: int, position: int, admin_user_id: int = None):
-    RecentContributionModel.objects.filter(position=position).delete()
-    return RecentContributionModel.objects.create(blog_id=blog_id, position=position, added_by_id=admin_user_id)
+    with transaction.atomic():
+        RecentContributionModel.objects.filter(position=position).delete()
+        return RecentContributionModel.objects.create(blog_id=blog_id, position=position, added_by_id=admin_user_id)
 
 
 def remove_from_recent_contributions(contribution_id: int) -> bool:
@@ -48,13 +54,14 @@ def remove_from_recent_contributions(contribution_id: int) -> bool:
 
 
 def update_contribution_position(contribution_id: int, new_position: int):
-    RecentContributionModel.objects.filter(position=new_position).exclude(id=contribution_id).delete()
-    contribution = RecentContributionModel.objects.filter(id=contribution_id).first()
-    if not contribution:
-        return None
-    contribution.position = new_position
-    contribution.save()
-    return contribution
+    with transaction.atomic():
+        RecentContributionModel.objects.filter(position=new_position).exclude(id=contribution_id).delete()
+        contribution = RecentContributionModel.objects.filter(id=contribution_id).first()
+        if not contribution:
+            return None
+        contribution.position = new_position
+        contribution.save()
+        return contribution
 
 
 def get_featured_blogs(skip: int = 0, limit: int = 100):
@@ -120,10 +127,8 @@ def create_audit_collection(blog_id: int):
     comments = get_blog_comments(blog_id, skip=0, limit=1000)
     contexts = get_blog_contexts(blog_id)
 
-    source_ids = []
-    for context in contexts:
-        sources = get_context_sources(context.id)
-        source_ids.extend([s.id for s in sources])
+    sources_by_context = {context.id: get_context_sources(context.id) for context in contexts}
+    source_ids = [s.id for sources in sources_by_context.values() for s in sources]
 
     collected_data = {
         "blog": {
@@ -144,8 +149,8 @@ def create_audit_collection(blog_id: int):
         "sources": [
             {"id": s.id, "context_id": s.context_id, "strTitle": s.strTitle, "strUrl": s.strUrl,
              "strAuthor": s.strAuthor, "dtCreatedAt": str(s.dtCreatedAt)}
-            for context in contexts
-            for s in get_context_sources(context.id)
+            for sources in sources_by_context.values()
+            for s in sources
         ],
         "comment_count": len(comments),
     }
@@ -154,10 +159,10 @@ def create_audit_collection(blog_id: int):
 
     return BlogAuditCollectionModel.objects.create(
         blog_id=blog_id,
-        collected_data=json.dumps(collected_data),
-        comment_ids=json.dumps(comment_ids),
-        source_ids=json.dumps(source_ids),
-        context_ids=json.dumps([c.id for c in contexts]),
+        collected_data=collected_data,
+        comment_ids=comment_ids,
+        source_ids=source_ids,
+        context_ids=[c.id for c in contexts],
         status="pending",
     )
 
@@ -170,7 +175,7 @@ def update_audit_collection_response(collection_id: int, llm_response: dict):
     collection = BlogAuditCollectionModel.objects.filter(id=collection_id).first()
     if not collection:
         return None
-    collection.llm_response = json.dumps(llm_response)
+    collection.llm_response = llm_response
     collection.status = "processed"
     collection.processed_at = timezone.now()
     collection.save()
@@ -185,14 +190,13 @@ def sync_audit_to_blog_analysis(blog_id: int, llm_response: dict):
     summary = llm_response.get("summary", "")
     context_guardrail = llm_response.get("ai_context_guardrail", "")
     detail = llm_response.get("analysis_detail")
-    detail_json = json.dumps(detail) if detail else None
     now = timezone.now()
 
     analysis, created = BlogAIAnalysisModel.objects.update_or_create(
         blog_id=blog_id,
         defaults={
             "ai_summary": summary, "ai_context_guardrail": context_guardrail,
-            "analysis_detail": detail_json, "analyzed_at": now,
+            "analysis_detail": detail, "analyzed_at": now,
         },
     )
     return analysis

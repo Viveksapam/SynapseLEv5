@@ -3,9 +3,6 @@ from django.utils import timezone
 
 
 class BlogCommentModel(models.Model):
-    class Meta:
-        db_table = "blog_blogcommentmodel"
-
     id = models.BigAutoField(primary_key=True)
     blog = models.ForeignKey(
         "posts.BlogModel", db_column="blog_id", on_delete=models.CASCADE, related_name="comments",
@@ -21,10 +18,14 @@ class BlogCommentModel(models.Model):
     strAuthor = models.CharField(max_length=255, default="Anonymous")
     strContent = models.TextField()
     strType = models.CharField(max_length=30, default="standard", db_index=True)
-    jsonAnalysisParams = models.TextField(null=True, blank=True)
-    jsonAnalysisResult = models.TextField(null=True, blank=True)
+    jsonAnalysisParams = models.JSONField(null=True, blank=True)
+    jsonAnalysisResult = models.JSONField(null=True, blank=True)
     strModelUsed = models.CharField(max_length=100, null=True, blank=True)
     datePosted = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        db_table = "blog_blogcommentmodel"
+        indexes = [models.Index(fields=["user", "strType", "datePosted"], name="ix_comment_user_type_date")]
 
     @property
     def strAiAnalysis(self):
@@ -59,8 +60,8 @@ class CommentAuditCollectionModel(models.Model):
     comment = models.ForeignKey(BlogCommentModel, db_column="comment_id", on_delete=models.CASCADE, related_name="audit_collections")
     blog = models.ForeignKey("posts.BlogModel", db_column="blog_id", on_delete=models.CASCADE, related_name="comment_audit_collections")
 
-    collected_data = models.TextField(null=True, blank=True)
-    llm_response = models.TextField(null=True, blank=True)
+    collected_data = models.JSONField(null=True, blank=True)
+    llm_response = models.JSONField(null=True, blank=True)
     status = models.CharField(max_length=50, default="pending")
     error_message = models.TextField(null=True, blank=True)
     collected_at = models.DateTimeField(null=True, blank=True, default=timezone.now)

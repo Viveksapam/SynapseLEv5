@@ -163,7 +163,7 @@ class AnalysisAsCommentTests(APITestCase):
         requester = _make_user("requester3")
         blog = BlogModel.objects.create(
             author=author, strTitle="T", strSummary="S", strContent="C",
-            strAnalysisMode="limited", jsonAllowedAnalysisFocus='["sources"]',
+            strAnalysisMode="limited", jsonAllowedAnalysisFocus=["sources"],
         )
 
         response = self.client.post(
