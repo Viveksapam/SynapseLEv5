@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../../hooks/useAuth';
 import { useReactions } from '../hooks/useReactions';
 import { usePostDetail } from '../hooks/usePostDetail';
@@ -12,6 +12,7 @@ import '../styles/VeriSphere.css';
 
 const PostDetailPage = ({ authHook }) => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const fallbackAuth = useAuth();
   const { strTokenState, boolIsLoggedInState, objUserState } = authHook || fallbackAuth;
   const boolIsAdmin = !!(objUserState && (objUserState.is_superuser || objUserState.is_staff));
@@ -64,6 +65,7 @@ const PostDetailPage = ({ authHook }) => {
         reactions={reactions}
         boolCanEdit={boolIsAdmin || (boolIsLoggedInState && post.objPostState.strAuthorUsername === objUserState?.username)}
         onSave={post.updatePost}
+        onDelete={async () => { await post.removePost(); navigate('/verisphere'); }}
         boolIsLoggedIn={boolIsLoggedInState}
       />
 

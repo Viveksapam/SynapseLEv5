@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
   fetchPostDetail, postCreateSource, postCreateComment, postAnalyzeComment, deleteComment, postAnalyzePost,
-  fetchApprovedSources, postUpdatePost, updateComment,
+  fetchApprovedSources, postUpdatePost, updateComment, deletePost,
 } from '../api/verisphereApi';
 
 
@@ -68,6 +68,10 @@ export const usePostDetail = (postId, strToken, boolIsLoggedIn) => {
   const updatePost = async (objUpdates) => {
     await postUpdatePost(postId, objUpdates, strToken);
     await loadPost();
+  };
+
+  const removePost = async () => {
+    await deletePost(postId, strToken);
   };
 
   const analyzeComment = async (numCommentId) => {
@@ -145,7 +149,7 @@ export const usePostDetail = (postId, strToken, boolIsLoggedIn) => {
   return {
     objPostState, boolIsLoadingState, loadingCommentsState, boolIsAnalyzingPostState, strAnalysisPhaseState,
     submitComment, submitSource, analyzeComment, analyzePost, handleDeleteComment, handleUpdateComment,
-    updatePost,
+    updatePost, removePost,
     refetch: loadPost,
   };
 };
