@@ -1,5 +1,3 @@
-import json
-
 from django.conf import settings
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.exceptions import NotFound, ValidationError
@@ -28,7 +26,7 @@ def run_blog_audit(request, blog_id):
         raise ValidationError("Failed to create collection")
 
     try:
-        llm_result = llm_audit.analyze_audit_collection(json.loads(collection.collected_data))
+        llm_result = llm_audit.analyze_audit_collection(collection.collected_data)
     except LlmAuditError as e:
         raise ServiceUnavailable(str(e))
 
@@ -58,7 +56,7 @@ def analyze_blog(request, blog_id):
         raise ValidationError("Failed to create collection")
 
     try:
-        llm_result = llm_audit.analyze_audit_collection(json.loads(collection.collected_data))
+        llm_result = llm_audit.analyze_audit_collection(collection.collected_data)
     except LlmAuditError as e:
         raise ServiceUnavailable(str(e))
 
