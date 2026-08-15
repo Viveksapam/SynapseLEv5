@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { legacyContactLinks } from '../../data/legacyLinks';
+import { contactLinks } from '../../data/contactInfo';
 
 const HomeFooter = () => {
   return (
@@ -13,7 +13,7 @@ const HomeFooter = () => {
             <span className="ath-footer-contact-label">Connect</span>
             <div className="ath-footer-contact-list">
               <a
-                href={legacyContactLinks.linkedin}
+                href={contactLinks.linkedin}
                 target="_blank"
                 rel="noreferrer"
                 className="ath-footer-contact-row"
@@ -25,7 +25,7 @@ const HomeFooter = () => {
                 <span className="ath-footer-contact-handle">/in/sapam-singh ↗</span>
               </a>
               <a
-                href={legacyContactLinks.github}
+                href={contactLinks.github}
                 target="_blank"
                 rel="noreferrer"
                 className="ath-footer-contact-row"
@@ -37,14 +37,14 @@ const HomeFooter = () => {
                 <span className="ath-footer-contact-handle">/Viveksapam ↗</span>
               </a>
               <a
-                href={`mailto:${legacyContactLinks.email}`}
+                href={`mailto:${contactLinks.email}`}
                 className="ath-footer-contact-row ath-footer-contact-row-last"
               >
                 <span className="ath-footer-contact-left">
                   <span className="ath-footer-contact-num">03</span>
                   <span className="ath-footer-contact-name">Email</span>
                 </span>
-                <span className="ath-footer-contact-handle">{legacyContactLinks.email} ↗</span>
+                <span className="ath-footer-contact-handle">{contactLinks.email} ↗</span>
               </a>
             </div>
           </div>

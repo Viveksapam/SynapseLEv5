@@ -36,10 +36,6 @@ vi.mock('../../api/productApi', () => ({
   fetchProductList: vi.fn(() => Promise.resolve({ data: [], error: null })),
 }));
 
-vi.mock('../../theme/ThemeLayer', () => ({
-  default: () => null,
-}));
-
 const renderApp = (route = '/') => render(
   <HelmetProvider>
     <MemoryRouter initialEntries={[route]}>
