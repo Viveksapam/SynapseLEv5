@@ -3,7 +3,6 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import ScrollToTop from './components/ScrollToTop';
 import SEO from './components/SEO';
-import ThemeLayer from './theme/ThemeLayer';
 import MaintenanceBlock from './components/MaintenanceBlock';
 import { fetchSiteSettings } from './api/coreApi';
 import { useAuth } from './hooks/useAuth';
@@ -15,10 +14,7 @@ import './Home/Home.css';
 const Home = lazy(() => import('./Home/Home'));
 const ShopPage = lazy(() => import('./Projects/Merchandise/ShopPage'));
 const CheckoutPage = lazy(() => import('./Projects/Merchandise/CheckoutPage'));
-const CredentialsPage = lazy(() => import('./Projects/Synapse_Assessments/CredentialsPage'));
-const AssessmentHub = lazy(() => import('./Projects/Synapse_Assessments/AssessmentHub'));
 const VeriSphereApp = lazy(() => import('./Projects/Verisphere/VeriSphereApp'));
-const ClassroomApp = lazy(() => import('./Projects/Classroom/ClassroomApp'));
 const ContactModal = lazy(() => import('./Home/components/ContactModal'));
 const AuthModal = lazy(() => import('./components/AuthModal'));
 const TermsOfServicePage = lazy(() => import('./pages/TermsOfServicePage'));
@@ -60,7 +56,6 @@ function App() {
 
   return (
     <div className="app-shell">
-      <ThemeLayer />
       <SEO />
       <ScrollToTop />
       <Analytics />
