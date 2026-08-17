@@ -3,11 +3,16 @@ import { Helmet } from 'react-helmet-async';
 
 const SEO = ({ 
   title = "Synapse Live Exchange", 
-  description = "A premium full-stack platform featuring an AI guide, developer portfolio, merchandise shop, and skills assessments.", 
-  keywords = "Synapse, Developer, Portfolio, AI, Tech Merchandise, Software Engineering", 
+  description = "A full-stack platform featuring a social media meant to reduce misinformation with AI,analysis of contents, Competence Based Assessment and classroom.",
+  keywords = "Verisphere, Developer, Portfolio, AI analysis, Merchandise, Competence Based Assessment, Social Media, Synapse Live Exchange",
   name = "Synapse",
-  icon = "/favicon.svg"
+  icon = "/favicon.svg",
+  image = "/verisphere.svg"
 }) => {
+  const absoluteImage = image.startsWith('http')
+    ? image
+    : `https://synapseislive.com${image}`;
+
   return (
     <Helmet>
       {}
@@ -21,12 +26,14 @@ const SEO = ({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:site_name" content={name} />
+      <meta property="og:image" content={absoluteImage} />
 
       {}
       <meta name="twitter:creator" content={name} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={absoluteImage} />
     </Helmet>
   );
 };
