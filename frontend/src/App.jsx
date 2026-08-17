@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useState, useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import ScrollToTop from './components/ScrollToTop';
 import SEO from './components/SEO';
@@ -21,6 +21,7 @@ const TermsOfServicePage = lazy(() => import('./pages/TermsOfServicePage'));
 const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
 const ActivateAccountPage = lazy(() => import('./pages/ActivateAccountPage'));
 const ResetPasswordConfirmPage = lazy(() => import('./pages/ResetPasswordConfirmPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 function App() {
   const [boolContactOpenState, setContactOpen] = useState(false);
@@ -91,7 +92,7 @@ function App() {
               element={<ResetPasswordConfirmPage authHook={authHook} />}
             />
             <Route path="/sle/*" element={<MaintenanceBlock pageName="Classroom" />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
 
           {boolContactOpenState && (
