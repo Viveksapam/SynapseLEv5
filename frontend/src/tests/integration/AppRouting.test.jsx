@@ -94,10 +94,10 @@ describe('App routing integration', () => {
     }, WAIT_FOR_LAZY);
   });
 
-  it('redirects unknown routes to /', async () => {
+  it('renders a 404 page for unknown routes', async () => {
     renderApp('/nonexistent');
     await waitFor(() => {
-      expect(screen.getByText(/Designing virtual spaces/)).toBeDefined();
+      expect(screen.getByText(/Page not found/)).toBeDefined();
     }, WAIT_FOR_LAZY);
   });
 

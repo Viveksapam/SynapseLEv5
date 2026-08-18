@@ -1,13 +1,14 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-const SEO = ({ 
-  title = "Synapse Live Exchange", 
-  description = "A full-stack platform featuring a social media meant to reduce misinformation with AI,analysis of contents, Competence Based Assessment and classroom.",
-  keywords = "Verisphere, Developer, Portfolio, AI analysis, Merchandise, Competence Based Assessment, Social Media, Synapse Live Exchange",
+const SEO = ({
+  title = "Synapse",
+  description = "A platform for verifiable discourse and learning.",
+  keywords = "Synapse, Verisphere, Discourse, AI Assistant, Assessments",
   name = "Synapse",
   icon = "/favicon.svg",
-  image = "/verisphere.svg"
+  image = "/verisphere.svg",
+  robots
 }) => {
   const absoluteImage = image.startsWith('http')
     ? image
@@ -20,6 +21,7 @@ const SEO = ({
       <meta name='description' content={description} />
       <meta name='keywords' content={keywords} />
       <link rel="icon" type="image/svg+xml" href={`${icon}?v=2`} />
+      {robots && <meta name="robots" content={robots} />}
 
       {}
       <meta property="og:type" content="website" />

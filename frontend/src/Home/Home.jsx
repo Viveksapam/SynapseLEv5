@@ -134,7 +134,7 @@ export default function Home({ onOpenContact, onOpenLogin, authHook, settings })
         numWelcomeProgressState={numWelcomeProgressState}
       />
 
-      <SEO title="Synapse | Scholarly Home" description="Release v.4 — Designing virtual spaces for accessibility and shared discovery." />
+      <SEO />
 
       <TopNavBar 
         boolIsLoggedInState={boolIsLoggedInState} 
