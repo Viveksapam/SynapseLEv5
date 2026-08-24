@@ -11,6 +11,7 @@ import CommunityGuidelinesPage from './pages/CommunityGuidelinesPage';
 import AdminReportsPage from './pages/AdminReportsPage';
 import NotificationBell from './components/NotificationBell';
 import VeriSphereSidebar from './components/VeriSphereSidebar';
+import BackendWakeUpOverlay from './components/BackendWakeUpOverlay';
 import './styles/VeriSphere.css';
 import './styles/VeriSphereLayout.css';
 import SEO from '../../components/SEO';
@@ -57,6 +58,7 @@ function VeriSphereApp({ onOpenLogin, authHook }) {
   return (
     <div className="v2-wrapper">
       <SEO title="VeriSphere" icon="/verisphere.svg" />
+      <BackendWakeUpOverlay />
 
       {}
       <nav className="v2-nav">

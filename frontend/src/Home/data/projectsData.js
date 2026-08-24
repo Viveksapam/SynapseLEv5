@@ -41,4 +41,17 @@ export const projectsData = [
     strCtaText: 'Open Classroom',
     strCtaRoute: '/sle',
   },
+  {
+    id: 4,
+    strName: 'Emporium',
+    strDescription: 'A general store built for browsing and checkout, in production.',
+    strTechStack: 'Django, Djoser, Postman',
+    strLiveUrl: null,
+    strGithubUrl: 'https://github.com/Viveksapam/Emporium',
+    strImageUrl: 'https://res.cloudinary.com/ycw7kcyb/image/upload/v1787531734/Emporium_Tablet-selection.png',
+    boolIsFeatured: true,
+    strKickerLabel: 'IN PRODUCTION',
+    strCtaText: 'View on GitHub',
+    strCtaRoute: 'https://github.com/Viveksapam/Emporium',
+  },
 ];

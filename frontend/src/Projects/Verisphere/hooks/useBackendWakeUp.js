@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { API_BASE } from '../api/config';
+import { API_BASE } from '../../../api/config';
 
 const SLOW_THRESHOLD_MS = 2500;
 const HEALTH_TIMEOUT_MS = 45000;
