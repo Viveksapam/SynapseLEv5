@@ -1,10 +1,10 @@
 import React from 'react';
-import { useBackendWakeUp } from '../hooks/useBackendWakeUp';
+import PropTypes from 'prop-types';
 import './BackendWakeUpOverlay.css';
 
-const BackendWakeUpOverlay = () => {
-  const strStatus = useBackendWakeUp();
-
+// Presentational only - the parent decides where this renders (e.g. swapped in
+// for routed content) based on the strStatus it gets from useBackendWakeUp.
+const BackendWakeUpOverlay = ({ strStatus }) => {
   if (strStatus === 'checking' || strStatus === 'ready') return null;
 
   return (
@@ -31,6 +31,10 @@ const BackendWakeUpOverlay = () => {
       </div>
     </div>
   );
+};
+
+BackendWakeUpOverlay.propTypes = {
+  strStatus: PropTypes.oneOf(['checking', 'waking', 'ready', 'unreachable']).isRequired,
 };
 
 export default BackendWakeUpOverlay;
