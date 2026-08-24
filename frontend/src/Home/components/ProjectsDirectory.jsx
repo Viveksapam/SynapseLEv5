@@ -72,6 +72,7 @@ const ProjectsDirectory = ({ boolIsProjectsLoadingState, arrFilteredProjectsStat
             const kicker = project.strKickerLabel || `PROJECT 0${idx + 1}`;
             const ctaText = project.strCtaText || 'Explore';
             const ctaTo = project.strCtaRoute || '/verisphere';
+            const isExternalCta = /^https?:\/\//.test(ctaTo);
 
             return (
               <article
@@ -99,10 +100,23 @@ const ProjectsDirectory = ({ boolIsProjectsLoadingState, arrFilteredProjectsStat
                     ))}
                   </div>
 
-                  <Link to={ctaTo} className="ath-article-link" style={{ marginTop: '20px' }}>
-                    {ctaText}
-                    <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                  </Link>
+                  {isExternalCta ? (
+                    <a
+                      href={ctaTo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="ath-article-link"
+                      style={{ marginTop: '20px' }}
+                    >
+                      {ctaText}
+                      <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                    </a>
+                  ) : (
+                    <Link to={ctaTo} className="ath-article-link" style={{ marginTop: '20px' }}>
+                      {ctaText}
+                      <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                    </Link>
+                  )}
                 </div>
               </article>
             );

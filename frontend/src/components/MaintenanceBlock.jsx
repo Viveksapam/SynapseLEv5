@@ -1,12 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const MaintenanceBlock = ({ pageName }) => {
-  useEffect(() => {
-    console.log(`[MAINTENANCE] ${pageName} is under maintenance`);
-  }, [pageName]);
-
   return (
     <div className="ath-maintenance-wrapper">
       <div className="ath-maintenance-container">

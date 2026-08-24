@@ -11,6 +11,8 @@ import CommunityGuidelinesPage from './pages/CommunityGuidelinesPage';
 import AdminReportsPage from './pages/AdminReportsPage';
 import NotificationBell from './components/NotificationBell';
 import VeriSphereSidebar from './components/VeriSphereSidebar';
+import BackendWakeUpOverlay from './components/BackendWakeUpOverlay';
+import { useBackendWakeUp } from './hooks/useBackendWakeUp';
 import './styles/VeriSphere.css';
 import './styles/VeriSphereLayout.css';
 import SEO from '../../components/SEO';
@@ -21,6 +23,7 @@ function VeriSphereApp({ onOpenLogin, authHook }) {
   const location = useLocation();
 
   const isWelcomeScreen = location.pathname === '/verisphere' || location.pathname === '/verisphere/' || location.pathname === '/';
+  const wakeUpStatus = useBackendWakeUp();
   const [isLightMode, setIsLightMode] = useState(!isWelcomeScreen);
   const [boolIsMobileMenuOpenState, setBoolIsMobileMenuOpen] = useState(false);
 
@@ -136,16 +139,20 @@ function VeriSphereApp({ onOpenLogin, authHook }) {
       {}
       <div key={location.key} className={`v2-content-scroll${isWelcomeScreen ? '' : ' vs-with-sidenav'}`}>
         <main className="verisphere-main" style={{ paddingTop: '100px', minHeight: '100%' }}>
-          <Routes>
-            <Route index element={<WelcomePage />} />
-            <Route path="feed" element={<HomePage authHook={authHook} />} />
-            <Route path="community/:id" element={<CommunityPage authHook={authHook} />} />
-            <Route path="post/:id" element={<PostDetailPage authHook={authHook} />} />
-            <Route path="post/:id/comments" element={<PostCommentsPage authHook={authHook} />} />
-            <Route path="profile" element={<ProfilePage authHook={authHook} />} />
-            <Route path="guidelines" element={<CommunityGuidelinesPage />} />
-            <Route path="admin/reports" element={<AdminReportsPage boolIsAdmin={boolIsAdmin} />} />
-          </Routes>
+          {wakeUpStatus === 'waking' || wakeUpStatus === 'unreachable' ? (
+            <BackendWakeUpOverlay strStatus={wakeUpStatus} />
+          ) : (
+            <Routes>
+              <Route index element={<WelcomePage />} />
+              <Route path="feed" element={<HomePage authHook={authHook} />} />
+              <Route path="community/:id" element={<CommunityPage authHook={authHook} />} />
+              <Route path="post/:id" element={<PostDetailPage authHook={authHook} />} />
+              <Route path="post/:id/comments" element={<PostCommentsPage authHook={authHook} />} />
+              <Route path="profile" element={<ProfilePage authHook={authHook} />} />
+              <Route path="guidelines" element={<CommunityGuidelinesPage />} />
+              <Route path="admin/reports" element={<AdminReportsPage boolIsAdmin={boolIsAdmin} />} />
+            </Routes>
+          )}
         </main>
 
         <footer className="v2-footer" style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', alignItems: 'center', justifyContent: 'space-between' }}>
