@@ -8,17 +8,12 @@ vi.mock('../../api/blogApi', () => ({
   fetchBlogList: vi.fn(),
 }));
 
-vi.mock('../../api/projectApi', () => ({
-  fetchProjectList: vi.fn(),
-}));
-
 vi.mock('../../api/portfolioApi', () => ({
   fetchSkillList: vi.fn(),
   fetchVideoList: vi.fn(),
 }));
 
 import { fetchBlogList } from '../../api/blogApi';
-import { fetchProjectList } from '../../api/projectApi';
 import { fetchSkillList, fetchVideoList } from '../../api/portfolioApi';
 
 const mockAuthHook = {
@@ -47,7 +42,6 @@ const renderHome = (props = {}) => render(
 beforeEach(() => {
   vi.clearAllMocks();
   fetchBlogList.mockResolvedValue({ data: [], error: null });
-  fetchProjectList.mockResolvedValue({ data: [], error: null });
   fetchSkillList.mockResolvedValue({ data: [], error: null });
   fetchVideoList.mockResolvedValue({ data: [], error: null });
 });
@@ -75,14 +69,22 @@ describe('Home page integration', () => {
     expect(screen.getByText('LOG OUT')).toBeDefined();
   });
 
-  it('fetches blogs, projects, and skills on mount', async () => {
+  it('fetches blogs and skills on mount', async () => {
     renderHome();
 
     await waitFor(() => {
       expect(fetchBlogList).toHaveBeenCalledOnce();
-      expect(fetchProjectList).toHaveBeenCalledOnce();
       expect(fetchSkillList).toHaveBeenCalledOnce();
     });
+  });
+
+  it('renders hardcoded project cards without fetching them', async () => {
+    renderHome();
+
+    await waitFor(() => {
+      expect(document.querySelector('.ath-article-title')).toBeDefined();
+    });
+    expect(screen.getByText('Emporium')).toBeDefined();
   });
 
   it('renders blog cards when API returns data', async () => {
@@ -147,7 +149,6 @@ describe('Home page integration', () => {
 
   it('handles API errors gracefully without crashing', async () => {
     fetchBlogList.mockResolvedValueOnce({ data: null, error: 'Failed' });
-    fetchProjectList.mockResolvedValueOnce({ data: null, error: 'Failed' });
     fetchSkillList.mockResolvedValueOnce({ data: null, error: 'Failed' });
 
     renderHome();
