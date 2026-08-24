@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,13 +7,13 @@ const ContributionsSection = ({ arrBlogsState }) => {
 
   if (arrBlogsState.length === 0) return null;
 
-  const renderCard = (post, idx, keyPrefix) => {
+  const renderCard = (post, idx) => {
     const category = post.strCategory || 'Discovery';
     const readTime  = String(post.numReadTime ?? 12).padStart(2, '0');
     const num       = String(idx + 1).padStart(2, '0');
     return (
       <div
-        key={`${keyPrefix}-${idx}`}
+        key={`static-${idx}`}
         className="ath-blog-card"
         onClick={() => navigate(`/verisphere/post/blog_${post.id}`)}
       >
@@ -39,7 +39,6 @@ const ContributionsSection = ({ arrBlogsState }) => {
     <section className="ath-blog-section ath-reveal" id="blog">
       <div className="ath-blog-container">
 
-        {}
         <div className="ath-blog-header">
           <h2 className="ath-section-title">Recent Contributions</h2>
           <p className="ath-blog-desc">Selected writing from Verisphere community</p>
@@ -47,12 +46,10 @@ const ContributionsSection = ({ arrBlogsState }) => {
 
         <div className="ath-blog-divider" />
 
-        {}
         <div className="ath-blog-grid-static">
-          {arrBlogsState.slice(0, 3).map((post, idx) => renderCard(post, idx, 'static'))}
+          {arrBlogsState.slice(0, 3).map((post, idx) => renderCard(post, idx))}
         </div>
 
-        {}
         <div className="ath-blog-footer-bar">
           <span className="ath-blog-footer-count">featured articles</span>
           <a

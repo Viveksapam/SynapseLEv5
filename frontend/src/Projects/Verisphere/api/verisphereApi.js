@@ -1,9 +1,30 @@
 import { API_BASE } from '../../../api/config';
 import { readToken } from '../../../hooks/useAuth';
-import { mapBlogToPost } from './verisphereMocks';
 
-
-
+const mapBlogToPost = (blog) => ({
+  id: `blog_${blog.id}`,
+  strTitle: blog.strTitle,
+  strContent: blog.strContent || blog.strSummary,
+  strAuthorUsername: blog.strAuthorUsername || 'System',
+  objAuthor: 0,
+  objCommunity: blog.objCommunity ?? null,
+  strCommunityName: blog.strCommunityName || 'General',
+  strPostType: blog.strPostType || 'mixed',
+  strAnalysisMode: blog.strAnalysisMode || 'open',
+  jsonAllowedAnalysisFocus: blog.jsonAllowedAnalysisFocus || null,
+  boolAnalysisEnabled: blog.boolAnalysisEnabled !== false,
+  created_at: new Date(blog.datePublished).toISOString(),
+  numUpvotes: blog.numUpvotes || 0,
+  comments_count: blog.comments_count || 0,
+  strMediaUrl: blog.strMediaUrl || null,
+  sources: [],
+  sources_count: blog.sources_count || 0,
+  ai_summary: blog.ai_summary || blog.strSummary,
+  ai_context_guardrail: blog.ai_context_guardrail || null,
+  analysis_detail: blog.analysis_detail || null,
+  analyzed_at: blog.analyzed_at || null,
+  boolIsFeatured: blog.boolIsFeatured || false,
+});
 
 const authHeaders = (strToken) => {
   const strAuth = strToken || readToken();
@@ -16,11 +37,6 @@ const blogIdFromString = (idOrString) => {
 };
 
 const noCacheHeaders = { 'Cache-Control': 'no-cache', Pragma: 'no-cache' };
-
-
-
-
-
 
 const ANALYSIS_TIMEOUT_MS = 60000;
 
@@ -39,8 +55,6 @@ const fetchWithTimeout = async (url, options = {}, timeoutMs = ANALYSIS_TIMEOUT_
   }
 };
 
-
-
 export const fetchPosts = async (numCommunityId = null) => {
   try {
     const objResponse = await fetch(`${API_BASE}/verisphere/blogs/`, { headers: noCacheHeaders });
@@ -48,7 +62,6 @@ export const fetchPosts = async (numCommunityId = null) => {
     const arrBlogs = await objResponse.json();
     let arrPosts = arrBlogs.map(mapBlogToPost);
 
-    
     arrPosts.sort((a, b) => b.numUpvotes - a.numUpvotes);
     if (numCommunityId) {
       arrPosts = arrPosts.filter(
@@ -81,7 +94,6 @@ const loadRepliesRecursively = async (numBlogId, numCommentId) => {
     const repliesResponse = await fetch(`${API_BASE}/verisphere/blogs/${numBlogId}/comments/${numCommentId}/replies/`, { headers: noCacheHeaders });
     const arrReplies = repliesResponse.ok ? await repliesResponse.json() : [];
 
-    
     return await Promise.all(arrReplies.map(async (reply) => {
       const nestedReplies = await loadRepliesRecursively(numBlogId, reply.id);
       return { ...reply, replies: nestedReplies };
@@ -102,7 +114,6 @@ export const fetchPostDetail = async (idOrString) => {
     const commentsResponse = await fetch(`${API_BASE}/verisphere/blogs/${numBlogId}/comments/`, { headers: noCacheHeaders });
     let arrComments = commentsResponse.ok ? await commentsResponse.json() : [];
 
-    
     arrComments = await Promise.all(arrComments.map(async (comment) => {
       const nestedReplies = await loadRepliesRecursively(numBlogId, comment.id);
       return { ...comment, replies: nestedReplies };
@@ -112,7 +123,6 @@ export const fetchPostDetail = async (idOrString) => {
     objPost.comments = arrComments;
     objPost.comments_count = arrComments.length;
 
-    
     try {
       const sourcesResponse = await fetch(`${API_BASE}/verisphere/blogs/${numBlogId}/sources/?status=approved`, { headers: noCacheHeaders });
       objPost.sources = sourcesResponse.ok ? await sourcesResponse.json() : [];

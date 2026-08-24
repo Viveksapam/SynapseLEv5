@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/react';
 import ScrollToTop from './components/ScrollToTop';
 import SEO from './components/SEO';
 import MaintenanceBlock from './components/MaintenanceBlock';
+import BackendWakeUpOverlay from './components/BackendWakeUpOverlay';
 import { fetchSiteSettings } from './api/coreApi';
 import { useAuth } from './hooks/useAuth';
 import { usePageContext } from './hooks/usePageContext';
@@ -60,6 +61,7 @@ function App() {
       <SEO />
       <ScrollToTop />
       <Analytics />
+      <BackendWakeUpOverlay />
       <PageErrorBoundary>
         <Suspense fallback={<div className="ath-loading-screen" />}>
           <Routes>

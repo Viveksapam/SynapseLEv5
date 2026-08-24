@@ -11,6 +11,12 @@ ALLOWED_IMAGE_TYPES = {"image/jpeg", "image/png", "image/webp", "image/gif"}
 MAX_IMAGE_BYTES = 8 * 1024 * 1024
 
 
+@api_view(["GET"])
+@permission_classes([AllowAny])
+def health(request):
+    return Response({"status": "ok"})
+
+
 @api_view(["POST"])
 @permission_classes([AllowAny])
 def log_activity(request):

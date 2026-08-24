@@ -7,7 +7,6 @@ const HomeFooter = () => {
     <footer className="ath-footer">
       <div className="ath-footer-inner">
 
-        {}
         <div className="ath-footer-top">
           <div className="ath-footer-contact-col">
             <span className="ath-footer-contact-label">Connect</span>
@@ -50,7 +49,6 @@ const HomeFooter = () => {
           </div>
         </div>
 
-        {}
         <div className="ath-footer-bottom">
           <p className="ath-footer-copyright">
             © {new Date().getFullYear()} Synapse LE.

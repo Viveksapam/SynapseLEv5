@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { fetchBlogList } from '../api/blogApi';
-import { fetchProjectList } from '../api/projectApi';
+// fetchProjectList is kept in ../api/projectApi for later reuse, but the homepage
+// projects section is hardcoded for now (see ./data/projectsData).
 import { fetchSkillList, fetchVideoList } from '../api/portfolioApi';
 import { fetchProductList } from '../api/productApi';
+
+import { projectsData } from './data/projectsData';
 
 import SEO from '../components/SEO';
 import './Home.css';
@@ -24,12 +27,12 @@ const MAX_DATA_WAIT_MS = 4000;
 
 export default function Home({ onOpenContact, onOpenLogin, authHook, settings }) {
   const [arrBlogsState, setArrBlogsState] = useState([]);
-  const [arrProjectsState, setArrProjectsState] = useState([]);
+  const [arrProjectsState] = useState(projectsData);
   const [arrSkillsState, setArrSkillsState] = useState([]);
   const [arrProductsState, setArrProductsState] = useState([]);
   const [arrVideosState, setArrVideosState] = useState([]);
 
-  const [boolIsProjectsLoadingState, setBoolIsProjectsLoadingState] = useState(true);
+  const [boolIsProjectsLoadingState] = useState(false);
   const [boolIsProductsLoadingState, setBoolIsProductsLoadingState] = useState(true);
   const [boolIsVideosLoadingState, setBoolIsVideosLoadingState] = useState(true);
   const [boolDataReadyState, setBoolDataReadyState] = useState(false);
@@ -102,14 +105,11 @@ export default function Home({ onOpenContact, onOpenLogin, authHook, settings })
     // Kick off every fetch in parallel, starting immediately (while the welcome
     // screen is still showing) instead of after the page is revealed.
     const loadData = async () => {
-      const [blogsRes, projectsRes, skillsRes, productsRes, videosRes] = await Promise.all([
-        fetchBlogList(), fetchProjectList(), fetchSkillList(), fetchProductList(), fetchVideoList(),
+      const [blogsRes, skillsRes, productsRes, videosRes] = await Promise.all([
+        fetchBlogList(), fetchSkillList(), fetchProductList(), fetchVideoList(),
       ]);
 
       if (blogsRes.data) setArrBlogsState(blogsRes.data);
-
-      if (projectsRes.data) setArrProjectsState(projectsRes.data);
-      setBoolIsProjectsLoadingState(false);
 
       if (skillsRes.data) setArrSkillsState(skillsRes.data);
 

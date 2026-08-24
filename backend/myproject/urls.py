@@ -7,6 +7,7 @@ from myproject import views as myproject_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/health/", myproject_views.health),
     path("api/auth/", include("myapps.users.urls")),
 
     path("api/activity/log/", myproject_views.log_activity),

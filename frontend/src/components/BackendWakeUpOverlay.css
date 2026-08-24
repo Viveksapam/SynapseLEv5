@@ -1,0 +1,44 @@
+.ath-wakeup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-main);
+}
+
+.ath-wakeup-card {
+  max-width: 380px;
+  padding: 2.5rem;
+  text-align: center;
+}
+
+.ath-wakeup-spinner {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 1.5rem;
+  border: 3px solid var(--border-light);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: ath-wakeup-spin 0.9s linear infinite;
+}
+
+.ath-wakeup-title {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--text-heading);
+}
+
+.ath-wakeup-message {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+@keyframes ath-wakeup-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
