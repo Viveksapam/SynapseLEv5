@@ -9,12 +9,11 @@ vi.mock('../../api/blogApi', () => ({
 }));
 
 vi.mock('../../api/portfolioApi', () => ({
-  fetchSkillList: vi.fn(),
   fetchVideoList: vi.fn(),
 }));
 
 import { fetchBlogList } from '../../api/blogApi';
-import { fetchSkillList, fetchVideoList } from '../../api/portfolioApi';
+import { fetchVideoList } from '../../api/portfolioApi';
 
 const mockAuthHook = {
   boolIsLoggedInState: false,
@@ -42,7 +41,6 @@ const renderHome = (props = {}) => render(
 beforeEach(() => {
   vi.clearAllMocks();
   fetchBlogList.mockResolvedValue({ data: [], error: null });
-  fetchSkillList.mockResolvedValue({ data: [], error: null });
   fetchVideoList.mockResolvedValue({ data: [], error: null });
 });
 
@@ -69,12 +67,11 @@ describe('Home page integration', () => {
     expect(screen.getByText('LOG OUT')).toBeDefined();
   });
 
-  it('fetches blogs and skills on mount', async () => {
+  it('fetches blogs on mount', async () => {
     renderHome();
 
     await waitFor(() => {
       expect(fetchBlogList).toHaveBeenCalledOnce();
-      expect(fetchSkillList).toHaveBeenCalledOnce();
     });
   });
 
@@ -106,25 +103,12 @@ describe('Home page integration', () => {
     });
   });
 
-  it('renders skills in carousel when API returns data', async () => {
-    fetchSkillList.mockResolvedValueOnce({
-      data: [
-        { id: 1, strTitle: 'React', strIconSvg: '<svg></svg>' },
-        { id: 2, strTitle: 'Python', strIconSvg: null },
-      ],
-      error: null,
-    });
-
+  it('renders hardcoded skills in carousel without fetching them', async () => {
     renderHome();
 
     await waitFor(() => {
       expect(screen.getAllByText('React').length).toBeGreaterThan(0);
     });
-  });
-
-  it('shows loading carousel when skills are empty', () => {
-    renderHome();
-    expect(screen.getAllByText('Loading Capabilities...').length).toBe(12);
   });
 
   it('renders recent contributions section once blogs load', async () => {
@@ -149,7 +133,6 @@ describe('Home page integration', () => {
 
   it('handles API errors gracefully without crashing', async () => {
     fetchBlogList.mockResolvedValueOnce({ data: null, error: 'Failed' });
-    fetchSkillList.mockResolvedValueOnce({ data: null, error: 'Failed' });
 
     renderHome();
 

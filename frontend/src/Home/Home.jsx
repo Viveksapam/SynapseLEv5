@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { fetchBlogList } from '../api/blogApi';
-// fetchProjectList is kept in ../api/projectApi for later reuse, but the homepage
-// projects section is hardcoded for now (see ./data/projectsData).
-import { fetchSkillList, fetchVideoList } from '../api/portfolioApi';
+// fetchProjectList and fetchSkillList are kept in ../api/projectApi and
+// ../api/portfolioApi for later reuse, but the homepage projects and
+// capabilities sections are hardcoded for now (see ./data).
+import { fetchVideoList } from '../api/portfolioApi';
 import { fetchProductList } from '../api/productApi';
 
 import { projectsData } from './data/projectsData';
+import { skillsData } from './data/skillsData';
 
 import SEO from '../components/SEO';
 import './Home.css';
@@ -28,7 +30,7 @@ const MAX_DATA_WAIT_MS = 4000;
 export default function Home({ onOpenContact, onOpenLogin, authHook, settings }) {
   const [arrBlogsState, setArrBlogsState] = useState([]);
   const [arrProjectsState] = useState(projectsData);
-  const [arrSkillsState, setArrSkillsState] = useState([]);
+  const [arrSkillsState] = useState(skillsData);
   const [arrProductsState, setArrProductsState] = useState([]);
   const [arrVideosState, setArrVideosState] = useState([]);
 
@@ -105,13 +107,11 @@ export default function Home({ onOpenContact, onOpenLogin, authHook, settings })
     // Kick off every fetch in parallel, starting immediately (while the welcome
     // screen is still showing) instead of after the page is revealed.
     const loadData = async () => {
-      const [blogsRes, skillsRes, productsRes, videosRes] = await Promise.all([
-        fetchBlogList(), fetchSkillList(), fetchProductList(), fetchVideoList(),
+      const [blogsRes, productsRes, videosRes] = await Promise.all([
+        fetchBlogList(), fetchProductList(), fetchVideoList(),
       ]);
 
       if (blogsRes.data) setArrBlogsState(blogsRes.data);
-
-      if (skillsRes.data) setArrSkillsState(skillsRes.data);
 
       if (productsRes.data) setArrProductsState(productsRes.data);
       setBoolIsProductsLoadingState(false);

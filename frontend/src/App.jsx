@@ -22,6 +22,7 @@ const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
 const ActivateAccountPage = lazy(() => import('./pages/ActivateAccountPage'));
 const ResetPasswordConfirmPage = lazy(() => import('./pages/ResetPasswordConfirmPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const InstructionalDesignPage = lazy(() => import('./pages/InstructionalDesignPage'));
 
 function App() {
   const [boolContactOpenState, setContactOpen] = useState(false);
@@ -92,6 +93,7 @@ function App() {
               element={<ResetPasswordConfirmPage authHook={authHook} />}
             />
             <Route path="/sle/*" element={<MaintenanceBlock pageName="Classroom" />} />
+            <Route path="/instructional-design" element={<InstructionalDesignPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
 
