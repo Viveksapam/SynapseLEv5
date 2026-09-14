@@ -15,9 +15,7 @@ const BackendWakeUpOverlay = ({ strStatus }) => {
           <>
             <h2 className="ath-wakeup-title">Waking up the server</h2>
             <p className="ath-wakeup-message">
-              This runs on a free backend that sleeps when idle. It's starting up now
-              &mdash; this can take up to a minute.
-            </p>
+              Dear visitor, this runs on a free backend that sleeps when idle. It's starting up now.</p>
           </>
         ) : (
           <>
