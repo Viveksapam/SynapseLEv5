@@ -22,7 +22,6 @@ const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
 const ActivateAccountPage = lazy(() => import('./pages/ActivateAccountPage'));
 const ResetPasswordConfirmPage = lazy(() => import('./pages/ResetPasswordConfirmPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
-const InstructionalDesignPage = lazy(() => import('./pages/InstructionalDesignPage'));
 
 function App() {
   const [boolContactOpenState, setContactOpen] = useState(false);
